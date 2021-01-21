@@ -41,7 +41,7 @@
 					<li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
 					<li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
 					<li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
-					<li><a href="#"><i class="icon fa fa-lock"></i>Login</a></li>
+					<li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
 				</ul>
 			</div><!-- /.cnt-account -->
 
@@ -77,7 +77,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
 					<!-- ============================================================= LOGO ============================================================= -->
                     <div class="logo">
-                        <a href="home.html">
+                        <a href="{{ url('/') }}">
                             
                             <img src="{{asset('fontend')}}/assets/images/logo.png" alt="">
 
@@ -449,7 +449,10 @@
 <!-- ============= HEADER : END ============== -->
 
 @yield('content')
-
+<!-- /.logo-slider -->
+<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
+</div><!-- /.container -->
+</div><!-- /#top-banner-and-menu -->
 <!-- ============================================================= FOOTER ============================================================= -->
 <footer id="footer" class="footer color-bg">
 
