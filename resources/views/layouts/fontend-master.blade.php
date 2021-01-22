@@ -41,7 +41,19 @@
 					<li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
 					<li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
 					<li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
-					<li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
+					<li>
+                        @auth
+                            {{-- <a href="{{ route('user.dashboard') }}"><i class="icon fa fa-user"></i>User Profile</a> --}}
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"><i class="icon ion-power"></i> Sign Out</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                            @else
+                            <a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a>
+                        @endauth
+                        
+                    </li>
 				</ul>
 			</div><!-- /.cnt-account -->
 
@@ -598,7 +610,32 @@
     <script type="text/javascript" src="{{ asset('fontend') }}/assets/js/lightbox.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/bootstrap-select.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/wow.min.js"></script>
-	<script src="{{ asset('fontend') }}/assets/js/scripts.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/scripts.js"></script>
+    {{-- ============================aditional script===================== --}}
+    <script src="{{ asset('fontend') }}/assets/js/aditional/toastr.min.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/aditional/jquery.validate.min.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/aditional/additional-methods.min.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/aditional/preview.js"></script>
+    @yield('script')
+    <script>
+        @if(Session::has('message'))
+            var type="{{Session::get('alert-type','info')}}"
+            switch(type){
+            case 'info':
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+            case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+            case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+            case 'error':
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif  
+    </script>
 </body>
 
 </html>
