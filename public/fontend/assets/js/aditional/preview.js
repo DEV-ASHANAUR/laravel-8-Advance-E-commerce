@@ -3,7 +3,7 @@ function filePreview(input) {
             var reader = new FileReader();
             reader.onload = function (e) {
             $('#Myform + img').remove();
-            $('#test').html('<img class="img-fluid img-thumbnail" src="'+e.target.result+'" width="150" height="150"/>');
+            $('#test').html('<img class="img-fluid img-thumbnail" src="'+e.target.result+'" width="150px" height="100px" />');
         }
         reader.readAsDataURL(input.files[0]);
         }

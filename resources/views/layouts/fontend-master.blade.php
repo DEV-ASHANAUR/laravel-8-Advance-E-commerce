@@ -9,7 +9,8 @@
 		<meta name="author" content="">
 	    <meta name="keywords" content="MediaCenter, Template, eCommerce">
 	    <meta name="robots" content="all">
-	    <title>Flipmart premium HTML5 & CSS3 Template</title>
+        <title>Flipmart premium HTML5 & CSS3 Template</title>
+        <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/style.css">
 	    <!-- Bootstrap Core CSS -->
 	    <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap.min.css">
 	    <!-- Customizable CSS -->
@@ -19,7 +20,8 @@
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/owl.transitions.css">
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/animate.min.css">
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/rateit.css">
-		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/toastr.css">
 		<!-- Icons/Glyphs -->
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/font-awesome.css">
         <!-- Fonts --> 
@@ -43,12 +45,7 @@
 					<li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
 					<li>
                         @auth
-                            {{-- <a href="{{ route('user.dashboard') }}"><i class="icon fa fa-user"></i>User Profile</a> --}}
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();"><i class="icon ion-power"></i> Sign Out</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                            <a href="{{ route('user.dashboard') }}"><i class="icon fa fa-user"></i>User Profile</a>
                             @else
                             <a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a>
                         @endauth
