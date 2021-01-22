@@ -29,5 +29,7 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){
     Route::get('dashboard',[UserController::class,'index'])->name('user.dashboard');
     Route::post('profile/update',[UserController::class,'ProfileUpdate'])->name('update.profile');
+    Route::get('change/password',[UserController::class,'PassChange'])->name('change.password');
+    Route::post('pass/store',[UserController::class,'updatePass'])->name('update.password');
 });
 // =================================Fontend Route==================================

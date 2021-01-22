@@ -83,7 +83,7 @@
 		    <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
 		    <input type="email" class="form-control unicase-form-control text-input" id="exampleInputEmail1" >
 		</div> --}}
-        <div class="form-group">
+    <div class="form-group">
 		    <label class="info-title" for="password">Password <span>*</span></label>
 			<input type="password" name="password" class="form-control unicase-form-control text-input" id="password" />
 			@error('password')

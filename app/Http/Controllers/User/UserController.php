@@ -44,4 +44,41 @@ class UserController extends Controller
             return redirect()->back()->with($notification);
         }
     }
+    public function PassChange()
+    {
+        return view('user.change-password');
+    }
+    public function updatePass(Request $request)
+    {
+        $request->validate([
+            'old' => 'required',
+            'password' => 'required|confirmed|min:8',
+        ]);
+        if(Auth::attempt(['id'=>Auth::user()->id,'password'=>$request->old])){
+            $user = User::find(Auth::user()->id);
+            $user->password = bcrypt($request->password);
+            $update = $user->save();
+            if($update){
+                $notification=array(
+                    'message'=>'Successfully Change Your Password',
+                    'alert-type'=>'success'
+                );
+                return redirect()->back()->with($notification);
+            }else{
+                $notification=array(
+                    'message'=>'Something went worng!',
+                    'alert-type'=>'error'
+                );
+                //return Redirect()->back()->with($notification);
+                return redirect()->back()->with($notification);
+            }
+        }else{
+            $notification=array(
+                'message'=>'Your Current Password is worng!',
+                'alert-type'=>'error'
+            );
+            return redirect()->back()->with($notification);
+        }
+        
+    }
 }
