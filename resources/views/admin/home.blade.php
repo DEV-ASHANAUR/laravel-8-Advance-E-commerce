@@ -1,9 +1,11 @@
 @extends('layouts.admin-master')
-
+@section('dashboard')
+    active
+@endsection
 @section('admin-content')
 <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
-      <a class="breadcrumb-item" href="index.html">Starlight</a>
+      <a class="breadcrumb-item" href="">ShopMama</a>
       <span class="breadcrumb-item active">Dashboard</span>
     </nav>
 

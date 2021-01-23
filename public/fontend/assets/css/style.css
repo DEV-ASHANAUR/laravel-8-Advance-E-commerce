@@ -9,3 +9,14 @@
     margin-left: auto;
     margin-right: auto;
 }
+.admin_container{
+    width: 100%;
+    max-width: 30px;
+    background-size: cover;
+    min-height: 30px;
+    background-position: center;
+    position: relative;
+    border-radius: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}

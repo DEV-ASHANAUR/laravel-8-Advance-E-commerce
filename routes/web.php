@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Fontend\IndexController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\User\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::post('profile/update',[AdminController::class,'profileUpdate'])->name('profile.update');
     Route::get('password/change',[AdminController::class,'PassChange'])->name('admin.password');
     Route::post('password/update',[AdminController::class,'PassUpdate'])->name('password.update');
+    // =================================brand=============================
+    Route::get('all-brands',[BrandController::class,'index'])->name('brands');
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){

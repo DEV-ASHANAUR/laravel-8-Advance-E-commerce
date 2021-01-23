@@ -8,10 +8,17 @@
             </div><!-- menu-item -->
         </a>
 
-        <a href="index.html" class="sl-menu-link active">
+        <a href="{{ route('admin.dashboard') }}" class="sl-menu-link @yield('dashboard')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
             <span class="menu-item-label">Dashboard</span>
+          </div><!-- menu-item -->
+        </a>
+
+        <a href="{{ route('brands') }}" class="sl-menu-link @yield('brands')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+            <span class="menu-item-label">Brands</span>
           </div><!-- menu-item -->
         </a>
         <!-- sl-menu-link -->
