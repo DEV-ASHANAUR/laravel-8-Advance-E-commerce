@@ -24,6 +24,10 @@ Auth::routes();
 // =================================Admin Route==================================
 Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Admin'], function(){
     Route::get('dashboard',[AdminController::class,'index'])->name('admin.dashboard');
+    Route::get('profile',[AdminController::class,'profile'])->name('admin.profile');
+    Route::post('profile/update',[AdminController::class,'profileUpdate'])->name('profile.update');
+    Route::get('password/change',[AdminController::class,'PassChange'])->name('admin.password');
+    Route::post('password/update',[AdminController::class,'PassUpdate'])->name('password.update');
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){

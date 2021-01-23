@@ -29,15 +29,20 @@
     <meta name="author" content="ThemePixels">
 
     <title>E-commerce Admin-panel</title>
-
+    <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/style.css">
     <!-- vendor css -->
     <link href="{{ asset('backend') }}/lib/font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="{{ asset('backend') }}/lib/Ionicons/css/ionicons.css" rel="stylesheet">
     <link href="{{ asset('backend') }}/lib/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet">
     <link href="{{ asset('backend') }}/lib/rickshaw/rickshaw.min.css" rel="stylesheet">
-
+    {{-- ==============================toastr======================= --}}
+    <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/toastr.css">
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
+    
+    <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script>
+    <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
+    <script src="{{ asset('backend') }}/lib/parsleyjs/parsley.js"></script>
   </head>
 
   <body>
@@ -61,7 +66,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
-                <li><a href=""><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
+                <li><a href="{{ route('admin.profile') }}"><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
                 <li><a href=""><i class="icon ion-ios-gear-outline"></i> Settings</a></li>
                 <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -247,7 +252,7 @@
     @yield('admin-content')
     <!-- ########## END: MAIN PANEL ########## -->
 
-    <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script>
+    
     <script src="{{ asset('backend') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('backend') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('backend') }}/lib/jquery-ui/jquery-ui.js"></script>
@@ -264,5 +269,33 @@
     <script src="{{ asset('backend') }}/js/starlight.js"></script>
     <script src="{{ asset('backend') }}/js/ResizeSensor.js"></script>
     <script src="{{ asset('backend') }}/js/dashboard.js"></script>
+    
+    {{-- ============================aditional script===================== --}}
+    <script src="{{ asset('fontend') }}/assets/js/aditional/toastr.min.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/aditional/jquery.validate.min.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/aditional/additional-methods.min.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/aditional/preview.js"></script>
+
+    
+    @yield('admin-script')
+    <script>
+        @if(Session::has('message'))
+            var type="{{Session::get('alert-type','info')}}"
+            switch(type){
+            case 'info':
+                    toastr.info("{{ Session::get('message') }}");
+                    break;
+            case 'success':
+                    toastr.success("{{ Session::get('message') }}");
+                    break;
+            case 'warning':
+                    toastr.warning("{{ Session::get('message') }}");
+                    break;
+            case 'error':
+                    toastr.error("{{ Session::get('message') }}");
+                    break;
+            }
+        @endif  
+    </script>
   </body>
 </html>
