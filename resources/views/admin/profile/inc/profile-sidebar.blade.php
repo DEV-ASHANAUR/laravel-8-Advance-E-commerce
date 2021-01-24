@@ -1,5 +1,5 @@
 <div class="card" style="width: 18rem;">
-    <div class="chat_container" style="background-image: url({{ (!empty(Auth::user()->image))?url('storage/'.Auth::user()->image):url('media/profile.jpg') }});" >
+    <div class="chat_container" style="background-image: url({{ (!empty(Auth::user()->image))?url(Auth::user()->image):url('media/profile.jpg') }});" >
         <div class="overlay" >
             
         </div>

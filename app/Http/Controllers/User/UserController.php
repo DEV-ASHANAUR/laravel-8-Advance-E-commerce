@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -24,9 +24,12 @@ class UserController extends Controller
             $request->validate([
                 'image' => 'image|mimes:jpeg,png,jpg'
             ]);
-            $path = $request->file('image')->store('user_images');
-            $data->image = $path;
-            Storage::delete($oldpath);
+            $image = $request->file('image');
+            $name_gen = date("YmdHi").'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(300,300)->save('uploads/users_images/'.$name_gen);
+            $save_url = 'uploads/users_images/'.$name_gen;
+            $data->image = $save_url;  
+            @unlink(public_path($oldpath));
         }
         $update = $data->save();
         if($update){

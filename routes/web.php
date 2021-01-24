@@ -31,6 +31,7 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::post('password/update',[AdminController::class,'PassUpdate'])->name('password.update');
     // =================================brand=============================
     Route::get('all-brands',[BrandController::class,'index'])->name('brands');
+    Route::post('brand/store',[BrandController::class,'Store'])->name('brand.store');
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){

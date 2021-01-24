@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
 {
@@ -34,9 +34,13 @@ class AdminController extends Controller
             $request->validate([
                 'image' => 'image|mimes:jpeg,png,jpg'
             ]);
-            $path = $request->file('image')->store('admin_images');
-            $data->image = $path;
-            Storage::delete($oldpath);
+            
+            $image = $request->file('image');
+            $name_gen = date("YmdHi").'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(400,400)->save('uploads/admin_images/'.$name_gen);
+            $save_url = 'uploads/admin_images/'.$name_gen;
+            $data->image = $save_url;  
+            @unlink(public_path($oldpath));
         }
         $update = $data->save();
         if($update){
