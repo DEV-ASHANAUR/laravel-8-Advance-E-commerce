@@ -36,7 +36,7 @@ class AdminController extends Controller
             ]);
             
             $image = $request->file('image');
-            $name_gen = date("YmdHi").'.'.$image->getClientOriginalExtension();
+            $name_gen = date("YmdHis").'.'.$image->getClientOriginalExtension();
             Image::make($image)->resize(400,400)->save('uploads/admin_images/'.$name_gen);
             $save_url = 'uploads/admin_images/'.$name_gen;
             $data->image = $save_url;  

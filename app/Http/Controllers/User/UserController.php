@@ -25,7 +25,7 @@ class UserController extends Controller
                 'image' => 'image|mimes:jpeg,png,jpg'
             ]);
             $image = $request->file('image');
-            $name_gen = date("YmdHi").'.'.$image->getClientOriginalExtension();
+            $name_gen = date("YmdHis").'.'.$image->getClientOriginalExtension();
             Image::make($image)->resize(300,300)->save('uploads/users_images/'.$name_gen);
             $save_url = 'uploads/users_images/'.$name_gen;
             $data->image = $save_url;  

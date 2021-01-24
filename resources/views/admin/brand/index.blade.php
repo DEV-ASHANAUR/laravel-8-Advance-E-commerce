@@ -33,10 +33,11 @@
                           <td>
                             <img src="{{ asset($brand->brand_image) }}" class="img-thumbnail" style="width: 80px" alt="">
                           </td>
-                          <td>{{ $brand->brand_name_en }}</td>
+                          <td style="text-transform: uppercase">{{ $brand->brand_name_en }}</td>
                           <td>{{ $brand->brand_name_bn }}</td>
                           <td>
-                            <a href="" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="{{ route('brand.edit',$brand->id) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
+
                             <a href="" class="btn btn-sm btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                           </td>
                         </tr>
