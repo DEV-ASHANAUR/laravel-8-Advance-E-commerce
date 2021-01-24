@@ -42,7 +42,45 @@ class CategoryController extends Controller
             'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
-    }    
+    }     
+    /**
+     * edit category
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function edit($id)
+    {
+        $editdata = Category::find($id);
+        return view('admin.category.edit',compact('editdata'));
+    }      
+    /**
+     * update
+     *
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
+     */
+    public function update(Request $request,$id)
+    {
+        $request->validate([
+            'category_name_en' => 'required',
+            'category_name_bn' => 'required',
+            'category_icon' => 'required',
+        ]);
+        $category = Category::find($id);
+        $category->category_name_en = $request->category_name_en;
+        $category->category_name_bn = $request->category_name_bn;
+        $category->category_slug_en = strtolower(str_replace(' ','-',$request->category_name_en));
+        $category->category_slug_bn = str_replace(' ','-',$request->category_name_bn);
+        $category->category_icon = $request->category_icon;
+        $category->save();
+        $notification=array(
+            'message'=>'Successfully update Category',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('category')->with($notification);
+    } 
     /**
      * delete
      *

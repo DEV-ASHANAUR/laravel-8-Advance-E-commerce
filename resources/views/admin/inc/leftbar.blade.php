@@ -25,7 +25,7 @@
         {{-- category start --}}
         <a href="#" class="sl-menu-link @yield('Categories')">
           <div class="sl-menu-item">
-            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <i class="menu-item-icon ion-ios-list-outline tx-20"></i>
             <span class="menu-item-label">Categories</span>
             <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
