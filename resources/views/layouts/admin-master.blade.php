@@ -42,9 +42,8 @@
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
     {{-- ==============================jquery======================== --}}
-    <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script>
-    <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
-    <script src="{{ asset('backend') }}/lib/parsleyjs/parsley.js"></script>
+    
+    
   </head>
   <body>
 
@@ -253,7 +252,37 @@
     @yield('admin-content')
     <!-- ########## END: MAIN PANEL ########## -->
 
-    
+    <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script>
+    <script src="{{ asset('backend') }}/js/sweetalert.js"></script>
+    <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
+    <script src="{{ asset('backend') }}/lib/parsleyjs/parsley.js"></script>
+    {{-- ==========================sweetalert====================== --}}
+    <script>
+      $(document).ready(function(){
+        $(document).on('click','#delete',function(e){
+            e.preventDefault();
+            var link = $(this).attr('href');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.value) {
+                    window.location.href = link;
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                    )
+                }
+             });
+        });
+      });
+    </script>
     <script src="{{ asset('backend') }}/lib/popper.js/popper.js"></script>
     <script src="{{ asset('backend') }}/lib/bootstrap/bootstrap.js"></script>
     <script src="{{ asset('backend') }}/lib/jquery-ui/jquery-ui.js"></script>
@@ -261,6 +290,7 @@
     <script src="{{ asset('backend') }}/lib/datatables/jquery.dataTables.js"></script>
     <script src="{{ asset('backend') }}/lib/datatables-responsive/dataTables.responsive.js"></script>
     <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
+    {{-- ==========================data table====================== --}}
     <script>
       $(function(){
         'use strict';
@@ -303,8 +333,7 @@
     <script src="{{ asset('fontend') }}/assets/js/aditional/jquery.validate.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/aditional/additional-methods.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/aditional/preview.js"></script>
-
-    
+    {{-- ============================script============================ --}}
     @yield('admin-script')
     <script>
         @if(Session::has('message'))
@@ -325,5 +354,6 @@
             }
         @endif  
     </script>
+    
   </body>
 </html>
