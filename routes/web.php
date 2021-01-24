@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Fontend\IndexController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\User\UserController;
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,12 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('brand/edit/{id}',[BrandController::class,'edit'])->name('brand.edit');
     Route::post('brand/update/{id}',[BrandController::class,'update'])->name('brand.update');
     Route::get('brand/delete/{id}',[BrandController::class,'delete'])->name('brand.delete');
+    // =================================category=============================
+    Route::get('category',[CategoryController::class,'index'])->name('category');
+    Route::post('category/store',[CategoryController::class,'store'])->name('category.store');
+    Route::post('category/edit/{id}',[CategoryController::class,'edit'])->name('category.edit');
+    Route::get('category/delete/{id}',[CategoryController::class,'delete'])->name('category.delete');
+
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){
