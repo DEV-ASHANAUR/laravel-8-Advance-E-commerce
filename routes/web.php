@@ -44,7 +44,10 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('category/delete/{id}',[CategoryController::class,'delete'])->name('category.delete');
     // ==============================subcategory===========================
     Route::get('sub-category',[CategoryController::class,'subindex'])->name('subcategory');
-
+    Route::post('sub-category/store',[CategoryController::class,'substore'])->name('subcategory.store');
+    Route::get('sub-category/edit/{id}',[CategoryController::class,'subedit'])->name('subcategory.edit');
+    Route::post('sub-category/update/{id}',[CategoryController::class,'subupdate'])->name('subcategory.update');
+    Route::get('sub-category/delete/{id}',[CategoryController::class,'subdelete'])->name('subcategory.delete');
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){

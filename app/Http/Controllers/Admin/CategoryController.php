@@ -99,6 +99,77 @@ class CategoryController extends Controller
     public function subindex()
     {
         $subcate = Subcategory::latest()->get();
-        return view('admin.subcategory.index',compact('subcate'));
+        $category = Category::latest()->get();
+        return view('admin.subcategory.index',compact('subcate','category'));
+    }
+    public function substore(Request $request)
+    {
+        $request->validate([
+            'category_id' => 'required',
+            'subcategory_name_en' => 'required',
+            'subcategory_name_bn' => 'required'
+        ]);
+        $subcategory = new Subcategory();
+        $subcategory->category_id = $request->category_id;
+        $subcategory->subcategory_name_en = $request->subcategory_name_en;
+        $subcategory->subcategory_name_bn = $request->subcategory_name_bn;
+        $subcategory->subcategory_slug_en = strtolower(str_replace(' ','-',$request->subcategory_name_en));
+        $subcategory->subcategory_slug_bn = str_replace(' ','-',$request->subcategory_name_bn);
+        $subcategory->save();
+        $notification=array(
+            'message'=>'Successfully Add Sub-Category',
+            'alert-type'=>'success'
+        );
+        return redirect()->back()->with($notification);
+    }    
+    /**
+     * subedit
+     *
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
+     */
+    public function subedit(Request $request,$id)
+    {
+        $editdata = Subcategory::find($id);
+        $category = Category::latest()->get();
+        return view('admin.subcategory.edit',compact('editdata','category'));
+    }   
+    public function subupdate(Request $request,$id)
+    {
+        $request->validate([
+            'category_id' => 'required',
+            'subcategory_name_en' => 'required',
+            'subcategory_name_bn' => 'required'
+        ]);
+        $subcategory = Subcategory::find($id);
+        $subcategory->category_id = $request->category_id;
+        $subcategory->subcategory_name_en = $request->subcategory_name_en;
+        $subcategory->subcategory_name_bn = $request->subcategory_name_bn;
+        $subcategory->subcategory_slug_en = strtolower(str_replace(' ','-',$request->subcategory_name_en));
+        $subcategory->subcategory_slug_bn = str_replace(' ','-',$request->subcategory_name_bn);
+        $subcategory->save();
+        $notification=array(
+            'message'=>'Successfully Update Sub-Category',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('subcategory')->with($notification);
+    } 
+    /**
+     * subdelete
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function subdelete($id)
+    {
+        $sub = Subcategory::find($id);
+        if($sub->delete()){
+            $notification=array(
+                'message'=>'Successfully delete Sub-Category',
+                'alert-type'=>'success'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

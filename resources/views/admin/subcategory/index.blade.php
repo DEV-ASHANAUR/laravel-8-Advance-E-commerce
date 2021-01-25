@@ -33,13 +33,13 @@
                         @foreach ($subcate as $key => $item)
                         <tr>
                           <td>{{ $key+1 }}</td>
-                          <td><span><i class="{{ $item->category_id }}"></i></span></td>
+                          <td style="text-transform: uppercase">{{ $item->category->category_name_en }}</td>
                           <td style="text-transform: uppercase">{{ $item->subcategory_name_en }}</td>
                           <td>{{ $item->subcategory_name_bn }}</td>
                           <td>
-                            <a href="{{ route('category.edit',$item->id) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="{{ route('subcategory.edit',$item->id) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
 
-                            <a href="{{ route('category.delete',$item->id) }}" id="delete" class="btn btn-sm btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                            <a href="{{ route('subcategory.delete',$item->id) }}" id="delete" class="btn btn-sm btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                           </td>
                         </tr>
                         @endforeach
@@ -53,26 +53,29 @@
             <div class="card">
                 <div class="card-header">Add Category</div>
                 <div class="card-body">
-                    <form action="{{ route('category.store') }}" method="POST" data-parsley-validate id="selectForm">
+                    <form action="{{ route('subcategory.store') }}" method="POST" data-parsley-validate id="selectForm">
                       @csrf
                         <div class="form-group">
-                            <label class="form-control-label">Category Name English: <span class="tx-danger">*</span></label>
-                            <input type="text" class="form-control" name="category_name_en" id="en"  value="{{ old('category_name_en') }}" placeholder="Enter category_name_en" required />
+                            <label class="form-control-label">Select Category Name: <span class="tx-danger">*</span></label>
+                            <select name="category_id" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
+                                <option label="Choose one"></option>
+                                @foreach ($category as $cat)
+                                   <option value="{{ $cat->id }}">{{ ucwords($cat->category_name_en)  }}</option> 
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label">SubCategory Name English: <span class="tx-danger">*</span></label>
+                            <input type="text" class="form-control" name="subcategory_name_en" id="en"  value="{{ old('subcategory_name_en') }}" placeholder="Enter subcategory_name_en" required />
 
-                            <font class="text-danger">{{ ($errors->has('category_name_en'))?$errors->first('category_name_en'):'' }}</font>
+                            <font class="text-danger">{{ ($errors->has('subcategory_name_en'))?$errors->first('subcategory_name_en'):'' }}</font>
 
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label">Category Name Bangla: <span class="tx-danger">*</span></label>
-                            <input type="text" class="form-control" name="category_name_bn"  value="{{ old('category_name_bn') }}" placeholder="Enter category_name_bn" required />
+                            <label class="form-control-label">SubCategory Name Bangla: <span class="tx-danger">*</span></label>
+                            <input type="text" class="form-control" name="subcategory_name_bn"  value="{{ old('subcategory_name_bn') }}" placeholder="Enter subcategory_name_bn" required />
 
-                            <font class="text-danger">{{ ($errors->has('category_name_bn'))?$errors->first('category_name_bn'):'' }}</font>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Category Icon: <span class="tx-danger">*</span></label>
-                            <input type="text" class="form-control" name="category_icon" placeholder="Add Category Icon" required />
-
-                            <font class="text-danger">{{ ($errors->has('category_icon'))?$errors->first('category_icon'):'' }}</font>
+                            <font class="text-danger">{{ ($errors->has('subcategory_name_bn'))?$errors->first('subcategory_name_bn'):'' }}</font>
                         </div>
                         <div class="form-layout-footer">
                             <button type="submit" class="btn btn-info mg-r-5">Submit</button>
@@ -87,12 +90,16 @@
   </div><!-- sl-mainpanel -->
 @endsection
 @section('admin-script')
-<script>
+<script>  
     $(function(){
       'use strict';
       $('.select2').select2({
-        minimumResultsForSearch: Infinity
-      });
+          minimumResultsForSearch: Infinity
+        });
+        // Select2 by showing the search
+       $('.select2-show-search').select2({
+          minimumResultsForSearch: ''
+        });
 
       $('#selectForm').parsley();
     })
