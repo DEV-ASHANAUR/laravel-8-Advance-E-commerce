@@ -32,7 +32,7 @@
         </a><!-- sl-menu-link  active show-sub -->
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('category') }}" class="nav-link @yield('add-category')">Add Category</a></li>
-          <li class="nav-item"><a href="chart-flot.html" class="nav-link">Flot Charts</a></li>
+          <li class="nav-item"><a href="{{ route('subcategory') }}" class="nav-link @yield('sub-category')">Sub Category</a></li>
         </ul>
         {{-- category end --}}
       </div><!-- sl-sideleft-menu -->

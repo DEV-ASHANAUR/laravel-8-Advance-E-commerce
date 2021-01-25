@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
-
+use App\Models\Subcategory;
 class CategoryController extends Controller
 {    
     /**
@@ -64,11 +64,6 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request,$id)
     {
-        // $request->validate([
-        //     'category_name_en' => 'required',
-        //     'category_name_bn' => 'required',
-        //     'category_icon' => 'required',
-        // ]);
         $category = Category::find($id);
         $category->category_name_en = $request->category_name_en;
         $category->category_name_bn = $request->category_name_bn;
@@ -98,5 +93,12 @@ class CategoryController extends Controller
             );
             return redirect()->back()->with($notification);
         }
+    }
+
+    // ==============================sub category ===================
+    public function subindex()
+    {
+        $subcate = Subcategory::latest()->get();
+        return view('admin.subcategory.index',compact('subcate'));
     }
 }
