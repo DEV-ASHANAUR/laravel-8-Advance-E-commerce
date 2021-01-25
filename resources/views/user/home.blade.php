@@ -27,7 +27,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-8">
                                 <label class="info-title" for="exampleInputEmail1">Image <span></span></label>
-                                <input type="file" id="file" name="image" class="form-control form-control-file unicase-form-control text-input" id="exampleInputEmail1" >
+                                <input type="file" id="file" name="image" class="form-control form-control-file unicase-form-control text-input" id="exampleInputEmail1" />
                                 <font class="text-danger">{{ ($errors->has('image'))?$errors->first('image'):'' }}</font>
                             </div>
                             <div class="col-md-4" id="test">
@@ -49,7 +49,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label class="info-title" for="exampleInputEmail1">Phone Number <span></span></label>
-                                <input type="number" name="phone" value="{{ Auth::user()->phone }}" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Enter Phone" />
+                                <input type="number" name="phone" value="{{ Auth::user()->phone }}" class="form-control unicase-form-control text-input" id="exampleInputEmail1" placeholder="Enter Phone" required />
                             </div>
                         </div>
                         <div class="form-row">

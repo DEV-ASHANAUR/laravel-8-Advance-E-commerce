@@ -20,3 +20,70 @@
     margin-left: auto;
     margin-right: auto;
 }
+/* -------------------------------------------- */
+/* ############### 4.12 Parsley ############### */
+/* -------------------------------------------- */
+input.parsley-error:focus,
+textarea.parsley-error:focus {
+  box-shadow: none !important;
+}
+
+input.parsley-success:focus,
+textarea.parsley-success:focus {
+  box-shadow: none !important;
+}
+
+.parsley-checkbox.parsley-error {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #DC3545!important;
+}
+.parsley-checkbox.parsley-success {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #23bf08!important;
+}
+
+.parsley-errors-list {
+  color: #DC3545;
+  list-style: none;
+  font-size: 12px;
+  padding: 0;
+  margin-bottom: 0;
+}
+.parsley-errors-list li {
+  margin: 5px 0 0;
+}
+
+/***** CUSTOM STYLED ERROR MESSAGE *****/
+.parsley-style-1 .parsley-input.parsley-error .form-control, .parsley-style-1 .parsley-input.parsley-error .dataTables_filter input, .dataTables_filter .parsley-style-1 .parsley-input.parsley-error input {
+  background-color: #fef9f9;
+  border-color: #DC3545;
+  border-bottom-width: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.parsley-style-1 .parsley-input.parsley-success .form-control, .parsley-style-1 .parsley-input.parsley-success .dataTables_filter input, .dataTables_filter .parsley-style-1 .parsley-input.parsley-success input {
+  border-color: #23bf08;
+}
+.parsley-style-1 .parsley-checkbox.parsley-error {
+  border: 1px solid #DC3545;
+  background-color: #fef9f9;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+.parsley-style-1 .parsley-select.parsley-error .select2-container--default .select2-selection--single {
+  background-color: #fef9f9;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.parsley-style-1 .parsley-errors-list.filled {
+  background-color: #DC3545;
+  color: #fff;
+  padding: 7px 10px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.parsley-style-1 .parsley-errors-list.filled li:first-child {
+  margin-top: 0;
+}

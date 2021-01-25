@@ -42,7 +42,10 @@
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
     {{-- ==============================jquery======================== --}}
-    
+    <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script>
+    <script src="{{ asset('backend') }}/js/sweetalert.js"></script>
+    <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
+    <script src="{{ asset('backend') }}/lib/parsleyjs/parsley.js"></script>
     
   </head>
   <body>
@@ -252,10 +255,7 @@
     @yield('admin-content')
     <!-- ########## END: MAIN PANEL ########## -->
 
-    <script src="{{ asset('backend') }}/lib/jquery/jquery.js"></script>
-    <script src="{{ asset('backend') }}/js/sweetalert.js"></script>
-    <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
-    <script src="{{ asset('backend') }}/lib/parsleyjs/parsley.js"></script>
+    
     {{-- ==========================sweetalert====================== --}}
     <script>
       $(document).ready(function(){

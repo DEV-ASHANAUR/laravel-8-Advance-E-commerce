@@ -596,7 +596,9 @@
 	<!-- For demo purposes – can be removed on production : End -->
 
 	<!-- JavaScripts placed at the end of the document so the pages load faster -->
-	<script src="{{ asset('fontend') }}/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/jquery-1.11.1.min.js"></script>
+    <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
+    <script src="{{ asset('backend') }}/lib/parsleyjs/parsley.js"></script>
 	<script src="{{ asset('fontend') }}/assets/js/bootstrap.min.js"></script>
 	<script src="{{ asset('fontend') }}/assets/js/bootstrap-hover-dropdown.min.js"></script>
 	<script src="{{ asset('fontend') }}/assets/js/owl.carousel.min.js"></script>

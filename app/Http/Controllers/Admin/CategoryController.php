@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
@@ -11,7 +12,7 @@ class CategoryController extends Controller
      * index
      *
      * @return void
-     */
+    */
     public function index()
     {
         $categories = Category::latest()->get();
@@ -26,8 +27,8 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name_en' => 'required',
-            'category_name_bn' => 'required',
+            'category_name_en' => 'required|unique:categories,category_name_en',
+            'category_name_bn' => 'required|unique:categories,category_name_bn',
             'category_icon' => 'required',
         ]);
         $category = new Category();
@@ -61,13 +62,13 @@ class CategoryController extends Controller
      * @param  mixed $id
      * @return void
      */
-    public function update(Request $request,$id)
+    public function update(CategoryRequest $request,$id)
     {
-        $request->validate([
-            'category_name_en' => 'required',
-            'category_name_bn' => 'required',
-            'category_icon' => 'required',
-        ]);
+        // $request->validate([
+        //     'category_name_en' => 'required',
+        //     'category_name_bn' => 'required',
+        //     'category_icon' => 'required',
+        // ]);
         $category = Category::find($id);
         $category->category_name_en = $request->category_name_en;
         $category->category_name_bn = $request->category_name_bn;

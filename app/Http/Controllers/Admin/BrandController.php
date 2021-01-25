@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\BrandRequest;
 use Intervention\Image\Facades\Image;
 use App\Models\Brand;
 use Carbon\Carbon;
@@ -31,12 +32,9 @@ class BrandController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'brand_name_en' => 'required',
-            'brand_name_bn' => 'required',
+            'brand_name_en' => 'required|unique:brands,brand_name_en',
+            'brand_name_bn' => 'required|unique:brands,brand_name_bn',
             'brand_image' => 'image|mimes:jpeg,png,jpg'
-        ],[
-            'brand_name_en.require' => 'English Brand Name',
-            'brand_name_bn.require' => 'Bangla Brand Name'
         ]);
             $image = $request->file('brand_image');
             $name_gen = date("YmdHis").'.'.$image->getClientOriginalExtension();
@@ -76,12 +74,12 @@ class BrandController extends Controller
      * @param  mixed $id
      * @return void
      */
-    public function update(Request $request,$id)
+    public function update(BrandRequest $request,$id)
     {
-        $request->validate([
-            'brand_name_en' => 'required',
-            'brand_name_bn' => 'required',
-        ]);
+        // $request->validate([
+        //     'brand_name_en' => 'required|unique:brands,brand_name_en',
+        //     'brand_name_bn' => 'required|unique:brands,brand_name_bn',
+        // ]);
         $brand = Brand::find($id);
         $oldpath = $brand->brand_image;
         $brand->brand_name_en = $request->brand_name_en; 
