@@ -6,6 +6,7 @@ use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
+use App\Models\Subsubcategory;
 class CategoryController extends Controller
 {    
     /**
@@ -115,12 +116,14 @@ class CategoryController extends Controller
         $subcategory->subcategory_name_bn = $request->subcategory_name_bn;
         $subcategory->subcategory_slug_en = strtolower(str_replace(' ','-',$request->subcategory_name_en));
         $subcategory->subcategory_slug_bn = str_replace(' ','-',$request->subcategory_name_bn);
-        $subcategory->save();
-        $notification=array(
-            'message'=>'Successfully Add Sub-Category',
-            'alert-type'=>'success'
-        );
-        return redirect()->back()->with($notification);
+        if($subcategory->save()){
+            $notification=array(
+                'message'=>'Successfully Add Sub-Category',
+                'alert-type'=>'success'
+            );
+            return redirect()->back()->with($notification);
+        }
+        
     }    
     /**
      * subedit
@@ -167,6 +170,77 @@ class CategoryController extends Controller
         if($sub->delete()){
             $notification=array(
                 'message'=>'Successfully delete Sub-Category',
+                'alert-type'=>'success'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }
+    // ============================sub-subcategory===================    
+    /**
+     * subsubindex
+     *
+     * @return void
+     */
+    public function subsubindex()
+    {
+        $subsubcate = Subsubcategory::latest()->get();
+        $category = Category::latest()->get();
+        return view('admin.sub-subcategory.index',compact('subsubcate','category'));
+    }   
+    /**
+     * getsubcategory ajax request by category_id
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function getsubcategory(Request $request)
+    {
+        $subcategory  = Subcategory::where('category_id',$request->category_id)->get();
+        return response()->json($subcategory);
+    }    
+    /**
+     * subsubstore
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function subsubstore(Request $request)
+    {
+        $request->validate([
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'subsubcategory_name_en' =>'required',
+            'subsubcategory_name_bn' =>'required',
+        ]);
+        $subsubcategory = new Subsubcategory();
+        $subsubcategory->category_id = $request->category_id;
+        $subsubcategory->subcategory_id = $request->subcategory_id;
+        $subsubcategory->subsubcategory_name_en = $request->subsubcategory_name_en;
+        $subsubcategory->subsubcategory_name_bn = $request->subsubcategory_name_bn;
+
+        $subsubcategory->subsubcategory_slug_en = strtolower(str_replace(' ','-',$request->subsubcategory_name_en));
+        $subsubcategory->subsubcategory_slug_bn = str_replace(' ','-',$request->subsubcategory_name_bn);
+        
+        if($subsubcategory->save()){
+            $notification=array(
+                'message'=>'Successfully Add Sub Sub-Category',
+                'alert-type'=>'success'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }     
+    /**
+     * subsubdelete
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function subsubdelete($id)
+    {
+        $subsubcategory = Subsubcategory::find($id);
+        if($subsubcategory->delete()){
+            $notification=array(
+                'message'=>'Successfully Delete Sub Sub-Category',
                 'alert-type'=>'success'
             );
             return redirect()->back()->with($notification);
