@@ -39,7 +39,7 @@
                           <td style="text-transform: uppercase">{{ $item->subsubcategory_name_en }}</td>
                           <td>{{ $item->subsubcategory_name_bn }}</td>
                           <td>
-                            <a href="{{ route('subcategory.edit',$item->id) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="{{ route('sub-subcategory.edit',$item->id) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
 
                             <a href="{{ route('sub-subdelete',$item->id) }}" id="delete" class="btn btn-sm btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                           </td>

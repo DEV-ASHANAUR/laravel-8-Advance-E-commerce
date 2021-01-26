@@ -52,6 +52,8 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('sub-subcategory',[CategoryController::class,'subsubindex'])->name('sub-subcategory');
     Route::post('sub-subcategory/store',[CategoryController::class,'subsubstore'])->name('sub-subcategory.store');
     Route::get('/get-subcategory', [CategoryController::class,'getsubcategory'])->name('get-subcategory');
+    Route::get('sub-subcategory/edit/{id}',[CategoryController::class,'subsubedit'])->name('sub-subcategory.edit');
+    Route::post('sub-subcategory/update/{id}',[CategoryController::class,'subsubupdate'])->name('sub-subcategory.update');
     Route::get('sub-subcategory/delete{id}',[CategoryController::class,'subsubdelete'])->name('sub-subdelete');
 });
 // =================================User Route==================================

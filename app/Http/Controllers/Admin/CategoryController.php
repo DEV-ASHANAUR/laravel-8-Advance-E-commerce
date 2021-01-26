@@ -199,7 +199,7 @@ class CategoryController extends Controller
         return response()->json($subcategory);
     }    
     /**
-     * subsubstore
+     * sub sub-category store
      *
      * @param  mixed $request
      * @return void
@@ -228,9 +228,49 @@ class CategoryController extends Controller
             );
             return redirect()->back()->with($notification);
         }
-    }     
+    }         
     /**
-     * subsubdelete
+     * sub sub-category edit
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function subsubedit($id)
+    {
+        $editdata = Subsubcategory::find($id);
+        return view('admin.sub-subcategory.edit',compact('editdata'));
+
+    }    
+    /**
+     * sub sub-category update
+     *
+     * @param  mixed $request
+     * @param  mixed $id
+     * @return void
+     */
+    public function subsubupdate(Request $request,$id)
+    {
+        $request->validate([
+            'subsubcategory_name_en' =>'required',
+            'subsubcategory_name_bn' =>'required',
+        ]);
+        $subsubcategory = Subsubcategory::find($id);
+        $subsubcategory->subsubcategory_name_en = $request->subsubcategory_name_en;
+        $subsubcategory->subsubcategory_name_bn = $request->subsubcategory_name_bn;
+
+        $subsubcategory->subsubcategory_slug_en = strtolower(str_replace(' ','-',$request->subsubcategory_name_en));
+        $subsubcategory->subsubcategory_slug_bn = str_replace(' ','-',$request->subsubcategory_name_bn);
+        
+        if($subsubcategory->save()){
+            $notification=array(
+                'message'=>'Successfully Update Sub Sub-Category',
+                'alert-type'=>'success'
+            );
+            return redirect()->route('sub-subcategory')->with($notification);
+        }
+    }
+    /**
+     * sub sub-category delete
      *
      * @param  mixed $id
      * @return void
