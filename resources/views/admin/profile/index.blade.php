@@ -63,7 +63,6 @@
     </div><!-- sl-pagebody -->
   </div><!-- sl-mainpanel -->
 @endsection
-
 @section('admin-script')
 <script>
     $(function(){
@@ -73,6 +72,6 @@
       });
 
       $('#selectForm').parsley();
-    })
-  </script>
+    });
+</script>
 @endsection

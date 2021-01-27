@@ -197,7 +197,18 @@ class CategoryController extends Controller
     {
         $subcategory  = Subcategory::where('category_id',$request->category_id)->get();
         return response()->json($subcategory);
-    }    
+    }     
+    /**
+     * get subsubcategory by ajax request
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function getsubsubcategory(Request $request)
+    {
+        $subsubcategory  = Subsubcategory::where('subcategory_id',$request->subcategory_id)->get();
+        return response()->json($subsubcategory);
+    }   
     /**
      * sub sub-category store
      *

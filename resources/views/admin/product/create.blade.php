@@ -18,7 +18,8 @@
             <div class="card">
                 <div class="card-header">Add Product</div>
                 <div class="card-body">
-                    <form action="" method="POST" enctype="multipart/form-data" data-parsley-validate id="selectForm">
+                    <form action="{{ route('product.store') }}" id="Myform" method="POST" enctype="multipart/form-data" data-parsley-validate id="selectForm">
+                        @csrf
                         <div class="form-layout">
                             <div class="row mg-b-25">
                                 <div class="col-lg-4">
@@ -36,7 +37,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Select Category Name: <span class="tx-danger">*</span></label>
-                                        <select name="category_id" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
+                                        <select name="category_id" id="category_id" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
                                             <option label="Choose one"></option>
                                             @foreach ($category as $cat)
                                             <option value="{{ $cat->id }}">{{ ucwords($cat->category_name_en)  }}</option> 
@@ -49,7 +50,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Select Sub-Category Name: <span class="tx-danger">*</span></label>
-                                        <select name="subcategory_id" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
+                                        <select name="subcategory_id" id="subcategory" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
                                             <option label="Choose one"></option>
                                             {{-- @foreach ($category as $cat)
                                             <option value="{{ $cat->id }}">{{ ucwords($cat->category_name_en)  }}</option> 
@@ -62,7 +63,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Select Sub Sub-Category Name: <span class="tx-danger">*</span></label>
-                                        <select name="subsubcategory_id" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
+                                        <select name="subsubcategory_id" id="subsubcategory" class="form-control select2-show-search" data-placeholder="Choose one (with searchbox)" required>
                                             <option label="Choose one"></option>
                                             {{-- @foreach ($category as $cat)
                                             <option value="{{ $cat->id }}">{{ ucwords($cat->category_name_en)  }}</option> 
@@ -107,7 +108,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Tag English: <span class="tx-danger">*</span></label>
-                                        <input type="text" class="form-control" name="product_tag_en" id="en"  value="{{ old('product_tag_en') }}" placeholder="Enter product_tag_en" required />
+                                        <input type="text" class="form-control" name="product_tag_en" data-role="tagsinput"  value="{{ old('product_tag_en') }}" placeholder="Enter product_tag_en" required />
 
                                         <font class="text-danger">{{ ($errors->has('product_tag_en'))?$errors->first('product_tag_en'):'' }}</font>
                                     </div>
@@ -115,7 +116,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Tag Bangla: <span class="tx-danger">*</span></label>
-                                        <input type="text" class="form-control" name="product_tag_bn" id="en"  value="{{ old('product_tag_bn') }}" placeholder="Enter product_tag_bn" required />
+                                        <input type="text" class="form-control" name="product_tag_bn" data-role="tagsinput"  value="{{ old('product_tag_bn') }}" placeholder="Enter product_tag_bn" required />
 
                                         <font class="text-danger">{{ ($errors->has('product_tag_bn'))?$errors->first('product_tag_bn'):'' }}</font>
                                     </div>
@@ -123,7 +124,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Size English: <span class="tx-danger">*</span></label>
-                                        <input type="text" class="form-control" name="product_size_en" id="en"  value="{{ old('product_size_en') }}" placeholder="Enter product_size_en" required />
+                                        <input type="text" class="form-control" name="product_size_en" data-role="tagsinput"  value="{{ old('product_size_en') }}" placeholder="Enter product_size_en" required />
 
                                         <font class="text-danger">{{ ($errors->has('product_size_en'))?$errors->first('product_size_en'):'' }}</font>
                                     </div>
@@ -131,7 +132,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Size Bangla: <span class="tx-danger">*</span></label>
-                                        <input type="text" class="form-control" name="product_size_bn" id="en"  value="{{ old('product_size_bn') }}" placeholder="Enter product_size_bn" required />
+                                        <input type="text" class="form-control" name="product_size_bn" data-role="tagsinput"  value="{{ old('product_size_bn') }}" placeholder="Enter product_size_bn" required />
 
                                         <font class="text-danger">{{ ($errors->has('product_size_bn'))?$errors->first('product_size_bn'):'' }}</font>
                                     </div>
@@ -139,7 +140,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Color English: <span class="tx-danger">*</span></label>
-                                        <input type="text" class="form-control" name="product_color_en" id="en"  value="{{ old('product_color_en') }}" placeholder="Enter product_color_en" required />
+                                        <input type="text" class="form-control" name="product_color_en" data-role="tagsinput" value="{{ old('product_color_en') }}" placeholder="Enter product_color_en" required />
 
                                         <font class="text-danger">{{ ($errors->has('product_color_en'))?$errors->first('product_color_en'):'' }}</font>
                                     </div>
@@ -147,7 +148,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Color Bangla: <span class="tx-danger">*</span></label>
-                                        <input type="text" class="form-control" name="product_color_bn" id="en"  value="{{ old('product_color_bn') }}" placeholder="Enter product_color_bn" required />
+                                        <input type="text" class="form-control" name="product_color_bn" data-role="tagsinput"  value="{{ old('product_color_bn') }}" placeholder="Enter product_color_bn" required />
 
                                         <font class="text-danger">{{ ($errors->has('product_color_bn'))?$errors->first('product_color_bn'):'' }}</font>
                                     </div>
@@ -167,22 +168,24 @@
 
                                         <font class="text-danger">{{ ($errors->has('discount_price'))?$errors->first('discount_price'):'' }}</font>
                                     </div>
-                                </div>
+                                </div>        
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Main Thumbnail: <span class="tx-danger">*</span></label>
-                                        <input type="file" class="form-control" name="product_thumbnail" id="en"  value="{{ old('product_thumbnail') }}" placeholder="Enter product_thumbnail" required />
+                                        <input type="file" id="file" class="form-control" name="product_thumbnail" value="{{ old('product_thumbnail') }}" placeholder="Enter product_thumbnail" required />
 
                                         <font class="text-danger">{{ ($errors->has('product_thumbnail'))?$errors->first('product_thumbnail'):'' }}</font>
                                     </div>
+                                    <div id="test"></div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Multiple Image: <span class="tx-danger">*</span></label>
-                                        <input type="file" class="form-control" name="image" id="en"  value="{{ old('image') }}" placeholder="Enter image" required />
+                                        <input type="file" class="form-control" name="image[]" value="{{ old('image') }}" id="multiple" placeholder="Enter image" multiple required />
 
                                         <font class="text-danger">{{ ($errors->has('image'))?$errors->first('image'):'' }}</font>
                                     </div>
+                                    <div id="preview_img"></div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
@@ -259,6 +262,73 @@
   </div><!-- sl-mainpanel -->
 @endsection
 @section('admin-script')
+{{-- multiple img preview script --}}
+<script>
+    $(document).ready(function(){
+        $('#multiple').on('change',function(){
+            if(window.File && window.FileReader && window.FileList && window.Blob)
+            {
+                var data = $(this)[0].files;
+
+                $.each(data, function(index, file){
+                    if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){
+                        var fRead = new FileReader();
+                        fRead.onload = (function(file){
+                            return function(e){
+                                var img = $('<img/>').addClass('thumb').attr('src', e.target.result).width(80).height(80);
+                                $('#preview_img').append(img);
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file);
+                    }
+                });
+            }
+            else{
+                alert('Your Browser dosent support file API');
+            }
+        });
+    });
+</script>
+{{-- sub category and sub sub request script --}}
+<script>
+    $(document).ready(function(){
+      $(document).on('change','#category_id',function(){
+        var category_id = $(this).val();
+        // alert(category_id);
+        $.ajax({
+          url:"{{route('get-subcategory')}}",
+          type:"GET",
+          data:{category_id:category_id},
+          success:function(data){
+            var html = '<option value="">Selcet Subcategory</option>';
+            $.each(data,function(key,v){
+              html +='<option value="'+v.id+'">'+v.subcategory_name_en+'</option>';
+            });
+            $('#subcategory').html(html);
+          }
+        });
+      });
+    });
+
+    $(document).ready(function(){
+      $(document).on('change','#subcategory',function(){
+        var subcategory_id = $(this).val();
+        //alert(subcategory_id);
+        $.ajax({
+          url:"{{route('get-subsubcategory')}}",
+          type:"GET",
+          data:{subcategory_id:subcategory_id},
+          success:function(data){
+            var html = '<option value="">Selcet Sub sub-category</option>';
+            $.each(data,function(key,v){
+              html +='<option value="'+v.id+'">'+v.subsubcategory_name_en+'</option>';
+            });
+            $('#subsubcategory').html(html);
+          }
+        });
+      });
+    });
+</script>
 <script>  
     $(function(){
       'use strict';

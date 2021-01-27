@@ -119,7 +119,7 @@
         });
       });
     });
-  </script>
+</script>
 <script>  
     $(function(){
       'use strict';
