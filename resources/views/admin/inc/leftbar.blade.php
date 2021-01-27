@@ -38,6 +38,20 @@
           <li class="nav-item"><a href="{{ route('sub-subcategory') }}" class="nav-link @yield('sub-sub-category')">Sub sub-Category</a></li>
         </ul>
         {{-- category end --}}
+        {{-- product start --}}
+        <a href="#" class="sl-menu-link @yield('product')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-cart-outline tx-20"></i>
+            <span class="menu-item-label">Product</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link  active show-sub -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('product.create') }}" class="nav-link @yield('product-create')">Add Product</a></li>
+
+          <li class="nav-item"><a href="{{ route('subcategory') }}" class="nav-link @yield('sub-category')">Manage Product</a></li>
+        </ul>
+        {{-- product end --}}
       </div><!-- sl-sideleft-menu -->
       <br>
     </div>

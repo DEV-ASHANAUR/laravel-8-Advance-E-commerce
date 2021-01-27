@@ -41,7 +41,7 @@
     <link href="{{ asset('backend') }}/lib/datatables/jquery.dataTables.css" rel="stylesheet">
     <link href="{{ asset('backend') }}/lib/highlightjs/github.css" rel="stylesheet">
     <link href="{{ asset('backend') }}/lib/select2/css/select2.min.css" rel="stylesheet">
-    
+    <link href="{{ asset('backend') }}/lib/summernote/summernote-bs4.css" rel="stylesheet">
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend') }}/css/starlight.css">
     {{-- ==============================jquery======================== --}}
@@ -292,6 +292,7 @@
     <script src="{{ asset('backend') }}/lib/jquery-ui/jquery-ui.js"></script>
     <script src="{{ asset('backend') }}/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js"></script>
     <script src="{{ asset('backend') }}/lib/select2/js/select2.min.js"></script>
+    
     <script src="{{ asset('backend') }}/lib/highlightjs/highlight.pack.js"></script>
     <script src="{{ asset('backend') }}/lib/datatables/jquery.dataTables.js"></script>
     <script src="{{ asset('backend') }}/lib/datatables-responsive/dataTables.responsive.js"></script>
@@ -320,6 +321,7 @@
         
       });
     </script>
+    <script src="{{ asset('backend') }}/lib/summernote/summernote-bs4.min.js"></script>
     <script src="{{ asset('backend') }}/lib/jquery.sparkline.bower/jquery.sparkline.min.js"></script>
     {{-- <script src="{{ asset('backend') }}/lib/d3/d3.js"></script>
     <script src="{{ asset('backend') }}/lib/rickshaw/rickshaw.min.js"></script>

@@ -63,6 +63,7 @@
                                    <option value="{{ $cat->id }}">{{ ucwords($cat->category_name_en)  }}</option> 
                                 @endforeach
                             </select>
+                            <font class="text-danger">{{ ($errors->has('category_id'))?$errors->first('category_id'):'' }}</font>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">SubCategory Name English: <span class="tx-danger">*</span></label>
@@ -102,6 +103,6 @@
         });
 
       $('#selectForm').parsley();
-    })
-  </script>
+    });
+</script>
 @endsection
