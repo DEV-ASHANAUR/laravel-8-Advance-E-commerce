@@ -162,9 +162,8 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Discount Price: <span class="tx-danger"></span></label>
-                                        <input type="text" class="form-control" name="discount_price" id="en"  value="{{ $pro->discount_price }}" placeholder="Enter discount_price" required />
+                                        <input type="text" class="form-control" name="discount_price" id="en"  value="{{ $pro->discount_price }}" placeholder="Enter discount_price" />
 
-                                        <font class="text-danger">{{ ($errors->has('discount_price'))?$errors->first('discount_price'):'' }}</font>
                                     </div>
                                 </div>        
                                 <div class="col-lg-4">

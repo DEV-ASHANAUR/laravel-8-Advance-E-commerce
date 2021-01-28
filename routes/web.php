@@ -63,6 +63,8 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::post('store-product', [ProductController::class,'store'])->name('product.store');
     Route::get('edit-product/{id}',[ProductController::class,'edit'])->name('product.edit');
     Route::post('update-product/{id}',[ProductController::class,'update'])->name('product.update');
+    Route::get('active-product/{id}',[ProductController::class,'active'])->name('product.active');
+    Route::get('disable-product/{id}',[ProductController::class,'disable'])->name('product.disable');
     Route::get('delete-product/{id}',[ProductController::class,'delete'])->name('product.delete');
 });
 // =================================User Route==================================

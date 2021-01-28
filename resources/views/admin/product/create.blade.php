@@ -164,9 +164,8 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Discount Price: <span class="tx-danger"></span></label>
-                                        <input type="text" class="form-control" name="discount_price" id="en"  value="{{ old('discount_price') }}" placeholder="Enter discount_price" required />
+                                        <input type="text" class="form-control" name="discount_price" id="en"  value="{{ old('discount_price') }}" placeholder="Enter discount_price" />
 
-                                        <font class="text-danger">{{ ($errors->has('discount_price'))?$errors->first('discount_price'):'' }}</font>
                                     </div>
                                 </div>        
                                 <div class="col-lg-4">
@@ -190,7 +189,9 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Short Description English: <span class="tx-danger">*</span></label>
-                                        <textarea name="short_descp_en" id="summernote1" cols="30" rows="10"></textarea>
+                                        <textarea name="short_descp_en" id="summernote1" cols="30" rows="10">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos dolorem ad est sit impedit optio omnis, repellendus voluptatibus repudiandae adipisci tempore tenetur, fuga corrupti? Suscipit consequatur amet consectetur mollitia ea.
+                                        </textarea>
 
                                         <font class="text-danger">{{ ($errors->has('short_descp_en'))?$errors->first('short_descp_en'):'' }}</font>
                                     </div>
@@ -198,7 +199,9 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Short Description Bangla: <span class="tx-danger">*</span></label>
-                                        <textarea name="short_descp_bn" id="summernote2" cols="30" rows="10"></textarea>
+                                        <textarea name="short_descp_bn" id="summernote2" cols="30" rows="10">
+                                            আমার বাংলা নিয়ে প্রথম কাজ করবার সুযোগ তৈরি হয়েছিল অভ্র^ নামক এক যুগান্তকারী বাংলা সফ্‌টওয়্যার হাতে পাবার মধ্য দিয়ে। এর পর একে একে বাংলা উইকিপিডিয়া, ওয়ার্ডপ্রেস বাংলা কোডেক্সসহ বিভিন্ন বাংলা অনলাইন পত্রিকা তৈরির কাজ করতে করতে বাংলার সাথে নিজেকে বেঁধে নিয়েছি আষ্টেপৃষ্ঠে। বিশেষ করে অনলাইন পত্রিকা তৈরি করতে ডিযাইন করার সময়, সেই ডিযাইনকে কোডে রূপান্তর করবার সময় বারবার অনুভব করেছি কিছু নমুনা লেখার।
+                                        </textarea>
 
                                         <font class="text-danger">{{ ($errors->has('short_descp_bn'))?$errors->first('short_descp_bn'):'' }}</font>
                                     </div>
@@ -206,7 +209,10 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Long Description English: <span class="tx-danger">*</span></label>
-                                        <textarea name="long_descp_en" id="summernote3" cols="30" rows="10"></textarea>
+                                        <textarea name="long_descp_en" id="summernote3" cols="30" rows="10">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, ipsam alias placeat, reprehenderit magni, aliquam expedita a nulla aut quia velit? Illo deleniti aspernatur optio! Molestias nemo nostrum ipsam dolor?
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita explicabo quisquam error quod excepturi ea exercitationem dicta nam cumque similique saepe ducimus earum, nemo commodi rerum fuga quis provident eius.
+                                        </textarea>
 
                                         <font class="text-danger">{{ ($errors->has('long_descp_en'))?$errors->first('long_descp_en'):'' }}</font>
                                     </div>
@@ -214,7 +220,11 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Product Long Description Bangla: <span class="tx-danger">*</span></label>
-                                        <textarea name="long_descp_bn" id="summernote4" cols="30" rows="10"></textarea>
+                                        <textarea name="long_descp_bn" id="summernote4" cols="30" rows="10">
+                                            আমি কোনো ভাষাবিজ্ঞানী নই। তাই ভাষাগত, শব্দব্যঞ্জনগত শুদ্ধতা, তাল-লয় -এসব বিষয়ে আমার জ্ঞান খুবই প্রাথমিক। তাই এই লেখায় এসব ভাষাবিজ্ঞানগত তাত্ত্বিক উপাদান খুঁজতে যাওয়া অর্থহীন হবে। আমি চেষ্টা করেছি বাংলা ভাষায় দীর্ঘ শব্দ রাখতে, তবে তা দীর্ঘতম – এমন দাবি আমি করছি না। আমি চেষ্টা করেছি, অংক (সংখ্যা) রাখতে, যাতে ফন্টের অবয়বটা টের পাওয়া যায়। আমি চেষ্টা করেছি যুক্তাক্ষর রাখতে, যতিচিহ্ন রাখতে,… অর্ধমাত্রার অক্ষর, পূর্ণমাত্রার অক্ষর, মাত্রাহীন অক্ষর, কার-ফলাযুক্ত শব্দ, বাক্যের এখানে-ওখানে রাখতে।
+
+বাংলা সব অক্ষর রাখার একটা চেষ্টা ছিল। কিন্তু তা ব্যর্থ – আমি শেষে এই চেষ্টা করাটাকেই অপ্রয়োজনীয় মনে করলাম। এ-তো আর বাংলা ভাষার আগার হচ্ছে না, এ হলো পরম্পরাহীন, কিংবা তাৎপর্যপূর্ণ একটি লেখা, যা বাংলা ভাষার প্রতিনিধিত্ব করবে টাইপসেটিং, প্রিন্টিং, ইন্ডাস্ট্রিতে কিংবা ওয়েব ডিযাইনে।
+                                        </textarea>
 
                                         <font class="text-danger">{{ ($errors->has('long_descp_bn'))?$errors->first('long_descp_bn'):'' }}</font>
                                     </div>

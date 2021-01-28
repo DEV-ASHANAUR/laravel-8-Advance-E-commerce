@@ -46,7 +46,7 @@ class ProductController extends Controller
             'product_tag_en' => 'required',
             'product_tag_bn' => 'required',
             'selling_price' => 'required',
-            'discount_price' => 'required',
+            // 'discount_price' => 'required',
             'short_descp_en' => 'required',
             'short_descp_bn' => 'required',
             'long_descp_en' => 'required',
@@ -107,7 +107,7 @@ class ProductController extends Controller
             'message'=>'Successfully Save Product',
             'alert-type'=>'success'
         );
-        return redirect()->back()->with($notification);
+        return redirect()->route('product.manage')->with($notification);
     }    
     /**
      * edit product
@@ -143,7 +143,6 @@ class ProductController extends Controller
             'product_tag_en' => 'required',
             'product_tag_bn' => 'required',
             'selling_price' => 'required',
-            'discount_price' => 'required',
             'short_descp_en' => 'required',
             'short_descp_bn' => 'required',
             'long_descp_en' => 'required',
@@ -196,12 +195,11 @@ class ProductController extends Controller
         $product->status = 1;
         $product->updated_at = Carbon::now();
         if($product->save()){
-
             $images = $request->file('image');
             if(!empty($images)){
                 $multi_image = Multiimg::where('product_id',$id)->get()->toArray();
                 foreach($multi_image as $value){
-                    if($value){
+                    if(!empty($value)){
                         @unlink(public_path($value['image']));
                     }
                 }
@@ -222,6 +220,71 @@ class ProductController extends Controller
         }
         $notification=array(
             'message'=>'Successfully Update Product',
+            'alert-type'=>'success'
+        );
+        return redirect()->back()->with($notification);
+    }    
+    /**
+     * disable product
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function disable($id)
+    {
+        $product = Product::find($id);
+        $product->status = 0;
+        if($product->save())
+        {
+            $notification=array(
+                'message'=>'Successfully Disable Product',
+                'alert-type'=>'success'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }    
+    /**
+     * active Product
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function active($id)
+    {
+        $product = Product::find($id);
+        $product->status = 1;
+        if($product->save())
+        {
+            $notification=array(
+                'message'=>'Successfully Active Product',
+                'alert-type'=>'success'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }    
+    /**
+     * delete product
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        if(file_exists($product->product_thumbnail) AND !empty($product->product_thumbnail)){
+            @unlink(public_path($product->product_thumbnail));
+        }
+        // multi_img unlink
+        $multi_image = Multiimg::where('product_id',$id)->get()->toArray();
+        foreach($multi_image as $value){
+            if(!empty($value)){
+                @unlink(public_path($value['image']));
+            }
+        }
+        Multiimg::where('product_id',$id)->delete();
+        $product->delete();
+        $notification=array(
+            'message'=>'Successfully Delete Product',
             'alert-type'=>'success'
         );
         return redirect()->back()->with($notification);
