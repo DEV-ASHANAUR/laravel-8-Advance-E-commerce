@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Fontend\IndexController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -31,6 +32,14 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::post('profile/update',[AdminController::class,'profileUpdate'])->name('profile.update');
     Route::get('password/change',[AdminController::class,'PassChange'])->name('admin.password');
     Route::post('password/update',[AdminController::class,'PassUpdate'])->name('password.update');
+    // =================================slider=============================
+    Route::get('all-slider',[SliderController::class,'index'])->name('sliders');
+    Route::post('slider/store',[SliderController::class,'Store'])->name('slider.store');
+    Route::get('slider/edit/{id}',[SliderController::class,'edit'])->name('slider.edit');
+    Route::post('slider/update/{id}',[SliderController::class,'update'])->name('slider.update');
+    Route::get('active-slider/{id}',[SliderController::class,'active'])->name('slider.active');
+    Route::get('disable-slider/{id}',[SliderController::class,'disable'])->name('slider.disable');
+    Route::get('slider/delete/{id}',[SliderController::class,'delete'])->name('slider.delete');
     // =================================brand=============================
     Route::get('all-brands',[BrandController::class,'index'])->name('brands');
     Route::post('brand/store',[BrandController::class,'Store'])->name('brand.store');

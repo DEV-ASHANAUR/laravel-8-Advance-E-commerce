@@ -14,6 +14,14 @@
             <span class="menu-item-label">Dashboard</span>
           </div><!-- menu-item -->
         </a>
+        <!-- slider start -->
+        <a href="{{ route('sliders') }}" class="sl-menu-link @yield('slider')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
+            <span class="menu-item-label">Slider</span>
+          </div><!-- menu-item -->
+        </a>
+        <!-- slider end -->
         <!-- brand start -->
         <a href="{{ route('brands') }}" class="sl-menu-link @yield('brands')">
           <div class="sl-menu-item">
