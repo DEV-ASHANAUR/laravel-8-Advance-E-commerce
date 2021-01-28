@@ -14,12 +14,23 @@ use App\Models\Product;
 use Carbon\Carbon;
 
 class ProductController extends Controller
-{ 
+{     
+    /**
+     * index product list
+     *
+     * @return void
+     */
     public function index()
     {
         $product = Product::latest()->get();
         return view('admin.product.index',compact('product'));
-    }   
+    } 
+    public function view($id)
+    {
+        $pro = Product::find($id);
+        $img = Multiimg::where('product_id',$pro->id)->get();
+        return view('admin.product.view',compact('pro','img'));
+    }  
     /**
      * create product
      *

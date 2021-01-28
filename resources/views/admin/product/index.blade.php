@@ -75,8 +75,10 @@
                               <a href="{{ route('product.disable',$item->id) }}" class="btn btn-sm btn-danger" title="Press For Disable"><i class="fa fa-check-circle"></i></a> 
                             @endif
                             
+                            <a href="{{ route('view-product',$item->id) }}" class="btn btn-sm btn-purple" title="View"><i class="fa fa-eye"></i></a>
+
                             <a href="{{ route('product.edit',$item->id) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
-                            
+
                             <a href="{{ route('product.delete',$item->id) }}" id="delete" class="btn btn-sm btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                           </td>
                         </tr>

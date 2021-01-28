@@ -59,6 +59,7 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('sub-subcategory/delete{id}',[CategoryController::class,'subsubdelete'])->name('sub-subdelete');
     // ============================product=======================
     Route::get('manage-product',[ProductController::class,'index'])->name('product.manage');
+    Route::get('view-product/{id}',[ProductController::class,'view'])->name('view-product');
     Route::get('create-product',[ProductController::class,'create'])->name('product.create');
     Route::post('store-product', [ProductController::class,'store'])->name('product.store');
     Route::get('edit-product/{id}',[ProductController::class,'edit'])->name('product.edit');
