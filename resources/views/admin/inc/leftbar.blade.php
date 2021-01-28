@@ -49,7 +49,7 @@
         <ul class="sl-menu-sub nav flex-column">
           <li class="nav-item"><a href="{{ route('product.create') }}" class="nav-link @yield('product-create')">Add Product</a></li>
 
-          <li class="nav-item"><a href="{{ route('subcategory') }}" class="nav-link @yield('sub-category')">Manage Product</a></li>
+          <li class="nav-item"><a href="{{ route('product.manage') }}" class="nav-link @yield('manage-product')">Manage Product</a></li>
         </ul>
         {{-- product end --}}
       </div><!-- sl-sideleft-menu -->

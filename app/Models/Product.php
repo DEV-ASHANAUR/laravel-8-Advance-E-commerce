@@ -14,4 +14,12 @@ class Product extends Model
      * @var array
      */
     protected $guarded = [];
+
+    public function subcategory(){
+        return $this->belongsTo('App\Models\Subcategory','subcategory_id');
+    }
+    public function subsubcategory(){
+        return $this->belongsTo('App\Models\Subsubcategory','subsubcategory_id');
+    }
+    
 }
