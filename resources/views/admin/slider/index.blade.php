@@ -78,12 +78,14 @@
                         <div class="form-group">
                             <label class="form-control-label">Slider Description English: <span class="tx-danger">*</span></label>
                             {{-- <input type="text" class="form-control" name="description"  value="{{ old('description') }}" placeholder="Enter description" required /> --}}
-                            <textarea name="description_en" class="form-control" placeholder="Enter description English"></textarea>
+                            <textarea name="description_en" class="form-control" placeholder="Enter description English">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                            </textarea>
                         </div>
                         <div class="form-group">
                           <label class="form-control-label">Slider Description Bangla: <span class="tx-danger">*</span></label>
                           {{-- <input type="text" class="form-control" name="description"  value="{{ old('description') }}" placeholder="Enter description" required /> --}}
-                          <textarea name="description_bn" class="form-control" placeholder="Enter description Bangla"></textarea>
+                          <textarea name="description_bn" class="form-control" placeholder="Enter description Bangla">লোরেম ইপসাম কেবল মুদ্রণ এবং টাইপসেটিং শিল্পের ডামি পাঠ্য।
+                          </textarea>
 
                       </div>
                         <div class="form-group">

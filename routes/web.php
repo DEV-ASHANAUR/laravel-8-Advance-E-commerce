@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Fontend\LanguageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,3 +86,5 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::post('pass/store',[UserController::class,'updatePass'])->name('update.password');
 });
 // =================================Fontend Route==================================
+    Route::get('language/english',[LanguageController::class,'english'])->name('english.language');
+    Route::get('language/bangla',[LanguageController::class,'bangla'])->name('bangla.language');
