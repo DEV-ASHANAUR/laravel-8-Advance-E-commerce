@@ -59,10 +59,7 @@
                             <div class="mt-2 mb-2">
                                 <h5 class="text-capitalize">selling price</h5>
                                 @if (!$pro->discount_price == NULL)
-                                @php
-                                    $amount = $pro->selling_price - $pro->discount_price;
-                                @endphp
-                                {{ number_format($amount,2) }} $
+                                {{ number_format($pro->discount_price,2) }} $
                                 @else
                                     {{ number_format($pro->selling_price,'2') }} $
                                 @endif
@@ -76,7 +73,7 @@
                                     $amount = $pro->selling_price - $pro->discount_price;
                                     $discount = ($amount/$pro->selling_price) * 100;
                                 @endphp
-                                <span class="badge badge-pill badge-success">{{ round(100 - $discount) }}%</span>
+                                <span class="badge badge-pill badge-success">{{ round($discount) }}%</span>
                             @endif
                             </div>
                             <div class="mt-2 mb-2">

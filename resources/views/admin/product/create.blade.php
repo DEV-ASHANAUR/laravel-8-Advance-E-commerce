@@ -156,7 +156,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Selling Price: <span class="tx-danger">*</span></label>
-                                        <input type="text" class="form-control" name="selling_price" id="en"  value="{{ old('selling_price') }}" placeholder="Enter selling_price" required />
+                                        <input type="number" class="form-control" name="selling_price" id="en"  value="{{ old('selling_price') }}" placeholder="Enter selling_price" required />
 
                                         <font class="text-danger">{{ ($errors->has('selling_price'))?$errors->first('selling_price'):'' }}</font>
                                     </div>
@@ -164,7 +164,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="form-control-label">Discount Price: <span class="tx-danger"></span></label>
-                                        <input type="text" class="form-control" name="discount_price" id="en"  value="{{ old('discount_price') }}" placeholder="Enter discount_price" />
+                                        <input type="number" class="form-control" name="discount_price" id="en"  value="{{ old('discount_price') }}" placeholder="Enter discount_price" />
 
                                     </div>
                                 </div>        

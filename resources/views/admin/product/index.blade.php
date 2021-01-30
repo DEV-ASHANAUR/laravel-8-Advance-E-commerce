@@ -40,10 +40,8 @@
                           <td style="text-transform: uppercase">{{ $item->product_name_en }}</td>
                           <td>
                             @if (!$item->discount_price == NULL)
-                                @php
-                                    $amount = $item->selling_price - $item->discount_price;
-                                @endphp
-                                {{ number_format($amount,2) }} $
+                                
+                                {{ number_format($item->discount_price) }} $
                             @else
                                 {{ number_format($item->selling_price,'2') }} $
                             @endif
@@ -56,7 +54,7 @@
                                     $amount = $item->selling_price - $item->discount_price;
                                     $discount = ($amount/$item->selling_price) * 100;
                                 @endphp
-                                <span class="badge badge-pill badge-success">{{ round(100 - $discount) }}%</span>
+                                <span class="badge badge-pill badge-success">{{ round($discount) }}%</span>
                             @endif
                           </td>
                           <td>{{ $item->product_qty }}</td>
