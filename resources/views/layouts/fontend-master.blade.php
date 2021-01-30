@@ -123,8 +123,10 @@
                                         </ul>
                                     </li>
                                 </ul>
+                                
                                 <input class="search-field" placeholder="Search here..." />
-                                <a class="search-button" href="#" ></a>    
+                                <a class="search-button" href="#" ></a> 
+
                             </div>
                         </form>
                     </div><!-- /.search-area -->				
