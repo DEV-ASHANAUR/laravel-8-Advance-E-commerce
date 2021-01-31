@@ -21,7 +21,7 @@ use App\Http\Controllers\Fontend\LanguageController;
 */
 
 Route::get('/',[IndexController::class,'index']);
-
+Route::get('single/product/{id}/{slug}',[IndexController::class,'singleProduct']);
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

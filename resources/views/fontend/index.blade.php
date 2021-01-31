@@ -1,5 +1,12 @@
 @extends('layouts.fontend-master')
 @section('content')
+@section('title')
+@if (session()->get('language') == 'bangla')
+	হোম পেজ
+@else
+	Home page
+@endif
+@endsection
 @php
 	function bn_price($str){
 		$en = array(1,2,3,4,5,6,7,8,9,0);
@@ -1194,7 +1201,7 @@
 					<ul class="nav nav-tabs nav-tab-line pull-right" id="new-products-1">
 						<li class="active"><a data-transition-type="backSlide" href="#all" data-toggle="tab">
 							@if (session()->get('language') == 'bangla')
-								সব
+								সকল
 							@else
 								All
 							@endif
@@ -1226,7 +1233,12 @@
 										<div class="product">		
 											<div class="product-image">
 												<div class="image">
-													<a href="detail.html"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+													@if (session()->get('language') == 'bangla')
+														<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+													@else
+														<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+													@endif
+													
 												</div><!-- /.image -->			
 												@php
 													$amount = $product->selling_price - $product->discount_price;
@@ -1256,11 +1268,10 @@
 											<div class="product-info text-left">
 												<h3 class="name text-capitalize">
 													@if (session()->get('language') == 'bangla')
-													<a href="detail.html">{{ $product->product_name_bn }}</a>
+													<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
 													@else
-													<a href="detail.html">{{ $product->product_name_en }}</a>
+													<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
 													@endif
-													
 												</h3>
 												<div class="rating rateit-small"></div>
 												<div class="description"></div>
@@ -1339,7 +1350,11 @@
 										<div class="product">		
 											<div class="product-image">
 												<div class="image">
-													<a href="detail.html"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+													@if (session()->get('language') == 'bangla')
+														<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+													@else
+														<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+													@endif
 												</div><!-- /.image -->			
 												@php
 													$amount = $product->selling_price - $product->discount_price;
@@ -1369,11 +1384,10 @@
 											<div class="product-info text-left">
 												<h3 class="name text-capitalize">
 													@if (session()->get('language') == 'bangla')
-													<a href="detail.html">{{ $product->product_name_bn }}</a>
+													<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
 													@else
-													<a href="detail.html">{{ $product->product_name_en }}</a>
+													<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
 													@endif
-													
 												</h3>
 												<div class="rating rateit-small"></div>
 												<div class="description"></div>
