@@ -15,9 +15,14 @@ class IndexController extends Controller
     {
         $category = Category::orderBy('category_name_en','ASC')->get();
         $categories = Category::orderBy('category_name_en','ASC')->limit(7)->get();
-        $products = Product::latest()->get();
+        $products = Product::where('status',1)->latest()->get();
+        $featured = Product::where('featured',1)->where('status',1)->latest()->get();
+        $hot_deals = Product::where('hot_deals',1)->where('status',1)->latest()->get();
+        $special_offer = Product::where('special_offer',1)->where('status',1)->latest()->get();
+        $special_deals = Product::where('special_deals',1)->where('status',1)->latest()->get();
+        
         $sliders = Silder::where('status',1)->orderBy('id','DESC')->limit(4)->get();
-        return view('fontend.index',compact('category','sliders','categories','products'));
+        return view('fontend.index',compact('category','sliders','categories','products','featured','hot_deals','special_offer','special_deals'));
     }
     public function singleProduct($id,$slug)
     {
