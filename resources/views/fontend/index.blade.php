@@ -82,7 +82,13 @@
 
 	<!-- ======================= HOT DEALS ======================= -->
 	<div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
-		<h3 class="section-title">hot deals</h3>
+		<h3 class="section-title">
+			@if (session()->get('language') == 'bangla')
+				গরম অফার 
+			@else
+				hot deals
+			@endif
+		</h3>
 		<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
 			@forelse ($hot_deals as $product)
 			<div class="item">
@@ -196,7 +202,11 @@
 						<i class="fa fa-shopping-cart"></i>
 						</button>
 						<button class="btn btn-primary cart-btn" type="button">
-						Add to cart
+						@if (session()->get('language') == 'bangla')
+							কার্টে যোগ করুন
+						@else
+							Add to cart
+						@endif
 						</button>
 					</div>
 					</div>
@@ -222,338 +232,159 @@
 
 <!-- ======= SPECIAL OFFER ========== -->
 	<div class="sidebar-widget outer-bottom-small wow fadeInUp">
-		<h3 class="section-title">Special Offer</h3>
-		<div class="sidebar-widget-body outer-top-xs">
-		<div
-			class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs"
-		>
+		<h3 class="section-title">
+			@if (session()->get('language') == 'bangla')
+				বিশেষ অফার
+			@else
+				Special Offer
+			@endif
+		</h3>
+	<div class="sidebar-widget-body outer-top-xs">
+		<div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-them outer-top-xs">
 			<div class="item">
-			<div class="products special-product">
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p30.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
+				<div class="products special-product">
+					@forelse ($special_offer as $product)
+					<div class="product">
+						<div class="product-micro">
+							<div class="row product-micro-row">
+								<div class="col col-xs-5">
+									<div class="product-image">
+										<div class="image">
+											@if (session()->get('language') == 'bangla')
+												<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">
+												<img src="{{asset($product->product_thumbnail)}}" alt="" />
+												</a>
+											@else
+												<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">
+												<img src="{{asset($product->product_thumbnail)}}" alt="" />
+												</a>
+											@endif
+										</div>
+									</div><!-- /.image -->
+								</div><!-- /.product-image -->
+								<!-- /.col -->
+								<div class="col col-xs-7">
+									<div class="product-info">
+									<h3 class="name text-capitalize">
+										@if (session()->get('language') == 'bangla')
+										<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
+										@else
+										<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
+										@endif
+									</h3>
+									<div class="rating rateit-small"></div>
+									<div class="product-price">
+										@if ($product->discount_price == null)
+											@if (session()->get('language') == 'bangla')
+												<span class="price">${{ bn_price($product->selling_price) }}</span>
+											@else
+												<span class="price">${{ number_format($product->selling_price,2) }}</span>
+											@endif
+											
+										@else
+											@if (session()->get('language') == 'bangla')
+												<span class="price">${{ bn_price($product->discount_price) }}</span>
+
+												<span class="price-before-discount">${{ bn_price($product->selling_price) }}<span>
+											@else
+												<span class="price">${{ number_format($product->discount_price,2) }}</span>
+
+												<span class="price-before-discount">${{ number_format($product->selling_price,2) }}<span>
+											@endif
+										@endif
+									</div>
+									</div><!-- /.product-price -->
+								</div>
+							</div><!-- /.col -->
+						</div><!-- /.product-micro-row -->
+					</div><!-- /.product-micro -->
+					@empty
+						
+					@endforelse
 				</div>
-				<!-- /.product-micro -->
-				</div>
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p29.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
-				</div>
-				<!-- /.product-micro -->
-				</div>
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p28.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
-				</div>
-				<!-- /.product-micro -->
-				</div>
-			</div>
 			</div>
 			<div class="item">
-			<div class="products special-product">
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p27.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
+				<div class="products special-product">
+					@forelse ($special_offer2 as $product)
+					<div class="product">
+						<div class="product-micro">
+							<div class="row product-micro-row">
+								<div class="col col-xs-5">
+									<div class="product-image">
+										<div class="image">
+											@if (session()->get('language') == 'bangla')
+												<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">
+												<img src="{{asset($product->product_thumbnail)}}" alt="" />
+												</a>
+											@else
+												<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">
+												<img src="{{asset($product->product_thumbnail)}}" alt="" />
+												</a>
+											@endif
+										</div>
+									</div><!-- /.image -->
+								</div><!-- /.product-image -->
+								<!-- /.col -->
+								<div class="col col-xs-7">
+									<div class="product-info">
+									<h3 class="name text-capitalize">
+										@if (session()->get('language') == 'bangla')
+										<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
+										@else
+										<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
+										@endif
+									</h3>
+									<div class="rating rateit-small"></div>
+									<div class="product-price">
+										@if ($product->discount_price == null)
+											@if (session()->get('language') == 'bangla')
+												<span class="price">${{ bn_price($product->selling_price) }}</span>
+											@else
+												<span class="price">${{ number_format($product->selling_price,2) }}</span>
+											@endif
+											
+										@else
+											@if (session()->get('language') == 'bangla')
+												<span class="price">${{ bn_price($product->discount_price) }}</span>
+
+												<span class="price-before-discount">${{ bn_price($product->selling_price) }}<span>
+											@else
+												<span class="price">${{ number_format($product->discount_price,2) }}</span>
+
+												<span class="price-before-discount">${{ number_format($product->selling_price,2) }}<span>
+											@endif
+										@endif
+									</div>
+									</div><!-- /.product-price -->
+								</div>
+							</div><!-- /.col -->
+						</div><!-- /.product-micro-row -->
+					</div><!-- /.product-micro -->
+					@empty
+						
+					@endforelse
 				</div>
-				<!-- /.product-micro -->
-				</div>
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p26.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
-				</div>
-				<!-- /.product-micro -->
-				</div>
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p25.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
-				</div>
-				<!-- /.product-micro -->
-				</div>
-			</div>
-			</div>
-			<div class="item">
-			<div class="products special-product">
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p24.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
-				</div>
-				<!-- /.product-micro -->
-				</div>
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p23.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
-				</div>
-				<!-- /.product-micro -->
-				</div>
-				<div class="product">
-				<div class="product-micro">
-					<div class="row product-micro-row">
-					<div class="col col-xs-5">
-						<div class="product-image">
-						<div class="image">
-							<a href="#">
-							<img
-								src="{{asset('fontend')}}/assets/images/products/p22.jpg"
-								alt=""
-							/>
-							</a>
-						</div>
-						<!-- /.image -->
-						</div>
-						<!-- /.product-image -->
-					</div>
-					<!-- /.col -->
-					<div class="col col-xs-7">
-						<div class="product-info">
-						<h3 class="name"><a href="#">Floral Print Shirt</a></h3>
-						<div class="rating rateit-small"></div>
-						<div class="product-price">
-							<span class="price"> $450.99 </span>
-						</div>
-						<!-- /.product-price -->
-						</div>
-					</div>
-					<!-- /.col -->
-					</div>
-					<!-- /.product-micro-row -->
-				</div>
-				<!-- /.product-micro -->
-				</div>
-			</div>
 			</div>
 		</div>
 	</div>
-		<!-- /.sidebar-widget-body -->
+	<!-- /.sidebar-widget-body -->
 </div>
 <!-- /.sidebar-widget -->
 <!-- ============= SPECIAL OFFER : END ============== -->
 <!-- =========== PRODUCT TAGS ============ -->
+@php
+	$tags_en = App\Models\Product::groupBy('product_tag_en')->select('product_tag_en')->get();
+	$tags_bn = App\Models\Product::groupBy('product_tag_bn')->select('product_tag_bn')->get();
+@endphp
 <div class="sidebar-widget product-tag wow fadeInUp">
-	<h3 class="section-title">Product tags</h3>
+	<h3 class="section-title">
+		@if (session()->get('language') == 'bangla')
+			পণ্যর ট্যাগসমূহ
+		@else
+			Product tags
+		@endif
+	</h3>
+
 	<div class="sidebar-widget-body outer-top-xs">
 		<div class="tag-list">					
 			<a class="item" title="Phone" href="category.html">Phone</a>
@@ -572,12 +403,142 @@
 <!-- ================= SPECIAL DEALS ============ -->
 
 <div class="sidebar-widget outer-bottom-small wow fadeInUp">
-	<h3 class="section-title">Special Deals</h3>
+	<h3 class="section-title">
+		@if (session()->get('language') == 'bangla')
+			বিশেষ চুক্তি
+		@else
+			Special Deals
+		@endif
+		
+	</h3>
 	<div class="sidebar-widget-body outer-top-xs">
-	  <div
-		class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs"
-	  >
+	  <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
+
 		<div class="item">
+			<div class="products special-product">
+				@forelse ($special_deals as $product)
+				<div class="product">
+					<div class="product-micro">
+						<div class="row product-micro-row">
+							<div class="col col-xs-5">
+								<div class="product-image">
+									<div class="image">
+										@if (session()->get('language') == 'bangla')
+											<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">
+											<img src="{{asset($product->product_thumbnail)}}" alt="" />
+											</a>
+										@else
+											<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">
+											<img src="{{asset($product->product_thumbnail)}}" alt="" />
+											</a>
+										@endif
+									</div>
+								</div><!-- /.image -->
+							</div><!-- /.product-image -->
+							<!-- /.col -->
+							<div class="col col-xs-7">
+								<div class="product-info">
+								<h3 class="name text-capitalize">
+									@if (session()->get('language') == 'bangla')
+									<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
+									@else
+									<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
+									@endif
+								</h3>
+								<div class="rating rateit-small"></div>
+								<div class="product-price">
+									@if ($product->discount_price == null)
+										@if (session()->get('language') == 'bangla')
+											<span class="price">${{ bn_price($product->selling_price) }}</span>
+										@else
+											<span class="price">${{ number_format($product->selling_price,2) }}</span>
+										@endif
+										
+									@else
+										@if (session()->get('language') == 'bangla')
+											<span class="price">${{ bn_price($product->discount_price) }}</span>
+
+											<span class="price-before-discount">${{ bn_price($product->selling_price) }}<span>
+										@else
+											<span class="price">${{ number_format($product->discount_price,2) }}</span>
+
+											<span class="price-before-discount">${{ number_format($product->selling_price,2) }}<span>
+										@endif
+									@endif
+								</div>
+								</div><!-- /.product-price -->
+							</div>
+						</div><!-- /.col -->
+					</div><!-- /.product-micro-row -->
+				</div><!-- /.product-micro -->
+				@empty
+					
+				@endforelse
+			</div>
+		</div>
+		<div class="item">
+			<div class="products special-product">
+				@forelse ($special_deals2 as $product)
+				<div class="product">
+					<div class="product-micro">
+						<div class="row product-micro-row">
+							<div class="col col-xs-5">
+								<div class="product-image">
+									<div class="image">
+										@if (session()->get('language') == 'bangla')
+											<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">
+											<img src="{{asset($product->product_thumbnail)}}" alt="" />
+											</a>
+										@else
+											<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">
+											<img src="{{asset($product->product_thumbnail)}}" alt="" />
+											</a>
+										@endif
+									</div>
+								</div><!-- /.image -->
+							</div><!-- /.product-image -->
+							<!-- /.col -->
+							<div class="col col-xs-7">
+								<div class="product-info">
+								<h3 class="name text-capitalize">
+									@if (session()->get('language') == 'bangla')
+									<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
+									@else
+									<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
+									@endif
+								</h3>
+								<div class="rating rateit-small"></div>
+								<div class="product-price">
+									@if ($product->discount_price == null)
+										@if (session()->get('language') == 'bangla')
+											<span class="price">${{ bn_price($product->selling_price) }}</span>
+										@else
+											<span class="price">${{ number_format($product->selling_price,2) }}</span>
+										@endif
+										
+									@else
+										@if (session()->get('language') == 'bangla')
+											<span class="price">${{ bn_price($product->discount_price) }}</span>
+
+											<span class="price-before-discount">${{ bn_price($product->selling_price) }}<span>
+										@else
+											<span class="price">${{ number_format($product->discount_price,2) }}</span>
+
+											<span class="price-before-discount">${{ number_format($product->selling_price,2) }}<span>
+										@endif
+									@endif
+								</div>
+								</div><!-- /.product-price -->
+							</div>
+						</div><!-- /.col -->
+					</div><!-- /.product-micro-row -->
+				</div><!-- /.product-micro -->
+				@empty
+					
+				@endforelse
+			</div>
+		</div>
+		{{-- <div class="item">
 		  <div class="products special-product">
 			<div class="product">
 			  <div class="product-micro">
@@ -896,7 +857,8 @@
 			  <!-- /.product-micro -->
 			</div>
 		  </div>
-		</div>
+		</div> --}}
+
 	  </div>
 	</div>
 	<!-- /.sidebar-widget-body -->
@@ -1395,11 +1357,143 @@
 <!-- === WIDE PRODUCTS : END ====-->
 <!-- ====== FEATURED PRODUCTS ======= -->
 <section class="section featured-product wow fadeInUp">
-	<h3 class="section-title">Featured products</h3>
-	<div
-	  class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs"
-	>
+	<h3 class="section-title">
+		@if (session()->get('language') == 'bangla')
+			বৈশিষ্ট্যযুক্ত পণ্য
+		@else
+			Featured products
+		@endif
+	</h3>
+	<div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 	@forelse ($featured as $product)
+	<div class="item item-carousel">
+		<div class="products">
+			<div class="product">		
+				<div class="product-image">
+					<div class="image">
+						@if (session()->get('language') == 'bangla')
+							<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+						@else
+							<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+						@endif
+					</div><!-- /.image -->			
+					@php
+						$amount = $product->selling_price - $product->discount_price;
+						$discount = ($amount/$product->selling_price) * 100;
+					@endphp
+					@if ($product->discount_price == null)
+					<div class="tag new">
+						@if (session()->get('language') == 'bangla')
+							<span>নতুন</span>
+						@else
+							<span>new</span>
+						@endif
+					</div>
+					@else
+					<div class="tag new" style="background: #ff7878">
+						@if (session()->get('language') == 'bangla')
+							<span>{{ bn_price(round($discount)) }}%</span>
+						@else
+							<span>{{ round($discount) }}%</span>
+						@endif
+					</div>
+					@endif
+													
+				</div><!-- /.product-image -->
+				<div class="product-info text-left">
+					<h3 class="name text-capitalize">
+						@if (session()->get('language') == 'bangla')
+						<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
+						@else
+						<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
+						@endif
+					</h3>
+					<div class="rating rateit-small"></div>
+					<div class="description"></div>
+
+					<div class="product-price">	
+						@if ($product->discount_price == null)
+							@if (session()->get('language') == 'bangla')
+								<span class="price">${{ bn_price($product->selling_price) }}</span>
+							@else
+								<span class="price">${{ number_format($product->selling_price,2) }}</span>
+							@endif
+							
+						@else
+							@if (session()->get('language') == 'bangla')
+								<span class="price">${{ bn_price($product->discount_price) }}</span>
+
+								<span class="price-before-discount">${{ bn_price($product->selling_price) }}<span>
+							@else
+								<span class="price">${{ number_format($product->discount_price,2) }}</span>
+
+								<span class="price-before-discount">${{ number_format($product->selling_price,2) }}<span>
+							@endif
+						@endif
+						
+					</div><!-- /.product-price -->
+				</div><!-- /.product-info -->
+				<div class="cart clearfix animate-effect">
+					<div class="action">
+						<ul class="list-unstyled">
+							<li class="add-cart-button btn-group">
+								<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart">
+									<i class="fa fa-shopping-cart"></i>													
+								</button>
+								<button class="btn btn-primary cart-btn" type="button">
+									@if (session()->get('language') == 'bangla')
+										কার্টে যোগ করুন
+									@else
+										Add to cart
+									@endif
+								</button>
+														
+							</li>
+					
+							<li class="lnk wishlist">
+								<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist">
+									<i class="icon fa fa-heart"></i>
+								</a>
+							</li>
+
+							<li class="lnk">
+								<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare">
+									<i class="fa fa-signal" aria-hidden="true"></i>
+								</a>
+							</li>
+						</ul>
+					</div><!-- /.action -->
+				</div><!-- /.cart -->
+			</div><!-- /.product -->
+		</div><!-- /.products -->
+	</div><!-- /.item -->
+	@empty
+		<h5 class="text-danger">
+			<i class="fa fa-search"></i>
+			@if (session()->get('language') == 'bangla')
+				কোন পণ্য পাওয়া যায় নি!
+			@else
+				No Product Found!
+			@endif
+		</h5>
+	@endforelse
+	  
+	</div>
+	<!-- /.home-owl-carousel -->
+  </section>
+<!-- /.section -->
+<!-- === FEATURED PRODUCTS : END ====== -->
+<!-- ====== FEATURED PRODUCTS ======= -->
+<section class="section featured-product wow fadeInUp">
+	<h3 class="section-title">
+		@if (session()->get('language') == 'bangla')
+		{{ $skip_category_0->category_name_bn }}
+		@else
+		{{ $skip_category_0->category_name_en }}
+		@endif
+	</h3>
+	<div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+	@forelse ($skip_product_0 as $product)
 	<div class="item item-carousel">
 		<div class="products">
 			<div class="product">		
