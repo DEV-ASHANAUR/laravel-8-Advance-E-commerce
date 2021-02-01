@@ -254,11 +254,11 @@
                                                             {{-- subsubcategory bangla english start --}}
                                                             @if (session()->get('language') == 'bangla')
                                                             <li>
-                                                                <a href="#">{{ $subsubcategory->subsubcategory_name_bn }}</a>
+                                                                <a href="{{ url('product/subsubcategory/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_bn) }}">{{ $subsubcategory->subsubcategory_name_bn }}</a>
                                                             </li>  
                                                             @else
                                                             <li>
-                                                                <a href="#">{{ $subsubcategory->subsubcategory_name_en }}</a>
+                                                                <a href="{{ url('product/subsubcategory/'.$subsubcategory->id.'/'.$subsubcategory->subsubcategory_slug_en) }}">{{ $subsubcategory->subsubcategory_name_en }}</a>
                                                             </li> 
                                                             @endif
                                                             {{-- subsubcategory bangla english end --}}

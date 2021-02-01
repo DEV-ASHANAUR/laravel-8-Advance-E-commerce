@@ -90,3 +90,5 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('language/bangla',[LanguageController::class,'bangla'])->name('bangla.language');
     Route::get('single/product/{id}/{slug}',[IndexController::class,'singleProduct']);
     Route::get('product/tag/{tag}',[IndexController::class,'tagWiseProduct']);
+    Route::get('product/subsubcategory/{id}/{slug}',[IndexController::class,'subsubcategory']);
+    Route::get('product/subcategory/{id}/{slug}',[IndexController::class,'subcategory']);

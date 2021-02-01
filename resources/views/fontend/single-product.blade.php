@@ -41,251 +41,7 @@
             </div>
 
             <!-- ============================================== HOT DEALS ============================================== -->
-            <div class="sidebar-widget hot-deals wow fadeInUp outer-top-vs">
-              <h3 class="section-title">hot deals</h3>
-              <div
-                class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs"
-              >
-                <div class="item">
-                  <div class="products">
-                    <div class="hot-deal-wrapper">
-                      <div class="image">
-                        <img src="{{asset('fontend')}}/assets/images/hot-deals/p5.jpg" alt="" />
-                      </div>
-                      <div class="sale-offer-tag">
-                        <span>35%<br />off</span>
-                      </div>
-                      <div class="timing-wrapper">
-                        <div class="box-wrapper">
-                          <div class="date box">
-                            <span class="key">120</span>
-                            <span class="value">Days</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper">
-                          <div class="hour box">
-                            <span class="key">20</span>
-                            <span class="value">HRS</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper">
-                          <div class="minutes box">
-                            <span class="key">36</span>
-                            <span class="value">MINS</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper hidden-md">
-                          <div class="seconds box">
-                            <span class="key">60</span>
-                            <span class="value">SEC</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.hot-deal-wrapper -->
-
-                    <div class="product-info text-left m-t-20">
-                      <h3 class="name">
-                        <a href="detail.html">Floral Print Buttoned</a>
-                      </h3>
-                      <div class="rating rateit-small"></div>
-
-                      <div class="product-price">
-                        <span class="price"> $600.00 </span>
-
-                        <span class="price-before-discount">$800.00</span>
-                      </div>
-                      <!-- /.product-price -->
-                    </div>
-                    <!-- /.product-info -->
-
-                    <div class="cart clearfix animate-effect">
-                      <div class="action">
-                        <div class="add-cart-button btn-group">
-                          <button
-                            class="btn btn-primary icon"
-                            data-toggle="dropdown"
-                            type="button"
-                          >
-                            <i class="fa fa-shopping-cart"></i>
-                          </button>
-                          <button
-                            class="btn btn-primary cart-btn"
-                            type="button"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                      <!-- /.action -->
-                    </div>
-                    <!-- /.cart -->
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="products">
-                    <div class="hot-deal-wrapper">
-                      <div class="image">
-                        <img src="{{asset('fontend')}}/assets/images/products/p6.jpg" alt="" />
-                      </div>
-                      <div class="sale-offer-tag">
-                        <span>35%<br />off</span>
-                      </div>
-                      <div class="timing-wrapper">
-                        <div class="box-wrapper">
-                          <div class="date box">
-                            <span class="key">120</span>
-                            <span class="value">Days</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper">
-                          <div class="hour box">
-                            <span class="key">20</span>
-                            <span class="value">HRS</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper">
-                          <div class="minutes box">
-                            <span class="key">36</span>
-                            <span class="value">MINS</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper hidden-md">
-                          <div class="seconds box">
-                            <span class="key">60</span>
-                            <span class="value">SEC</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.hot-deal-wrapper -->
-
-                    <div class="product-info text-left m-t-20">
-                      <h3 class="name">
-                        <a href="detail.html">Floral Print Buttoned</a>
-                      </h3>
-                      <div class="rating rateit-small"></div>
-
-                      <div class="product-price">
-                        <span class="price"> $600.00 </span>
-
-                        <span class="price-before-discount">$800.00</span>
-                      </div>
-                      <!-- /.product-price -->
-                    </div>
-                    <!-- /.product-info -->
-
-                    <div class="cart clearfix animate-effect">
-                      <div class="action">
-                        <div class="add-cart-button btn-group">
-                          <button
-                            class="btn btn-primary icon"
-                            data-toggle="dropdown"
-                            type="button"
-                          >
-                            <i class="fa fa-shopping-cart"></i>
-                          </button>
-                          <button
-                            class="btn btn-primary cart-btn"
-                            type="button"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                      <!-- /.action -->
-                    </div>
-                    <!-- /.cart -->
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="products">
-                    <div class="hot-deal-wrapper">
-                      <div class="image">
-                        <img src="{{asset('fontend')}}/assets/images/products/p7.jpg" alt="" />
-                      </div>
-                      <div class="sale-offer-tag">
-                        <span>35%<br />off</span>
-                      </div>
-                      <div class="timing-wrapper">
-                        <div class="box-wrapper">
-                          <div class="date box">
-                            <span class="key">120</span>
-                            <span class="value">Days</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper">
-                          <div class="hour box">
-                            <span class="key">20</span>
-                            <span class="value">HRS</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper">
-                          <div class="minutes box">
-                            <span class="key">36</span>
-                            <span class="value">MINS</span>
-                          </div>
-                        </div>
-
-                        <div class="box-wrapper hidden-md">
-                          <div class="seconds box">
-                            <span class="key">60</span>
-                            <span class="value">SEC</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- /.hot-deal-wrapper -->
-
-                    <div class="product-info text-left m-t-20">
-                      <h3 class="name">
-                        <a href="detail.html">Floral Print Buttoned</a>
-                      </h3>
-                      <div class="rating rateit-small"></div>
-
-                      <div class="product-price">
-                        <span class="price"> $600.00 </span>
-
-                        <span class="price-before-discount">$800.00</span>
-                      </div>
-                      <!-- /.product-price -->
-                    </div>
-                    <!-- /.product-info -->
-
-                    <div class="cart clearfix animate-effect">
-                      <div class="action">
-                        <div class="add-cart-button btn-group">
-                          <button
-                            class="btn btn-primary icon"
-                            data-toggle="dropdown"
-                            type="button"
-                          >
-                            <i class="fa fa-shopping-cart"></i>
-                          </button>
-                          <button
-                            class="btn btn-primary cart-btn"
-                            type="button"
-                          >
-                            Add to cart
-                          </button>
-                        </div>
-                      </div>
-                      <!-- /.action -->
-                    </div>
-                    <!-- /.cart -->
-                  </div>
-                </div>
-              </div>
-              <!-- /.sidebar-widget -->
-            </div>
+            @include('fontend.inc.hot-deals')
             <!-- ============================================== HOT DEALS: END ============================================== -->
             
 
@@ -317,66 +73,7 @@
             <!-- ============================================== NEWSLETTER: END ============================================== -->
 
             <!-- ============================================== Testimonials============================================== -->
-            <div class="sidebar-widget wow fadeInUp outer-top-vs">
-              <div id="advertisement" class="advertisement">
-                <div class="item">
-                  <div class="avatar">
-                    <img
-                      src="{{asset('fontend')}}/assets/images/testimonials/member1.png"
-                      alt="Image"
-                    />
-                  </div>
-                  <div class="testimonials">
-                    <em>"</em> Vtae sodales aliq uam morbi non sem lacus port
-                    mollis. Nunc condime tum metus eud molest sed
-                    consectetuer.<em>"</em>
-                  </div>
-                  <div class="clients_author">
-                    John Doe <span>Abc Company</span>
-                  </div>
-                  <!-- /.container-fluid -->
-                </div>
-                <!-- /.item -->
-
-                <div class="item">
-                  <div class="avatar">
-                    <img
-                      src="{{asset('fontend')}}/assets/images/testimonials/member3.png"
-                      alt="Image"
-                    />
-                  </div>
-                  <div class="testimonials">
-                    <em>"</em>Vtae sodales aliq uam morbi non sem lacus port
-                    mollis. Nunc condime tum metus eud molest sed
-                    consectetuer.<em>"</em>
-                  </div>
-                  <div class="clients_author">
-                    Stephen Doe <span>Xperia Designs</span>
-                  </div>
-                </div>
-                <!-- /.item -->
-
-                <div class="item">
-                  <div class="avatar">
-                    <img
-                      src="{{asset('fontend')}}/assets/images/testimonials/member2.png"
-                      alt="Image"
-                    />
-                  </div>
-                  <div class="testimonials">
-                    <em>"</em> Vtae sodales aliq uam morbi non sem lacus port
-                    mollis. Nunc condime tum metus eud molest sed
-                    consectetuer.<em>"</em>
-                  </div>
-                  <div class="clients_author">
-                    Saraha Smith <span>Datsun &amp; Co</span>
-                  </div>
-                  <!-- /.container-fluid -->
-                </div>
-                <!-- /.item -->
-              </div>
-              <!-- /.owl-carousel -->
-            </div>
+            @include('fontend.inc.testimonial')
 
             <!-- ============== Testimonials: END ======== -->
           </div>
@@ -493,6 +190,53 @@
                   <div class="price-container info-container m-t-20">
                     <div class="row">
                       <div class="col-sm-6">
+                        <div class="form-group">
+                          @if (session()->get('language') == 'bangla')
+                            <label for="">সিলেক্ট কালার</label>
+                            <select name="color" class="form-control" id="">
+                                  <option>সিলেক্ট কালার</option>
+                              @foreach ($product_color_bn as $color)
+                                  <option value="{{ $color }}">{{ $color }}</option>
+                              @endforeach
+                            </select> 
+                          @else
+                            <label for="">Select Color</label>
+                            <select name="color" class="form-control" id="">
+                              <option>Select Color</option>
+                              @foreach ($product_color_en as $color)
+                                  <option value="{{ $color }}">{{ ucwords($color) }}</option>
+                              @endforeach
+                            </select>
+                          @endif
+                          
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          @if ($product_size_en)
+                            @if (session()->get('language') == 'bangla')
+                              <label for="">সিলেক্ট সাইজ</label>
+                              <select name="size" class="form-control" id="">
+                                <option value="">সিলেক্ট সাইজ</option>
+                                @foreach ($product_size_bn as $size)
+                                  <option value="{{ $size }}">{{ $size }}</option>
+                                @endforeach
+                              </select>
+                            @else
+                              <label for="">Select Size</label>
+                              <select name="size" class="form-control" id="">
+                                <option>Select Size</option>
+                                @foreach ($product_size_en as $size)
+                                  <option value="{{ $size }}">{{ ucwords($size) }}</option>
+                                @endforeach
+                              </select>
+                            @endif
+                          @endif
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
                         <div class="price-box">
                             @if ($products->discount_price == null)
                                 @if (session()->get('language') == 'bangla')
@@ -549,6 +293,7 @@
                         </div>
                       </div>
                     </div>
+                    
                     <!-- /.row -->
                   </div>
                   <!-- /.price-container -->
@@ -582,8 +327,12 @@
                       <div class="col-sm-7">
                         <a href="#" class="btn btn-primary"
                           ><i class="fa fa-shopping-cart inner-right-vs"></i>
-                          ADD TO CART</a
-                        >
+                          @if (session()->get('language') == 'bangla')
+															কার্টে যোগ করুন
+													@else
+															Add to cart
+                          @endif
+                          </a>
                       </div>
                     </div>
                     <!-- /.row -->
@@ -925,90 +674,131 @@
 
           <!-- ============================================== UPSELL PRODUCTS ============================================== -->
           <section class="section featured-product wow fadeInUp">
-            <h3 class="section-title">upsell products</h3>
-            <div
-              class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs"
-            >
-              <div class="item item-carousel">
-                <div class="products">
-                  <div class="product">
-                    <div class="product-image">
-                      <div class="image">
-                        <a href="detail.html"
-                          ><img src="{{asset('fontend')}}/assets/images/products/p1.jpg" alt=""
-                        /></a>
-                      </div>
-                      <!-- /.image -->
+            <h3 class="section-title">
+              @if (session()->get('language') == 'bangla')
+                সম্পর্কিত পন্য  
+              @else
+                Related Product  
+              @endif
+            </h3>
+            <div class="owl-carousel home-owl-carousel upsell-product custom-carousel owl-theme outer-top-xs">
+              @forelse ($realtedProduct as $product)
+								<div class="item item-carousel">
+									<div class="products">
+										<div class="product">		
+											<div class="product-image">
+												<div class="image">
+													@if (session()->get('language') == 'bangla')
+														<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+													@else
+														<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+													@endif
+												</div><!-- /.image -->			
+												@php
+													$amount = $product->selling_price - $product->discount_price;
+													$discount = ($amount/$product->selling_price) * 100;
+												@endphp
+												@if ($product->discount_price == null)
+												<div class="tag new">
+													@if (session()->get('language') == 'bangla')
+														<span>নতুন</span>
+													@else
+														<span>new</span>
+													@endif
+													
+												</div>
+												@else
+												<div class="tag new" style="background: #ff7878">
+												@if (session()->get('language') == 'bangla')
+													<span>{{ bn_price(round($discount)) }}%</span>
+												@else
+													<span>{{ round($discount) }}%</span>
+												@endif
+													
+												</div>
+												@endif
+																				
+											</div><!-- /.product-image -->
+											<div class="product-info text-left">
+												<h3 class="name text-capitalize">
+													@if (session()->get('language') == 'bangla')
+													<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
+													@else
+													<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
+													@endif
+												</h3>
+												<div class="rating rateit-small"></div>
+												<div class="description"></div>
 
-                      <div class="tag sale"><span>sale</span></div>
-                    </div>
-                    <!-- /.product-image -->
+												<div class="product-price">	
+													@if ($product->discount_price == null)
+														@if (session()->get('language') == 'bangla')
+															<span class="price">${{ bn_price($product->selling_price) }}</span>
+														@else
+															<span class="price">${{ number_format($product->selling_price,2) }}</span>
+														@endif
+														
+													@else
+														@if (session()->get('language') == 'bangla')
+															<span class="price">${{ bn_price($product->discount_price) }}</span>
 
-                    <div class="product-info text-left">
-                      <h3 class="name">
-                        <a href="detail.html">Floral Print Buttoned</a>
-                      </h3>
-                      <div class="rating rateit-small"></div>
-                      <div class="description"></div>
+															<span class="price-before-discount">${{ bn_price($product->selling_price) }}<span>
+														@else
+															<span class="price">${{ number_format($product->discount_price,2) }}</span>
 
-                      <div class="product-price">
-                        <span class="price"> $650.99 </span>
-                        <span class="price-before-discount">$ 800</span>
-                      </div>
-                      <!-- /.product-price -->
-                    </div>
-                    <!-- /.product-info -->
-                    <div class="cart clearfix animate-effect">
-                      <div class="action">
-                        <ul class="list-unstyled">
-                          <li class="add-cart-button btn-group">
-                            <button
-                              class="btn btn-primary icon"
-                              data-toggle="dropdown"
-                              type="button"
-                            >
-                              <i class="fa fa-shopping-cart"></i>
-                            </button>
-                            <button
-                              class="btn btn-primary cart-btn"
-                              type="button"
-                            >
-                              Add to cart
-                            </button>
-                          </li>
+															<span class="price-before-discount">${{ number_format($product->selling_price,2) }}<span>
+														@endif
+													@endif
+													
+												</div><!-- /.product-price -->
+											</div><!-- /.product-info -->
+											<div class="cart clearfix animate-effect">
+												<div class="action">
+													<ul class="list-unstyled">
+														<li class="add-cart-button btn-group">
+															<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart">
+																<i class="fa fa-shopping-cart"></i>													
+															</button>
+															<button class="btn btn-primary cart-btn" type="button">
+																@if (session()->get('language') == 'bangla')
+																	কার্টে যোগ করুন
+																@else
+																	Add to cart
+																@endif
+															</button>
+																					
+														</li>
+												
+														<li class="lnk wishlist">
+															<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist">
+																<i class="icon fa fa-heart"></i>
+															</a>
+														</li>
 
-                          <li class="lnk wishlist">
-                            <a
-                              class="add-to-cart"
-                              href="detail.html"
-                              title="Wishlist"
-                            >
-                              <i class="icon fa fa-heart"></i>
-                            </a>
-                          </li>
-
-                          <li class="lnk">
-                            <a
-                              class="add-to-cart"
-                              href="detail.html"
-                              title="Compare"
-                            >
-                              <i class="fa fa-signal"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <!-- /.action -->
-                    </div>
-                    <!-- /.cart -->
-                  </div>
-                  <!-- /.product -->
-                </div>
-                <!-- /.products -->
-              </div>
+														<li class="lnk">
+															<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare">
+																<i class="fa fa-signal" aria-hidden="true"></i>
+															</a>
+														</li>
+													</ul>
+												</div><!-- /.action -->
+											</div><!-- /.cart -->
+										</div><!-- /.product -->
+									</div><!-- /.products -->
+								</div><!-- /.item -->
+								@empty
+									<h5 class="text-danger">
+										<i class="fa fa-search"></i>
+										@if (session()->get('language') == 'bangla')
+											কোন পণ্য পাওয়া যায় নি!
+										@else
+											No Product Found!
+										@endif
+									</h5>
+								@endforelse
               <!-- /.item -->
 
-              <div class="item item-carousel">
+              {{-- <div class="item item-carousel">
                 <div class="products">
                   <div class="product">
                     <div class="product-image">
@@ -1406,7 +1196,7 @@
                   <!-- /.product -->
                 </div>
                 <!-- /.products -->
-              </div>
+              </div> --}}
               <!-- /.item -->
             </div>
             <!-- /.home-owl-carousel -->
