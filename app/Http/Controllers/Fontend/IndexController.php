@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Fontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Multiimg;
 use App\Models\Product;
@@ -25,12 +26,21 @@ class IndexController extends Controller
         $sliders = Silder::where('status',1)->orderBy('id','DESC')->limit(4)->get();
         $skip_category_0 = Category::skip(0)->first(); 
         $skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get(); 
-        return view('fontend.index',compact('category','sliders','categories','products','featured','hot_deals','special_offer','special_offer2','special_deals','special_deals2','skip_category_0','skip_product_0'));
+        $skip_brand_0 = Brand::skip(8)->first(); 
+        $skip_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_0->id)->orderBy('id','DESC')->get(); 
+        return view('fontend.index',compact('category','sliders','categories','products','featured','hot_deals','special_offer','special_offer2','special_deals','special_deals2','skip_category_0','skip_product_0','skip_product_1','skip_brand_0'));
     }
     public function singleProduct($id,$slug)
     {
         $products = Product::find($id);
         $multi_img = Multiimg::where('product_id',$id)->get();
         return view('fontend.single-product',compact('products','multi_img'));
+    }
+    public function tagWiseProduct($tag)
+    {
+        $products = Product::where('status',1)->where('product_tag_en',$tag)->orWhere('product_tag_bn',$tag)->orderBy('id','DESC')->get();
+        $categories = Category::orderBy('category_name_en','ASC')->get();
+        // dd($products);
+        return view('fontend.tag-wise-product',compact('products','categories'));
     }
 }

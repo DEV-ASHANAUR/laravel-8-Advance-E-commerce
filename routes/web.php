@@ -21,7 +21,7 @@ use App\Http\Controllers\Fontend\LanguageController;
 */
 
 Route::get('/',[IndexController::class,'index']);
-Route::get('single/product/{id}/{slug}',[IndexController::class,'singleProduct']);
+
 Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -88,3 +88,5 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
 // =================================Fontend Route==================================
     Route::get('language/english',[LanguageController::class,'english'])->name('english.language');
     Route::get('language/bangla',[LanguageController::class,'bangla'])->name('bangla.language');
+    Route::get('single/product/{id}/{slug}',[IndexController::class,'singleProduct']);
+    Route::get('product/tag/{tag}',[IndexController::class,'tagWiseProduct']);

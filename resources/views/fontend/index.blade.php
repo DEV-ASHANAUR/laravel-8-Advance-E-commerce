@@ -21,63 +21,8 @@
 			<!-- ============ SIDEBAR ====== -->	
 			<div class="col-xs-12 col-sm-12 col-md-3 sidebar">
 				<!-- ======== TOP NAVIGATION ====================== -->
-				<div class="side-menu animate-dropdown outer-bottom-xs">
-    				<div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>        
-    				<nav class="yamm megamenu-horizontal" role="navigation">
-        				<ul class="nav">
-							@foreach ($category as $category)
-            				<li class="dropdown menu-item">
-								{{-- category bangla english starts --}}
-								@if (session()->get('language') == 'bangla')
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon {{ $category->category_icon }}" aria-hidden="true"></i>{{ $category->category_name_bn }}</a>
-								@else
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon {{ $category->category_icon }}" aria-hidden="true"></i>{{ $category->category_name_en }}</a>
-								@endif
-								{{-- category bangla english end --}}
-								
-                 				<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											@php
-												$subcategories = App\Models\Subcategory::where('category_id',$category->id)->orderBy('subcategory_name_en','ASC')->get();
-											@endphp
-											@foreach ($subcategories as $subcategory)
-											<div class="col-sm-12 col-md-3">
-												{{-- subcategory bangla english start --}}
-												@if (session()->get('language') == 'bangla')
-												<h2 class="title text-capitalize">{{ $subcategory->subcategory_name_bn }}</h2>     
-												@else
-												<h2 class="title text-capitalize">{{ $subcategory->subcategory_name_en }}</h2>     
-												@endif
-												{{-- subcategory bangla english start --}}
-												@php
-													$subsubcategories = App\Models\Subsubcategory::where('subcategory_id',$subcategory->id)->orderBy('subsubcategory_name_en','ASC')->get();
-												@endphp
-												<ul class="links">
-													@foreach ($subsubcategories as $subsubcategory)
-													{{-- subsubcategory bangla english start --}}
-													@if (session()->get('language') == 'bangla')
-													<li>
-														<a href="#">{{ $subsubcategory->subsubcategory_name_bn }}</a>
-													</li>  
-													@else
-													<li>
-														<a href="#">{{ $subsubcategory->subsubcategory_name_en }}</a>
-													</li> 
-													@endif
-													{{-- subsubcategory bangla english end --}}
-													@endforeach
-												</ul>
-											</div><!-- /.col -->
-											@endforeach
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->                    
-								</ul><!-- /.dropdown-menu -->
-							</li><!-- /.menu-item -->
-							@endforeach
-        				</ul><!-- /.nav -->
-    				</nav><!-- /.megamenu-horizontal -->
-				</div><!-- /.side-menu -->
+				@include('fontend.inc.category')
+				<!-- /.side-menu -->
 <!-- ========= TOP NAVIGATION : END ================== -->
 
 	<!-- ======================= HOT DEALS ======================= -->
@@ -386,16 +331,17 @@
 	</h3>
 
 	<div class="sidebar-widget-body outer-top-xs">
-		<div class="tag-list">					
-			<a class="item" title="Phone" href="category.html">Phone</a>
-			<a class="item active" title="Vest" href="category.html">Vest</a>
-			<a class="item" title="Smartphone" href="category.html">Smartphone</a>
-			<a class="item" title="Furniture" href="category.html">Furniture</a>
-			<a class="item" title="T-shirt" href="category.html">T-shirt</a>
-			<a class="item" title="Sweatpants" href="category.html">Sweatpants</a>
-			<a class="item" title="Sneaker" href="category.html">Sneaker</a>
-			<a class="item" title="Toys" href="category.html">Toys</a>
-			<a class="item" title="Rose" href="category.html">Rose</a>
+		<div class="tag-list">	
+			@if (session()->get('language') == 'bangla')
+				@foreach ($tags_bn as $tag)
+					<a class="item active" title="Vest" href="{{ url('product/tag/'.$tag->product_tag_bn) }}">{{ str_replace(',',' ',$tag->product_tag_bn)  }}</a>
+				@endforeach	
+			@else
+				@foreach ($tags_en as $tag)
+					<a class="item active" title="Vest" href="{{ url('product/tag/'.$tag->product_tag_en) }}">{{ str_replace(',',' ',$tag->product_tag_en)  }}</a>
+				@endforeach
+			@endif		
+				
 		</div><!-- /.tag-list -->
 	</div><!-- /.sidebar-widget-body -->
 </div><!-- /.sidebar-widget -->
@@ -1494,6 +1440,132 @@
 	</h3>
 	<div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 	@forelse ($skip_product_0 as $product)
+	<div class="item item-carousel">
+		<div class="products">
+			<div class="product">		
+				<div class="product-image">
+					<div class="image">
+						@if (session()->get('language') == 'bangla')
+							<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+						@else
+							<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}"><img src="{{ asset($product->product_thumbnail) }}" alt=""></a>
+						@endif
+					</div><!-- /.image -->			
+					@php
+						$amount = $product->selling_price - $product->discount_price;
+						$discount = ($amount/$product->selling_price) * 100;
+					@endphp
+					@if ($product->discount_price == null)
+					<div class="tag new">
+						@if (session()->get('language') == 'bangla')
+							<span>নতুন</span>
+						@else
+							<span>new</span>
+						@endif
+					</div>
+					@else
+					<div class="tag new" style="background: #ff7878">
+						@if (session()->get('language') == 'bangla')
+							<span>{{ bn_price(round($discount)) }}%</span>
+						@else
+							<span>{{ round($discount) }}%</span>
+						@endif
+					</div>
+					@endif
+													
+				</div><!-- /.product-image -->
+				<div class="product-info text-left">
+					<h3 class="name text-capitalize">
+						@if (session()->get('language') == 'bangla')
+						<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_bn) }}">{{ $product->product_name_bn }}</a>
+						@else
+						<a href="{{ url('single/product/'.$product->id.'/'.$product->product_slug_en) }}">{{ $product->product_name_en }}</a>
+						@endif
+					</h3>
+					<div class="rating rateit-small"></div>
+					<div class="description"></div>
+
+					<div class="product-price">	
+						@if ($product->discount_price == null)
+							@if (session()->get('language') == 'bangla')
+								<span class="price">${{ bn_price($product->selling_price) }}</span>
+							@else
+								<span class="price">${{ number_format($product->selling_price,2) }}</span>
+							@endif
+							
+						@else
+							@if (session()->get('language') == 'bangla')
+								<span class="price">${{ bn_price($product->discount_price) }}</span>
+
+								<span class="price-before-discount">${{ bn_price($product->selling_price) }}<span>
+							@else
+								<span class="price">${{ number_format($product->discount_price,2) }}</span>
+
+								<span class="price-before-discount">${{ number_format($product->selling_price,2) }}<span>
+							@endif
+						@endif
+						
+					</div><!-- /.product-price -->
+				</div><!-- /.product-info -->
+				<div class="cart clearfix animate-effect">
+					<div class="action">
+						<ul class="list-unstyled">
+							<li class="add-cart-button btn-group">
+								<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart">
+									<i class="fa fa-shopping-cart"></i>													
+								</button>
+								<button class="btn btn-primary cart-btn" type="button">
+									@if (session()->get('language') == 'bangla')
+										কার্টে যোগ করুন
+									@else
+										Add to cart
+									@endif
+								</button>
+														
+							</li>
+					
+							<li class="lnk wishlist">
+								<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist">
+									<i class="icon fa fa-heart"></i>
+								</a>
+							</li>
+
+							<li class="lnk">
+								<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Compare">
+									<i class="fa fa-signal" aria-hidden="true"></i>
+								</a>
+							</li>
+						</ul>
+					</div><!-- /.action -->
+				</div><!-- /.cart -->
+			</div><!-- /.product -->
+		</div><!-- /.products -->
+	</div><!-- /.item -->
+	@empty
+		<h5 class="text-danger">
+			<i class="fa fa-search"></i>
+			@if (session()->get('language') == 'bangla')
+				কোন পণ্য পাওয়া যায় নি!
+			@else
+				No Product Found!
+			@endif
+		</h5>
+	@endforelse
+	  
+	</div>
+	<!-- /.home-owl-carousel -->
+  </section>
+<!-- /.section -->
+<section class="section featured-product wow fadeInUp">
+	<h3 class="section-title">
+		@if (session()->get('language') == 'bangla')
+		{{ $skip_brand_0->brand_name_bn }}
+		@else
+		{{ $skip_brand_0->brand_name_en }}
+		@endif
+	</h3>
+	<div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+	@forelse ($skip_product_1 as $product)
 	<div class="item item-carousel">
 		<div class="products">
 			<div class="product">		
