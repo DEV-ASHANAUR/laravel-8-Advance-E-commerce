@@ -70,4 +70,21 @@ class IndexController extends Controller
         // dd($products);
         return view('fontend.tag-wise-product',compact('products','categories'));
     }
+    public function productViewAjax($id)
+    {
+        $products = Product::with('category','brand')->find($id);
+
+        $color_en = $products->product_color_en;
+        $product_color_en = explode(',',$color_en);
+
+        $size_en = $products->product_size_en;
+        $product_size_en = explode(',',$size_en);
+
+        return response()->json([
+            'product' => $products,
+            'color' => $product_color_en,
+            'size' => $product_size_en,
+        ]);
+
+    }
 }

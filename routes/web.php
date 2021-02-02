@@ -92,3 +92,5 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('product/tag/{tag}',[IndexController::class,'tagWiseProduct']);
     Route::get('product/subsubcategory/{id}/{slug}',[IndexController::class,'subsubcategory']);
     Route::get('product/subcategory/{id}/{slug}',[IndexController::class,'subcategory']);
+    //view modal with ajax 
+    Route::get('product/view/modal/{id}',[IndexController::class,'productViewAjax']);
