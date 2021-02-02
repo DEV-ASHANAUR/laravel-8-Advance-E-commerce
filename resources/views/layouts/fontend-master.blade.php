@@ -553,7 +553,7 @@
                     
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="sizearea">
                   <label for="size">Select size</label>
                   <select name="size" class="form-control" id="size">
                     
@@ -629,12 +629,23 @@
               success:function(data){
                 // console.log(data);
                 $('#pname').text(data.product.product_name_en);
-                $('#price').text(data.product.selling_price);
                 $('#pcode').text(data.product.product_code);
                 $('#pcategory').text(data.product.category.category_name_en);
                 $('#pbrand').text(data.product.brand.brand_name_en);
-                $('#stock').text(data.product.product_qty);
+                
                 $('#pimage').attr('src','/'+data.product.product_thumbnail);
+
+                if(data.product.discount_price == null){
+                  $('#price').text(data.product.selling_price);
+                }else{
+                  $('#price').text(data.product.discount_price);
+                }
+
+                if(data.product.product_qty > 0){
+                  $('#stock').text('Available');
+                }else{
+                  $('#stock').text('Stock Out');
+                }
 
                 var color = '<option value="">Selcet color</option>';
                 $.each(data.color,function(key,v){
@@ -645,6 +656,11 @@
                 var size = '<option value="">Selcet Size</option>';
                 $.each(data.size,function(key,v){
                   size +='<option value="'+v+'">'+v+'</option>';
+                  if(data.size == ''){
+                    $('#sizearea').hide();
+                  }else{
+                    $('#sizearea').show();
+                  }
                 });
                 $('#size').html(size);
                 
