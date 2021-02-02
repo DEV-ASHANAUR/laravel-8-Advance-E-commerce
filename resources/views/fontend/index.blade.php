@@ -874,7 +874,10 @@
 												<div class="action">
 													<ul class="list-unstyled">
 														<li class="add-cart-button btn-group">
-															<button class="btn btn-primary icon" id="{{ $product->id }}"  type="button" data-toggle="modal" data-target="#cartModal" title="Add Cart" 
+															<button class="btn btn-primary icon" type="button"
+															title="Add Cart"
+															id="{{ $product->id }}"	
+															data-toggle="modal" data-target="#cartModal"  
 															onclick="productView(this.id)"	
 															>
 																
@@ -1160,10 +1163,18 @@
 					<div class="action">
 						<ul class="list-unstyled">
 							<li class="add-cart-button btn-group">
-								<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart">
+								<button class="btn btn-primary icon" type="button" title="Add Cart"
+								id="{{ $product->id }}"	
+								data-toggle="modal" data-target="#cartModal"  
+								onclick="productView(this.id)"
+								>
 									<i class="fa fa-shopping-cart"></i>													
 								</button>
-								<button class="btn btn-primary cart-btn" type="button">
+								<button class="btn btn-primary cart-btn" type="button"
+								id="{{ $product->id }}"	
+								data-toggle="modal" data-target="#cartModal"  
+								onclick="productView(this.id)"
+								>
 									@if (session()->get('language') == 'bangla')
 										কার্টে যোগ করুন
 									@else
@@ -1288,10 +1299,18 @@
 					<div class="action">
 						<ul class="list-unstyled">
 							<li class="add-cart-button btn-group">
-								<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart">
+								<button class="btn btn-primary icon" type="button" title="Add Cart"
+								id="{{ $product->id }}"	
+								data-toggle="modal" data-target="#cartModal"  
+								onclick="productView(this.id)"
+								>
 									<i class="fa fa-shopping-cart"></i>													
 								</button>
-								<button class="btn btn-primary cart-btn" type="button">
+								<button class="btn btn-primary cart-btn" type="button"
+								id="{{ $product->id }}"	
+								data-toggle="modal" data-target="#cartModal"  
+								onclick="productView(this.id)"
+								>
 									@if (session()->get('language') == 'bangla')
 										কার্টে যোগ করুন
 									@else
@@ -1414,7 +1433,11 @@
 					<div class="action">
 						<ul class="list-unstyled">
 							<li class="add-cart-button btn-group">
-								<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart">
+								<button class="btn btn-primary icon" type="button" title="Add Cart"
+								id="{{ $product->id }}"	
+								data-toggle="modal" data-target="#cartModal"  
+								onclick="productView(this.id)"
+								>
 									<i class="fa fa-shopping-cart"></i>													
 								</button>
 								<button class="btn btn-primary cart-btn" type="button">

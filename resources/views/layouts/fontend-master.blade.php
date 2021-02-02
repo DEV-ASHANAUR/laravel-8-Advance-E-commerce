@@ -155,13 +155,13 @@
                                     <i class="glyphicon glyphicon-shopping-cart"></i>
                                 </div>
                                 <div class="basket-item-count">
-                                    <span class="count" id="cartQty">2</span>
+                                    <span class="count" id="cartQty">0</span>
                                 </div>
                                 <div class="total-price-basket">
                                     <span class="lbl">cart -</span>
                                     <span class="total-price">
-                                        <span class="sign">$</span>
-                                        <span class="value" id="topsubTotal">600.00</span>
+                                        {{-- <span class="sign">$</span> --}}
+                                        <span class="value" id="topsubTotal">0</span>
                                     </span>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@
                                 <div class="clearfix cart-total">
                                     <div class="pull-right">
                                         <span class="text">Sub Total :</span>
-                                        <span id="subTotal" class='price'>$600.00</span>
+                                        <span id="subTotal" class='price'>00</span>
                                     </div>
                                     <div class="clearfix"></div>
                                     <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>	
@@ -638,7 +638,7 @@
                 $.each(data.color,function(key,v){
                   color +='<option value="'+v+'">'+v+'</option>';
                 });
-                $('#color').html(color);
+                $('select[name="color"]').html(color);
 
                 var size;
                 $.each(data.size,function(key,v){
@@ -649,7 +649,7 @@
                     $('#sizearea').show();
                   }
                 });
-                $('#size').html(size);
+                $('select[name="size"]').html(size);
                 
               }
             });
@@ -699,8 +699,8 @@
             url:'/product/mini/cart',
             dataType:'json',
             success:function(data){
-              $('#subTotal').text('$ '+data.cartTotal);
-              $('#topsubTotal').text(data.cartTotal);
+              $('#subTotal').text('$'+data.cartTotal);
+              $('#topsubTotal').text('$'+data.cartTotal);
               $('#cartQty').text(data.cartQty);
               var miniCart = "";
               
@@ -721,7 +721,7 @@
                             <div class="price">$${value.price}</div>
                         </div>
                         <div class="col-xs-1 action">
-                            <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                            <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash text-danger"></i></button>
                         </div>
                     </div>
                 </div><!-- /.cart-item -->

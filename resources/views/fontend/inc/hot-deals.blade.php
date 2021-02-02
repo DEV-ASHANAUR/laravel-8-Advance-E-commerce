@@ -118,10 +118,17 @@
                     class="btn btn-primary icon"
                     data-toggle="dropdown"
                     type="button"
+                    id="{{ $product->id }}"	
+                    data-toggle="modal" 
+                    data-target="#cartModal"  
+					onclick="productView(this.id)"
                     >
                     <i class="fa fa-shopping-cart"></i>
                     </button>
-                    <button class="btn btn-primary cart-btn" type="button">
+                    <button class="btn btn-primary cart-btn" type="button" 
+                    id="{{ $product->id }}"	
+                    data-toggle="modal" data-target="#cartModal"  
+                    onclick="productView(this.id)">
                     @if (session()->get('language') == 'bangla')
                         কার্টে যোগ করুন
                     @else

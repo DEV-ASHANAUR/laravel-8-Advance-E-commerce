@@ -193,16 +193,16 @@
                         <div class="form-group">
                           @if (session()->get('language') == 'bangla')
                             <label for="">সিলেক্ট কালার</label>
-                            <select name="color" class="form-control" id="">
-                                  <option>সিলেক্ট কালার</option>
+                            <select class="form-control" id="color">
+                                  {{-- <option>সিলেক্ট কালার</option> --}}
                               @foreach ($product_color_bn as $color)
                                   <option value="{{ $color }}">{{ $color }}</option>
                               @endforeach
                             </select> 
                           @else
                             <label for="">Select Color</label>
-                            <select name="color" class="form-control" id="">
-                              <option>Select Color</option>
+                            <select class="form-control" id="color">
+                              {{-- <option>Select Color</option> --}}
                               @foreach ($product_color_en as $color)
                                   <option value="{{ $color }}">{{ ucwords($color) }}</option>
                               @endforeach
@@ -216,16 +216,16 @@
                           @if ($product_size_en)
                             @if (session()->get('language') == 'bangla')
                               <label for="">সিলেক্ট সাইজ</label>
-                              <select name="size" class="form-control" id="">
-                                <option value="">সিলেক্ট সাইজ</option>
+                              <select class="form-control" id="size">
+                                {{-- <option value="">সিলেক্ট সাইজ</option> --}}
                                 @foreach ($product_size_bn as $size)
                                   <option value="{{ $size }}">{{ $size }}</option>
                                 @endforeach
                               </select>
                             @else
                               <label for="">Select Size</label>
-                              <select name="size" class="form-control" id="">
-                                <option>Select Size</option>
+                              <select class="form-control" id="size">
+                                {{-- <option>Select Size</option> --}}
                                 @foreach ($product_size_en as $size)
                                   <option value="{{ $size }}">{{ ucwords($size) }}</option>
                                 @endforeach
@@ -256,6 +256,7 @@
                                     <span class="price-strike">${{ number_format($products->selling_price,2) }}<span>
                                 @endif
                             @endif  
+                            <input type="hidden" id="product_id" value="{{ $products->id }}">
                           {{-- <span class="price">$800.00</span>
                           <span class="price-strike">$900.00</span> --}}
                         </div>
@@ -319,20 +320,20 @@
                                 ></span>
                               </div>
                             </div>
-                            <input type="text" value="1" />
+                            <input type="number" min="1" id="qty" value="1" />
                           </div>
                         </div>
                       </div>
 
                       <div class="col-sm-7">
-                        <a href="#" class="btn btn-primary"
+                        <button type="submit" class="btn btn-primary" onclick="addToCart()"
                           ><i class="fa fa-shopping-cart inner-right-vs"></i>
                           @if (session()->get('language') == 'bangla')
 															কার্টে যোগ করুন
 													@else
 															Add to cart
                           @endif
-                          </a>
+                      </button>
                       </div>
                     </div>
                     <!-- /.row -->
@@ -756,10 +757,16 @@
 												<div class="action">
 													<ul class="list-unstyled">
 														<li class="add-cart-button btn-group">
-															<button data-toggle="tooltip" class="btn btn-primary icon" type="button" title="Add Cart">
+                              <button class="btn btn-primary icon" id="{{ $product->id }}"  type="button" title="Add Cart"
+                              data-toggle="modal" data-target="#cartModal" title="Add Cart" 
+															onclick="productView(this.id)"
+                              >
 																<i class="fa fa-shopping-cart"></i>													
 															</button>
-															<button class="btn btn-primary cart-btn" type="button">
+                              <button class="btn btn-primary cart-btn" id="{{ $product->id }}"  type="button"
+                              data-toggle="modal" data-target="#cartModal" title="Add Cart" 
+															onclick="productView(this.id)"
+                              >
 																@if (session()->get('language') == 'bangla')
 																	কার্টে যোগ করুন
 																@else
