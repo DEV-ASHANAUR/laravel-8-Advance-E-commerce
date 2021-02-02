@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Fontend\LanguageController;
+use App\Http\Controllers\Fontend\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -94,3 +95,9 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('product/subcategory/{id}/{slug}',[IndexController::class,'subcategory']);
     //view modal with ajax 
     Route::get('product/view/modal/{id}',[IndexController::class,'productViewAjax']);
+    //cart data store cart/data/store
+    Route::post('/cart/data/store/{id}',[CartController::class,'addToCart']);
+    //product/mini/cart
+    Route::get('/product/mini/cart',[CartController::class,'miniCart']);
+    //remove mini cart product minicart/product-remove
+    Route::get('/minicart/product-remove/{rowId}',[CartController::class,'miniCartRemove']);

@@ -23,6 +23,7 @@
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/rateit.css">
     <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/toastr.css">
+    <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/sweetalert2.min.css">
 		<!-- Icons/Glyphs -->
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/font-awesome.css">
         <!-- Fonts --> 
@@ -154,45 +155,27 @@
                                     <i class="glyphicon glyphicon-shopping-cart"></i>
                                 </div>
                                 <div class="basket-item-count">
-                                    <span class="count">2</span>
+                                    <span class="count" id="cartQty">2</span>
                                 </div>
                                 <div class="total-price-basket">
                                     <span class="lbl">cart -</span>
                                     <span class="total-price">
                                         <span class="sign">$</span>
-                                        <span class="value">600.00</span>
+                                        <span class="value" id="topsubTotal">600.00</span>
                                     </span>
                                 </div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image">
-                                                <a href="detail.html">
-                                                    <img src="{{asset('fontend')}}/assets/images/cart.jpg" alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <h3 class="name">
-                                                <a href="index8a95.html?page-detail">Simple Product</a>
-                                            </h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action">
-                                            <a href="#"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </div>
-                                </div><!-- /.cart-item -->
-                                <div class="clearfix"></div>
-                                <hr>
+                                {{-- minicart start --}}
+                                <div id="miniCart"></div>
+                                {{-- minicart end --}}
+                               
                                 <div class="clearfix cart-total">
                                     <div class="pull-right">
                                         <span class="text">Sub Total :</span>
-                                        <span class='price'>$600.00</span>
+                                        <span id="subTotal" class='price'>$600.00</span>
                                     </div>
                                     <div class="clearfix"></div>
                                     <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>	
@@ -526,7 +509,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel"><strong class="text-capitalize" id="pname"></strong></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModal">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -562,8 +545,9 @@
                 <div class="form-group">
                   <label for="qty">Quantity</label>
                   <input type="number" min="1" id="qty" value="1" class="form-control" />
+                  <input type="hidden" id="product_id" />
                 </div>
-                <button type="submit" class="btn btn-sm btn-danger">Add To Cart</button>
+                <button type="submit" class="btn btn-sm btn-danger" onclick="addToCart()">Add To Cart</button>
               </div>
             </div>
           </div>
@@ -590,6 +574,7 @@
     <script src="{{ asset('fontend') }}/assets/js/wow.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/scripts.js"></script>
     {{-- ============================aditional script===================== --}}
+    <script src="{{ asset('fontend') }}/assets/js/aditional/sweetalert2@10.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/aditional/toastr.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/aditional/jquery.validate.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/aditional/additional-methods.min.js"></script>
@@ -620,11 +605,12 @@
             'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
           }
         });
+        // start product view with ajax modal
         function productView(id){
             // alert(id);
             $.ajax({
               type: 'GET',
-              url:'product/view/modal/'+id,
+              url:'/product/view/modal/'+id,
               dataType:'json',
               success:function(data){
                 // console.log(data);
@@ -632,7 +618,8 @@
                 $('#pcode').text(data.product.product_code);
                 $('#pcategory').text(data.product.category.category_name_en);
                 $('#pbrand').text(data.product.brand.brand_name_en);
-                
+                $('#product_id').val(id);
+                $('#qty').val(1);
                 $('#pimage').attr('src','/'+data.product.product_thumbnail);
 
                 if(data.product.discount_price == null){
@@ -647,13 +634,13 @@
                   $('#stock').text('Stock Out');
                 }
 
-                var color = '<option value="">Selcet color</option>';
+                var color;
                 $.each(data.color,function(key,v){
                   color +='<option value="'+v+'">'+v+'</option>';
                 });
                 $('#color').html(color);
 
-                var size = '<option value="">Selcet Size</option>';
+                var size;
                 $.each(data.size,function(key,v){
                   size +='<option value="'+v+'">'+v+'</option>';
                   if(data.size == ''){
@@ -667,7 +654,119 @@
               }
             });
         }
-        productView();
+        // end product view with ajax modal
+        function addToCart(){
+          var id = $('#product_id').val();
+          var color = $('#color').val();
+          var size = $('#size').val();
+          var qty = $('#qty').val();
+          $.ajax({
+            type:'POST',
+            dataType:'json',
+            data:{color:color, size:size, qty:qty},
+            url:'/cart/data/store/'+id,
+            success:function(data){
+              miniCart();
+              $('#closeModal').click();
+              var toastMixin = Swal.mixin({
+                  toast: true,
+                  icon: 'success',
+                  position: 'top-right',
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
+                
+                if(data.status_code == 200){
+                  toastMixin.fire({
+                    animation: true,
+                    title: data.message
+                  });
+                }else{
+                  toastMixin.fire({
+                    title: 'Something went Wrong',
+                    icon: 'error'
+                  });
+                }
+              // console.log(data);
+            }
+          });
+        }
+    </script>
+    <script type="text/javascript">
+        function miniCart(){
+          $.ajax({
+            type: 'GET',
+            url:'/product/mini/cart',
+            dataType:'json',
+            success:function(data){
+              $('#subTotal').text('$ '+data.cartTotal);
+              $('#topsubTotal').text(data.cartTotal);
+              $('#cartQty').text(data.cartQty);
+              var miniCart = "";
+              
+              $.each(data.carts,function(key,value){
+                miniCart +=`<div class="cart-item product-summary">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="image">
+                                <a href="detail.html">
+                                    <img src="/${value.options.image}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <h3 class="name">
+                                <a href="index8a95.html?page-detail">${value.name}</a>
+                            </h3>
+                            <div class="price">$${value.price}</div>
+                        </div>
+                        <div class="col-xs-1 action">
+                            <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div><!-- /.cart-item -->
+                <hr>
+                <div class="clearfix"></div>`
+                $('#miniCart').html(miniCart);
+              });
+              
+            }
+          });
+        }
+        miniCart();
+        // mini cart remove 
+        function miniCartRemove(rowid){
+          // console.log(rowId);
+          // alert(rowid);
+          $.ajax({
+              type: 'GET',
+              url:'/minicart/product-remove/'+rowid,
+              dataType:'json',
+              success:function(data){
+                // console.log(data);
+                miniCart();
+                var toastMixin = Swal.mixin({
+                  toast: true,
+                  icon: 'success',
+                  position: 'top-right',
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
+                
+                if(data.status_code == 200){
+                  toastMixin.fire({
+                    animation: true,
+                    title: data.message
+                  });
+                }else{
+                  toastMixin.fire({
+                    title: 'Something went Wrong',
+                    icon: 'error'
+                  });
+                }
+              }
+          })
+        }
     </script>
 </body>
 
