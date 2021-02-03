@@ -53,7 +53,7 @@
                 <div class="cnt-account">
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
-                        <li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
+                        <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
                         <li>
@@ -727,9 +727,8 @@
                 </div><!-- /.cart-item -->
                 <hr>
                 <div class="clearfix"></div>`
-                $('#miniCart').html(miniCart);
               });
-              
+              $('#miniCart').html(miniCart);
             }
           });
         }
@@ -743,7 +742,6 @@
               url:'/minicart/product-remove/'+rowid,
               dataType:'json',
               success:function(data){
-                // console.log(data);
                 miniCart();
                 var toastMixin = Swal.mixin({
                   toast: true,
@@ -765,8 +763,9 @@
                   });
                 }
               }
-          })
+          });
         }
+        
     </script>
     {{-- //add to wishlist --}}
     <script>
@@ -803,6 +802,82 @@
           });
         });
       });
+    </script>
+    <script>
+      function wishlist(){
+          $.ajax({
+            type: 'GET',
+            url: "{{ url('/user/wishlist-product') }}",
+            
+            dataType:'json',
+            success:function(data){
+              console.log(data);
+              var wishlist = "";
+
+              $.each(data,function(key,value){
+                wishlist +=`<tr>
+                    <td class="col-md-2">
+                      <img src="/${value.product.product_thumbnail}" alt="image" />
+                    </td>
+                    <td class="col-md-7">
+                      <div class="product-name text-capitalize">
+                        <a href="#">${value.product.product_name_en}</a>
+                      </div>
+  
+                      <div class="price">
+                        ${value.product.discount_price == null ? `$${value.product.selling_price}`:`$${value.product.discount_price}$<span>${value.product.selling_price}</span>`}
+                        
+                      </div>
+                    </td>
+                    <td class="col-md-2">
+                      <button class="btn-upper btn btn-primary"
+                      id="${value.product_id}"	
+											data-toggle="modal" data-target="#cartModal"  
+											onclick="productView(this.id)">Add to cart</button>
+                    </td>
+                    <td class="col-md-1 close-btn">
+                      <a href="${value.product_id}" id="rmWishList" class=""><i class="fa fa-times"></i></a>
+                    </td>
+                  </tr>`
+              });
+               $('#wishlist').html(wishlist);
+            }
+          });
+        }
+        wishlist();
+        $(document).ready(function(){
+          $(document).on('click','#rmWishList',function(e){
+            e.preventDefault();
+            var id = $(this).attr('href');
+            $.ajax({
+              type: 'GET',
+              url:"{{ url('/user/wishlist-product/remove') }}/"+id,
+              dataType:'json',
+              success:function(data){
+                wishlist();
+                var toastMixin = Swal.mixin({
+                  toast: true,
+                  icon: 'success',
+                  position: 'top-right',
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
+                
+                if($.isEmptyObject(data.error)){
+                  toastMixin.fire({
+                    animation: true,
+                    title: data.success
+                  });
+                }else{
+                  toastMixin.fire({
+                    title: data.error,
+                    icon: 'error'
+                  });
+                }
+              }
+            });
+          });
+        });
     </script>
 </body>
 

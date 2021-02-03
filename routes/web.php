@@ -86,7 +86,12 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::post('profile/update',[UserController::class,'ProfileUpdate'])->name('update.profile');
     Route::get('change/password',[UserController::class,'PassChange'])->name('change.password');
     Route::post('pass/store',[UserController::class,'updatePass'])->name('update.password');
-    //add to wishlist
+    //view product wishlist
+    Route::get('wishlist',[WishlistController::class,'create'])->name('wishlist');
+    ///wishlist-product
+    Route::get('wishlist-product',[WishlistController::class,'wishlistProduct']);
+    //wishlist-product/remove
+    Route::get('wishlist-product/remove/{id}',[WishlistController::class,'wishlistRemove']);
 });
 // =================================Fontend Route==================================
     Route::get('language/english',[LanguageController::class,'english'])->name('english.language');
