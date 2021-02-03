@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Fontend\LanguageController;
 use App\Http\Controllers\Fontend\CartController;
+use App\Http\Controllers\User\WishlistController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -85,6 +86,7 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::post('profile/update',[UserController::class,'ProfileUpdate'])->name('update.profile');
     Route::get('change/password',[UserController::class,'PassChange'])->name('change.password');
     Route::post('pass/store',[UserController::class,'updatePass'])->name('update.password');
+    //add to wishlist
 });
 // =================================Fontend Route==================================
     Route::get('language/english',[LanguageController::class,'english'])->name('english.language');
@@ -101,3 +103,5 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('/product/mini/cart',[CartController::class,'miniCart']);
     //remove mini cart product minicart/product-remove
     Route::get('/minicart/product-remove/{rowId}',[CartController::class,'miniCartRemove']);
+    Route::post('/addtowishlist/{id}',[WishlistController::class,'addToWishlist']);
+    

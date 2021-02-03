@@ -718,7 +718,7 @@
                             <h3 class="name">
                                 <a href="index8a95.html?page-detail">${value.name}</a>
                             </h3>
-                            <div class="price">$${value.price}</div>
+                            <div class="price">$${value.price} * ${value.qty} </div>
                         </div>
                         <div class="col-xs-1 action">
                             <button type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"><i class="fa fa-trash text-danger"></i></button>
@@ -767,6 +767,42 @@
               }
           })
         }
+    </script>
+    {{-- //add to wishlist --}}
+    <script>
+      $(document).ready(function(){
+        $(document).on('click','#addToWishlist',function(e){
+          e.preventDefault();
+          var id = $(this).attr('href');
+          // alert(id);
+          $.ajax({
+              type: 'POST',
+              url: "{{ url('/addtowishlist') }}/"+id,
+              dataType:'json',
+              success:function(data){
+                var toastMixin = Swal.mixin({
+                  toast: true,
+                  icon: 'success',
+                  position: 'top-right',
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
+                
+                if($.isEmptyObject(data.error)){
+                  toastMixin.fire({
+                    animation: true,
+                    title: data.success
+                  });
+                }else{
+                  toastMixin.fire({
+                    title: data.error,
+                    icon: 'error'
+                  });
+                }
+              }
+          });
+        });
+      });
     </script>
 </body>
 

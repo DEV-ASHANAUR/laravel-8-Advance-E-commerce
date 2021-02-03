@@ -894,7 +894,9 @@
 														</li>
 												
 														<li class="lnk wishlist">
-															<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist">
+															<a
+															href="{{ $product->id }}" data-toggle="tooltip"
+															id="addToWishlist" class="add-to-cart"  title="Wishlist">
 																<i class="icon fa fa-heart"></i>
 															</a>
 														</li>
@@ -1012,7 +1014,8 @@
 														</li>
 												
 														<li class="lnk wishlist">
-															<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist">
+															<a href="{{ $product->id }}" data-toggle="tooltip"
+															id="addToWishlist" class="add-to-cart"  title="Wishlist">
 																<i class="icon fa fa-heart"></i>
 															</a>
 														</li>
@@ -1185,7 +1188,7 @@
 							</li>
 					
 							<li class="lnk wishlist">
-								<a data-toggle="tooltip" class="add-to-cart" href="detail.html" title="Wishlist">
+								<a href="{{ $product->id }}" data-toggle="tooltip" id="addToWishlist" class="add-to-cart" title="Wishlist">
 									<i class="icon fa fa-heart"></i>
 								</a>
 							</li>

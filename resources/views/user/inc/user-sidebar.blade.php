@@ -1,12 +1,12 @@
 <div class="card" style="width: 18rem;">
-    {{-- <div class="chat_container" style="background-image: url({{ (!empty(Auth::user()->image))?url(Auth::user()->image):url('media/profile.jpg') }});" >
+    <div class="chat_container" style="background-image: url({{ (!empty(Auth::user()->image))?url(Auth::user()->image):url('media/profile.jpg') }});" >
         <div class="overlay" >
             
         </div>
-    </div> --}}
+    </div>
     
     <div class="card-body">
-        <img class="card-img-top" src="{{ asset(Auth::user()->image) }}" style="border-radius:50%" height="100%" width="100%" alt="">
+        {{-- <img class="card-img-top" src="{{ (Auth::user()->image)?asset(Auth::user()->image):asset('media/profile.jpg') }}" style="border-radius:50%" height="100%" width="100%" alt=""> --}}
         <ul class="list-group list-group-flush mt-2">
             <a href="{{ route('user.dashboard') }}" class="btn btn-sm btn-primary btn-block">Home</a>
             <a href="{{ route('change.password') }}" class="btn btn-sm btn-primary btn-block">Change Password</a>
