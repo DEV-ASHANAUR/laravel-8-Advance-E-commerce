@@ -2,7 +2,7 @@
 @section('content')
 @section('title')
 @if (session()->get('language') == 'bangla')
-	হোম পেজ
+	উইস লিস্ট
 @else
 	Wishlist
 @endif

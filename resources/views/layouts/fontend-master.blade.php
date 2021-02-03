@@ -54,7 +54,7 @@
                     <ul class="list-unstyled">
                         <li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
                         <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-                        <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+                        <li><a href="{{ route('cartpage') }}"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
                         <li>
                             @auth
@@ -855,6 +855,105 @@
               dataType:'json',
               success:function(data){
                 wishlist();
+                var toastMixin = Swal.mixin({
+                  toast: true,
+                  icon: 'success',
+                  position: 'top-right',
+                  showConfirmButton: false,
+                  timer: 3000,
+                });
+                
+                if($.isEmptyObject(data.error)){
+                  toastMixin.fire({
+                    animation: true,
+                    title: data.success
+                  });
+                }else{
+                  toastMixin.fire({
+                    title: data.error,
+                    icon: 'error'
+                  });
+                }
+              }
+            });
+          });
+        });
+    </script>
+    <script>
+      function cart(){
+          $.ajax({
+            type: 'GET',
+            url: "{{ url('/user/cart-product') }}",
+            
+            dataType:'json',
+            success:function(data){
+              console.log(data);
+              var cart = "";
+
+              $.each(data.carts,function(key,value){
+                cart +=`<tr>
+                      <td class="romove-item">
+                        <a href="${value.rowId}" title="cancel" id="rmcart" class="icon"
+                        ><i class="fa fa-trash-o"></i
+                        ></a>
+                      </td>
+                      <td class="cart-image">
+                        <a class="entry-thumbnail" href="#">
+                        <img class="img-thumbnail" src="/${value.options.image}" style="height:100px;width:100px" alt="" />
+                        </a>
+                      </td>
+                      <td class="cart-product-name-info">
+                        <h4 class="cart-product-description">
+                          <a href="detail.html">${value.name}</a>
+                        </h4>
+                        <!-- /.row -->
+                        <div class="cart-product-info">
+                        <span class="product-color">COLOR:<span>${value.options.color}</span></span> <br>
+                        <span class="product-color">Size:<span>${value.options.size}</span></span>
+                        </div>
+                      </td>
+                      <td class="cart-product-quantity">
+                        <div class="quant-input">
+                        <div class="arrows">
+                          <div class="arrow plus gradient">
+                          <span class="ir"
+                            ><i class="icon fa fa-sort-asc"></i
+                          ></span>
+                          </div>
+                          <div class="arrow minus gradient">
+                          <span class="ir"
+                            ><i class="icon fa fa-sort-desc"></i
+                          ></span>
+                          </div>
+                        </div>
+                        <input type="text" value="${value.qty}" />
+                        </div>
+                      </td>
+                      <td class="cart-product-sub-total">
+                        <span class="cart-sub-total-price">$${value.price}</span>
+                      </td>
+                      <td class="cart-product-grand-total">
+                        <span class="cart-grand-total-price">$${value.price * value.qty}</span>
+                      </td>
+                  </tr>`
+              });
+               $('#cart').html(cart);
+            }
+          });
+        }
+        cart();
+        $(document).ready(function(){
+          $(document).on('click','#rmcart',function(e){
+            e.preventDefault();
+            var rowId = $(this).attr('href');
+            // alert(rowId);
+            $.ajax({
+              type: 'GET',
+              url:"{{ url('/user/cart-product/remove') }}/"+rowId,
+              dataType:'json',
+              success:function(data){
+                cart();
+                miniCart();
                 var toastMixin = Swal.mixin({
                   toast: true,
                   icon: 'success',

@@ -269,7 +269,8 @@
                             data-toggle="tooltip"
                             data-placement="right"
                             title="Wishlist"
-                            href="#"
+                            href="{{ $products->id }}"
+                            id="addToWishlist" 
                           >
                             <i class="fa fa-heart"></i>
                           </a>

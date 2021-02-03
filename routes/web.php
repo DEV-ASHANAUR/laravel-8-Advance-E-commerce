@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Fontend\LanguageController;
 use App\Http\Controllers\Fontend\CartController;
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\CartPageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -92,6 +93,12 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('wishlist-product',[WishlistController::class,'wishlistProduct']);
     //wishlist-product/remove
     Route::get('wishlist-product/remove/{id}',[WishlistController::class,'wishlistRemove']);
+    //cartpage
+    Route::get('my-cartpage',[CartPageController::class,'index'])->name('cartpage');
+    // get cart-product
+    Route::get('cart-product',[CartPageController::class,'cartProduct']);
+    // cart-product/remove
+    Route::get('cart-product/remove/{rowId}',[CartPageController::class,'cartRemove']);
 });
 // =================================Fontend Route==================================
     Route::get('language/english',[LanguageController::class,'english'])->name('english.language');
