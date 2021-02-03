@@ -883,7 +883,7 @@
       function cart(){
           $.ajax({
             type: 'GET',
-            url: "{{ url('/user/cart-product') }}",
+            url: "{{ url('/cart-product') }}",
             
             dataType:'json',
             success:function(data){
@@ -949,7 +949,7 @@
             // alert(rowId);
             $.ajax({
               type: 'GET',
-              url:"{{ url('/user/cart-product/remove') }}/"+rowId,
+              url:"{{ url('/cart-product/remove') }}/"+rowId,
               dataType:'json',
               success:function(data){
                 cart();

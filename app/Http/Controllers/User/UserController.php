@@ -9,10 +9,21 @@ use App\Models\User;
 use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
-{
+{    
+    /**
+     * index() load Home page
+     *
+     * @return void
+     */
     public function index(){
         return view('user.home');
-    }
+    }    
+    /**
+     * ProfileUpdate() profile data update 
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function ProfileUpdate(Request $request)
     {
         $data = User::find(Auth::user()->id);
@@ -46,11 +57,22 @@ class UserController extends Controller
             //return Redirect()->back()->with($notification);
             return redirect()->back()->with($notification);
         }
-    }
+    }    
+    /**
+     * PassChange() change password page load
+     *
+     * @return void
+     */
     public function PassChange()
     {
         return view('user.change-password');
-    }
+    }    
+    /**
+     * updatePass() update password
+     *
+     * @param  mixed $request
+     * @return void
+     */
     public function updatePass(Request $request)
     {
         $request->validate([

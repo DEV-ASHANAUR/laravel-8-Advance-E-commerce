@@ -11,7 +11,12 @@ use App\Models\Silder;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
-{
+{    
+    /**
+     * index 
+     *
+     * @return void
+     */
     public function index()
     {
         $category = Category::orderBy('category_name_en','ASC')->get();
@@ -29,7 +34,14 @@ class IndexController extends Controller
         $skip_brand_0 = Brand::skip(8)->first(); 
         $skip_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_0->id)->orderBy('id','DESC')->get(); 
         return view('fontend.index',compact('category','sliders','categories','products','featured','hot_deals','special_offer','special_offer2','special_deals','special_deals2','skip_category_0','skip_product_0','skip_product_1','skip_brand_0'));
-    }
+    }    
+    /**
+     * singleProduct()
+     *
+     * @param  mixed $id
+     * @param  mixed $slug
+     * @return void
+     */
     public function singleProduct($id,$slug)
     {
         $products = Product::find($id);
@@ -48,28 +60,54 @@ class IndexController extends Controller
         $realtedProduct = Product::where('status',1)->where('category_id',$products->category_id)->where('id','!=',$products->id)->orderBy('id','DESC')->get();
         $multi_img = Multiimg::where('product_id',$id)->get();
         return view('fontend.single-product',compact('products','multi_img','realtedProduct','product_color_en','product_color_bn','product_size_en','product_size_bn'));
-    }
+    }    
+    /**
+     * tagWiseProduct()
+     *
+     * @param  mixed $tag
+     * @return void
+     */
     public function tagWiseProduct($tag)
     {
         $products = Product::where('status',1)->where('product_tag_en',$tag)->orWhere('product_tag_bn',$tag)->orderBy('id','DESC')->paginate(12);
         $categories = Category::orderBy('category_name_en','ASC')->get();
         // dd($products);
         return view('fontend.tag-wise-product',compact('products','categories'));
-    }
+    }    
+    /**
+     * subsubcategory()
+     *
+     * @param  mixed $id
+     * @param  mixed $slug
+     * @return void
+     */
     public function subsubcategory($id,$slug)
     {
         $products = Product::where('status',1)->where('subsubcategory_id',$id)->orderBy('id','DESC')->paginate(12);
         $categories = Category::orderBy('category_name_en','ASC')->get();
         // dd($products);
         return view('fontend.tag-wise-product',compact('products','categories'));
-    }
+    }    
+    /**
+     * subcategory() 
+     *
+     * @param  mixed $id
+     * @param  mixed $slug
+     * @return void
+     */
     public function subcategory($id,$slug)
     {
         $products = Product::where('status',1)->where('subcategory_id',$id)->orderBy('id','DESC')->paginate(12);
         $categories = Category::orderBy('category_name_en','ASC')->get();
         // dd($products);
         return view('fontend.tag-wise-product',compact('products','categories'));
-    }
+    }    
+    /**
+     * productViewAjax() load product by ajax into modal
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function productViewAjax($id)
     {
         $products = Product::with('category','brand')->find($id);

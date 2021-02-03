@@ -2,9 +2,9 @@
 @section('content')
 @section('title')
 @if (session()->get('language') == 'bangla')
-	উইস লিস্ট
+	কার্ট পেইজ
 @else
-	Wishlist
+	Cart Page
 @endif
 @endsection
 @php
