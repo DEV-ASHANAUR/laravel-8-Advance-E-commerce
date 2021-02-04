@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Fontend\LanguageController;
 use App\Http\Controllers\Fontend\CartController;
 use App\Http\Controllers\User\WishlistController;
@@ -80,6 +81,10 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('active-product/{id}',[ProductController::class,'active'])->name('product.active');
     Route::get('disable-product/{id}',[ProductController::class,'disable'])->name('product.disable');
     Route::get('delete-product/{id}',[ProductController::class,'delete'])->name('product.delete');
+    // =================================coupon=====================
+    Route::get('coupon',[CouponController::class,'index'])->name('coupon');
+    Route::post('coupon/store',[CouponController::class,'store'])->name('coupon.store');
+    Route::get('coupon/delete/{id}',[CouponController::class,'delete'])->name('coupon.delete');
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){

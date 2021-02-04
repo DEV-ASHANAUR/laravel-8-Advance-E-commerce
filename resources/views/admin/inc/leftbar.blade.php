@@ -60,6 +60,14 @@
           <li class="nav-item"><a href="{{ route('product.manage') }}" class="nav-link @yield('manage-product')">Manage Product</a></li>
         </ul>
         {{-- product end --}}
+        <!-- slider start -->
+        <a href="{{ route('coupon') }}" class="sl-menu-link @yield('coupon')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
+            <span class="menu-item-label">Coupon</span>
+          </div><!-- menu-item -->
+        </a>
+        <!-- slider end -->
       </div><!-- sl-sideleft-menu -->
       <br>
     </div>
