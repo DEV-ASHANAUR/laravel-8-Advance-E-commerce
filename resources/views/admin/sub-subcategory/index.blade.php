@@ -132,6 +132,6 @@
         });
 
       $('#selectForm').parsley();
-    })
+    });
   </script>
 @endsection

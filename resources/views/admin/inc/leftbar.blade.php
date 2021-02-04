@@ -60,14 +60,30 @@
           <li class="nav-item"><a href="{{ route('product.manage') }}" class="nav-link @yield('manage-product')">Manage Product</a></li>
         </ul>
         {{-- product end --}}
-        <!-- slider start -->
+        <!-- coupon start -->
         <a href="{{ route('coupon') }}" class="sl-menu-link @yield('coupon')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
             <span class="menu-item-label">Coupon</span>
           </div><!-- menu-item -->
         </a>
-        <!-- slider end -->
+        <!-- coupon end -->
+        {{-- shippingArea start --}}
+        <a href="#" class="sl-menu-link @yield('shippingArea')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-list-outline tx-20"></i>
+            <span class="menu-item-label">Shipping Area</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link  active show-sub -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('division') }}" class="nav-link @yield('add-division')">Add Division</a></li>
+
+          <li class="nav-item"><a href="{{ route('district') }}" class="nav-link @yield('add-district')">Add District</a></li>
+
+          <li class="nav-item"><a href="{{ route('state') }}" class="nav-link @yield('add-state')">Add State</a></li>
+        </ul>
+        {{-- shippingArea end --}}
       </div><!-- sl-sideleft-menu -->
       <br>
     </div>
