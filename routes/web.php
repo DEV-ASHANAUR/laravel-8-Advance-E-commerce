@@ -117,3 +117,7 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('cart-product',[CartController::class,'cartProduct']);
     // cart-product/remove
     Route::get('cart-product/remove/{rowId}',[CartController::class,'cartRemove']);
+    //cart decrement
+    Route::get('cart-decrement/{rowId}',[CartController::class,'cartDecrement']);
+    //cart  increment
+    Route::get('cart-increment/{rowId}',[CartController::class,'cartIncrement']);

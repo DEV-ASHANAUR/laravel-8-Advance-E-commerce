@@ -912,21 +912,15 @@
                         <span class="product-color">Size:<span>${value.options.size}</span></span>
                         </div>
                       </td>
-                      <td class="cart-product-quantity">
-                        <div class="quant-input">
-                        <div class="arrows">
-                          <div class="arrow plus gradient">
-                          <span class="ir"
-                            ><i class="icon fa fa-sort-asc"></i
-                          ></span>
-                          </div>
-                          <div class="arrow minus gradient">
-                          <span class="ir"
-                            ><i class="icon fa fa-sort-desc"></i
-                          ></span>
-                          </div>
-                        </div>
-                        <input type="text" value="${value.qty}" />
+                      <td>
+                        <div>
+                          ${value.qty > 1
+                          ?`<button type="submit" id="${value.rowId}" onclick="cartDecrement(this.id)" class="btn btn-sm btn-danger">-</button>`
+                          :`<button type="submit" disabled class="btn btn-sm btn-danger">-</button>`
+                          }
+                          <input type="text" value="${value.qty}" disabled min="1" max="10" style="width:25px;height:29px;border:2px solid #ddd;" />
+
+                          <button type="submit" id="${value.rowId}" onclick="cartIncrement(this.id)" class="btn btn-sm btn-success">+</button>
                         </div>
                       </td>
                       <td class="cart-product-sub-total">
@@ -977,6 +971,31 @@
             });
           });
         });
+        // =====================cart decrement=================
+        function cartDecrement(rowId){
+          // alert(rowId);
+          $.ajax({
+              type: 'GET',
+              url:"{{ url('/cart-decrement') }}/"+rowId,
+              dataType:'json',
+              success:function(data){
+                cart();
+                miniCart();
+              }
+          });
+        }
+        //======================cart increment=================
+        function cartIncrement(rowId){
+          $.ajax({
+            type: 'GET',
+            url:"{{ url('/cart-increment') }}/"+rowId,
+            dataType:'json',
+            success:function(data){
+                cart();
+                miniCart();
+            }
+          });
+        }
     </script>
 </body>
 
