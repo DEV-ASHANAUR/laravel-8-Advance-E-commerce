@@ -48,7 +48,7 @@
                               <a href="{{ route('slider.disable',$item->id) }}" class="btn btn-sm btn-danger" title="Press For Disable"><i class="fa fa-check-circle"></i></a> 
                             @endif --}}
 
-                            <a href="{{ route('slider.edit',$item->id) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="{{ route('coupon.edit',$item->id) }}" class="btn btn-sm btn-primary" title="Edit"><i class="fa fa-edit"></i></a>
 
                             <a href="{{ route('coupon.delete',$item->id) }}" id="delete" class="btn btn-sm btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                           </td>
