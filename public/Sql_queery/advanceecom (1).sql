@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2021 at 08:26 PM
+-- Generation Time: Feb 04, 2021 at 05:04 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -89,6 +89,30 @@ INSERT INTO `categories` (`id`, `category_name_en`, `category_name_bn`, `categor
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `coupon_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `coupon_discount` int(11) NOT NULL,
+  `coupon_validity` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `coupons`
+--
+
+INSERT INTO `coupons` (`id`, `coupon_name`, `coupon_discount`, `coupon_validity`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'NEW YEAR', 30, '2021-02-13', 1, '2021-02-04 07:08:45', '2021-02-04 07:10:22'),
+(3, 'NEW YEAR OFFER', 25, '2021-02-20', 1, '2021-02-04 07:10:06', '2021-02-04 07:10:06');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `failed_jobs`
 --
 
@@ -129,7 +153,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2021_01_26_083719_create_subsubcategories_table', 1),
 (9, '2021_01_27_080154_create_products_table', 1),
 (10, '2021_01_27_082253_create_multiimgs_table', 1),
-(11, '2021_01_28_174157_create_silders_table', 1);
+(11, '2021_01_28_174157_create_silders_table', 1),
+(12, '2021_02_03_044606_create_wishlists_table', 2),
+(13, '2021_02_04_091120_create_coupons_table', 3),
+(14, '2021_02_04_135746_create_ship_divisions_table', 4),
+(15, '2021_02_04_135920_create_ship_districts_table', 4),
+(16, '2021_02_04_135947_create_ship_states_table', 4);
 
 -- --------------------------------------------------------
 
@@ -259,6 +288,76 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', NULL, NULL),
 (2, 'User', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ship_districts`
+--
+
+CREATE TABLE `ship_districts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `division_id` bigint(20) UNSIGNED NOT NULL,
+  `district_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ship_districts`
+--
+
+INSERT INTO `ship_districts` (`id`, `division_id`, `district_name`, `created_at`, `updated_at`) VALUES
+(3, 1, 'rajbari', '2021-02-04 09:07:14', '2021-02-04 09:07:14'),
+(4, 3, 'potuyakhali', '2021-02-04 09:07:38', '2021-02-04 09:07:38'),
+(5, 1, 'manikgonj', '2021-02-04 09:08:29', '2021-02-04 09:08:29'),
+(6, 1, 'faridpur', '2021-02-04 09:08:45', '2021-02-04 09:08:45'),
+(7, 1, 'tangail', '2021-02-04 09:09:01', '2021-02-04 09:09:01');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ship_divisions`
+--
+
+CREATE TABLE `ship_divisions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `division_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ship_divisions`
+--
+
+INSERT INTO `ship_divisions` (`id`, `division_name`, `created_at`, `updated_at`) VALUES
+(1, 'dhaka', '2021-02-04 08:16:37', '2021-02-04 08:16:37'),
+(3, 'barisal', '2021-02-04 09:02:09', '2021-02-04 09:02:09'),
+(4, 'rangpur', '2021-02-04 09:02:14', '2021-02-04 09:02:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ship_states`
+--
+
+CREATE TABLE `ship_states` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `division_id` bigint(20) UNSIGNED NOT NULL,
+  `district_id` bigint(20) UNSIGNED NOT NULL,
+  `state_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ship_states`
+--
+
+INSERT INTO `ship_states` (`id`, `division_id`, `district_id`, `state_name`, `created_at`, `updated_at`) VALUES
+(1, 1, 6, 'shadarpur', '2021-02-04 09:37:37', '2021-02-04 09:57:20'),
+(3, 1, 3, 'baliyakandi', '2021-02-04 09:57:38', '2021-02-04 09:57:38');
 
 -- --------------------------------------------------------
 
@@ -403,7 +502,30 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `role_id`, `email`, `phone`, `image`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Md.Ashanur Rahman', 1, 'ashanour009@gmail.com', '01866936562', 'uploads/admin_images/20210129152423.jpg', NULL, '$2y$10$ooG9vBwuQo4ErekIF57jWOngcZCzFwvJF7dMSguThzOKhPq8Omp5u', '7ooZ6QgxXXYf0LL3byOW4dD0YOCZoRaC0iyFl1BDpQJWb3dp4bpxPzhXDBf0', '2021-01-29 09:20:06', '2021-01-29 09:24:23');
+(1, 'Md.Ashanur Rahman', 1, 'ashanour009@gmail.com', '01866936562', 'uploads/admin_images/20210129152423.jpg', NULL, '$2y$10$ooG9vBwuQo4ErekIF57jWOngcZCzFwvJF7dMSguThzOKhPq8Omp5u', 'OFnqTSNNVSvvtwpSr1h5TrreQdlKMxNwH2UuEaiL4u8vln85q4HT9p1vDH37', '2021-01-29 09:20:06', '2021-01-29 09:24:23'),
+(2, 'Md.Ashanaur Rahman', 2, 'nasim009@gmail.com', '01866936562', 'uploads/users_images/20210203052821.jpg', NULL, '$2y$10$sqVPBva7Uoz/bIr4n/LKkOoElwp8CJ7ywIl6u4mtEs07sIVVU69V6', 'iJmulqwBQPR1oNLReMSNf8MhbiLBiVV2hr4vliyIyRi1elbTo0bCLk2LZrSf', '2021-02-02 23:21:41', '2021-02-02 23:28:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlists`
+--
+
+CREATE TABLE `wishlists` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `wishlists`
+--
+
+INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES
+(13, 2, 6, '2021-02-03 03:17:29', NULL),
+(14, 2, 2, '2021-02-03 07:58:52', NULL);
 
 --
 -- Indexes for dumped tables
@@ -419,6 +541,12 @@ ALTER TABLE `brands`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -459,6 +587,24 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ship_districts`
+--
+ALTER TABLE `ship_districts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ship_divisions`
+--
+ALTER TABLE `ship_divisions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ship_states`
+--
+ALTER TABLE `ship_states`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `silders`
 --
 ALTER TABLE `silders`
@@ -484,6 +630,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -500,6 +652,12 @@ ALTER TABLE `categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -509,7 +667,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `multiimgs`
@@ -528,6 +686,24 @@ ALTER TABLE `products`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `ship_districts`
+--
+ALTER TABLE `ship_districts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `ship_divisions`
+--
+ALTER TABLE `ship_divisions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `ship_states`
+--
+ALTER TABLE `ship_states`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `silders`
@@ -551,7 +727,13 @@ ALTER TABLE `subsubcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

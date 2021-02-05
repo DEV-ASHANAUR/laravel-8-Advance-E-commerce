@@ -997,6 +997,57 @@
           });
         }
     </script>
+    {{-- =====================applyCoupon================= --}}
+    <script>
+      function applyCoupon()
+      {
+        var coupon = $('#coupon_name').val();
+        if(!coupon == ''){
+            $.ajax({
+              type: 'POST',
+              url:"{{ url('/coupon-apply') }}/",
+              dataType:'json',
+              data:{coupon:coupon},
+              success:function(data){
+                console.log(data);
+                var toastMixin = Swal.mixin({
+                    toast: true,
+                    icon: 'success',
+                    position: 'top-right',
+                    showConfirmButton: false,
+                    timer: 3000,
+                  });
+                  
+                  if($.isEmptyObject(data.error)){
+                    toastMixin.fire({
+                      animation: true,
+                      title: data.success
+                    });
+                  }else{
+                    toastMixin.fire({
+                      title: data.error,
+                      icon: 'error'
+                    });
+                  }
+                  $('#coupon_name').val("");
+              }
+          });
+        }else{
+          var toastMixin = Swal.mixin({
+              toast: true,
+              icon: 'success',
+              position: 'top-right',
+              showConfirmButton: false,
+              timer: 3000,
+            });
+            toastMixin.fire({
+                title: 'The Coupon Input field is Required',
+                icon: 'error'
+              });
+        }
+      }
+    </script>
+
 </body>
 
 </html>
