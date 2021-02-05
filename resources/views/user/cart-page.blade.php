@@ -82,7 +82,10 @@
 		  <!-- /.estimate-ship-tax -->
 
 		  <div class="col-md-6 col-sm-12 estimate-ship-tax">
-			<table class="table">
+			 @if (Session::has('coupon'))
+				 
+			 @else
+			<table class="table" id="couponField">
 			  <thead>
 				<tr>
 				  <th>
@@ -111,24 +114,32 @@
 				</tr>
 			  </tbody>
 			  <!-- /tbody -->
-			</table>
+			</table> 
+			 @endif 
+			
 			<!-- /table -->
 		  </div>
 		  <!-- /.estimate-ship-tax -->
 
 		  <div class="col-md-6 col-sm-12 cart-shopping-total">
 			<table class="table">
-			  <thead>
-				<tr>
+			  <thead id="couponcalField">
+				{{-- <tr>
 				  <th>
 					<div class="cart-sub-total">
 					  Subtotal<span class="inner-left-md">$600.00</span>
+					</div>
+					<div class="cart-sub-total">
+						Coupon<span class="inner-left-md">$600.00</span>
+					</div>
+					<div class="cart-sub-total">
+						Discount<span class="inner-left-md">$600.00</span>
 					</div>
 					<div class="cart-grand-total">
 					  Grand Total<span class="inner-left-md">$600.00</span>
 					</div>
 				  </th>
-				</tr>
+				</tr> --}}
 			  </thead>
 			  <!-- /thead -->
 			  <tbody>
@@ -141,7 +152,6 @@
 					  >
 						PROCCED TO CHEKOUT
 					  </button>
-					  <span class="">Checkout with multiples address!</span>
 					</div>
 				  </td>
 				</tr>

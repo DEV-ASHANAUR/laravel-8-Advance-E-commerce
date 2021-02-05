@@ -20,6 +20,9 @@ class CartController extends Controller
      */
     public function addToCart(Request $request,$id)
     {
+        if(Session::has('coupon')){
+            Session::forget('coupon');
+        }
         $product = Product::findOrFail($id);
         if($product->discount_price == NULL){
             Cart::add([
@@ -74,6 +77,9 @@ class CartController extends Controller
     public function miniCartRemove($rowId)
     {
         Cart::remove($rowId);
+        if(Session::has('coupon')){
+            Session::forget('coupon');
+        }
         return response()->json([
             'status_code' => 200,
             'message' => 'Product Remove From Cart'
@@ -114,6 +120,9 @@ class CartController extends Controller
     public function cartRemove($rowId)
     {
         Cart::remove($rowId);
+        if(Session::has('coupon')){
+            Session::forget('coupon');
+        }
         return response()->json([
             'success' => 'Product Remove From Cart'
         ]);
@@ -126,6 +135,16 @@ class CartController extends Controller
      */
     public function cartIncrement($rowId)
     {
+        if(Session::has('coupon')){
+            $coupon_name = Session::get('coupon')['coupon_name'];
+            $coupon = Coupon::where('coupon_name',$coupon_name)->first();
+            Session::put('coupon',[
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round(Cart::total() * $coupon->coupon_discount/100),
+                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount/100),
+            ]);
+        }
         $row = Cart::get($rowId);
         Cart::update($rowId,$row->qty + 1);
         return response()->json('increment');
@@ -138,6 +157,16 @@ class CartController extends Controller
      */
     public function cartDecrement($rowId)
     {
+        if(Session::has('coupon')){
+            $coupon_name = Session::get('coupon')['coupon_name'];
+            $coupon = Coupon::where('coupon_name',$coupon_name)->first();
+            Session::put('coupon',[
+                'coupon_name' => $coupon->coupon_name,
+                'coupon_discount' => $coupon->coupon_discount,
+                'discount_amount' => round(Cart::total() * $coupon->coupon_discount/100),
+                'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount/100),
+            ]);
+        }
         $row = Cart::get($rowId);
         Cart::update($rowId,$row->qty - 1);
         return response()->json('decrement');
@@ -157,5 +186,26 @@ class CartController extends Controller
         }else{
             return response()->json(['error' => 'Invaild Coupon']);
         }
+    }
+    public function couponCalculation()
+    {
+        if(Session::has('coupon')){
+            return response()->json([
+                'subtotal' => Cart::total(),
+                'coupon_name' => session()->get('coupon')['coupon_name'],
+                'coupon_discount' => session()->get('coupon')['coupon_discount'],
+                'discount_amount' => session()->get('coupon')['discount_amount'],
+                'total_amount' => session()->get('coupon')['total_amount'],
+            ]);
+        }else{
+            return response()->json([
+                'total' => Cart::total(),
+            ]);
+        }
+    }
+    public function couponRemove()
+    {
+        Session::forget('coupon');
+        return response()->json(['success'=>'Coupon Remove Success']);
     }
 }

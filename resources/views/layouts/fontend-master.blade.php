@@ -742,7 +742,10 @@
               url:'/minicart/product-remove/'+rowid,
               dataType:'json',
               success:function(data){
+                $('#couponField').show();
                 miniCart();
+                couponCalculation();
+                cart();
                 var toastMixin = Swal.mixin({
                   toast: true,
                   icon: 'success',
@@ -884,12 +887,10 @@
           $.ajax({
             type: 'GET',
             url: "{{ url('/cart-product') }}",
-            
             dataType:'json',
             success:function(data){
               console.log(data);
               var cart = "";
-
               $.each(data.carts,function(key,value){
                 cart +=`<tr>
                       <td class="romove-item">
@@ -946,6 +947,8 @@
               url:"{{ url('/cart-product/remove') }}/"+rowId,
               dataType:'json',
               success:function(data){
+                $('#couponField').show();
+                couponCalculation();
                 cart();
                 miniCart();
                 var toastMixin = Swal.mixin({
@@ -979,6 +982,7 @@
               url:"{{ url('/cart-decrement') }}/"+rowId,
               dataType:'json',
               success:function(data){
+                couponCalculation();
                 cart();
                 miniCart();
               }
@@ -991,8 +995,9 @@
             url:"{{ url('/cart-increment') }}/"+rowId,
             dataType:'json',
             success:function(data){
-                cart();
-                miniCart();
+              couponCalculation();
+              cart();
+              miniCart();
             }
           });
         }
@@ -1009,7 +1014,9 @@
               dataType:'json',
               data:{coupon:coupon},
               success:function(data){
-                console.log(data);
+                // console.log(data);
+                couponCalculation();
+                $('#couponField').hide();
                 var toastMixin = Swal.mixin({
                     toast: true,
                     icon: 'success',
@@ -1045,6 +1052,85 @@
                 icon: 'error'
               });
         }
+      }
+    </script>
+    <script>
+      function couponCalculation(){
+        $.ajax({
+            type: 'GET',
+            url:"{{ url('/coupon-calculation') }}/",
+            dataType:'json',
+            success:function(data){
+              if(data.total){
+                $('#couponcalField').html(`
+                <tr>
+                  <th>
+                  <div class="cart-sub-total">
+                    Subtotal<span class="inner-left-md">$${data.total}</span>
+                  </div>
+                  <div class="cart-grand-total">
+                    Grand Total<span class="inner-left-md">$${data.total}</span>
+                  </div>
+                  </th>
+                </tr>
+                `);
+              }else{
+                $('#couponcalField').html(`
+                <tr>
+                  <th>
+                  <div class="cart-sub-total">
+                    Subtotal:<span class="inner-left-md">$${data.subtotal}</span>
+                  </div>
+                  <div class="cart-sub-total">
+                   Coupon:<span class="inner-left-md">${data.coupon_name} (${data.coupon_discount}%)</span>
+                   <button type="submit" onclick="couponRemove()"><i class="fa fa-times"></i></button>
+                  </div>
+                  <div class="cart-sub-total">
+                    Discount:<span class="inner-left-md">$${data.discount_amount}</span>
+                  </div>
+                  <div class="cart-grand-total">
+                    Grand Total:<span class="inner-left-md">$${data.total_amount}</span>
+                  </div>
+                  </th>
+                </tr>
+                `);
+              }
+            }
+        });
+      }
+      couponCalculation();
+    </script>
+    <script>
+      function couponRemove(){
+        $.ajax({
+            type: 'GET',
+            url:"{{ url('/coupon-remove') }}/",
+            dataType:'json',
+            success:function(data){
+              // console.log(data);
+              couponCalculation();
+              $('#couponField').show();
+              var toastMixin = Swal.mixin({
+                toast: true,
+                icon: 'success',
+                position: 'top-right',
+                showConfirmButton: false,
+                timer: 3000,
+              });
+              
+              if($.isEmptyObject(data.error)){
+                toastMixin.fire({
+                  animation: true,
+                  title: data.success
+                });
+              }else{
+                toastMixin.fire({
+                  title: data.error,
+                  icon: 'error'
+                });
+              }
+            }
+        });
       }
     </script>
 
