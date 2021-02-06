@@ -14,6 +14,7 @@ use App\Http\Controllers\Fontend\LanguageController;
 use App\Http\Controllers\Fontend\CartController;
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CartPageController;
+use App\Http\Controllers\User\CheckoutContrller;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -155,3 +156,9 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('coupon-calculation',[CartController::class,'couponCalculation']);
     //coupon-remove
     Route::get('coupon-remove',[CartController::class,'couponRemove']);
+    //checkout
+    Route::get('user/checkout',[CartController::class,'checkoutCreate'])->name('checkout');
+    //get ship district
+    Route::get('/get-district', [CheckoutContrller::class,'getDistrict'])->name('get-ship-district');
+
+    Route::get('/get-state', [CheckoutContrller::class,'getState'])->name('get-ship-state');

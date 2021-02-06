@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Fontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Coupon;
 use App\Models\Product;
+use App\Models\ShipDivision;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Cart;
@@ -135,6 +137,9 @@ class CartController extends Controller
      */
     public function cartIncrement($rowId)
     {
+        
+        $row = Cart::get($rowId);
+        Cart::update($rowId,$row->qty + 1);
         if(Session::has('coupon')){
             $coupon_name = Session::get('coupon')['coupon_name'];
             $coupon = Coupon::where('coupon_name',$coupon_name)->first();
@@ -145,8 +150,6 @@ class CartController extends Controller
                 'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount/100),
             ]);
         }
-        $row = Cart::get($rowId);
-        Cart::update($rowId,$row->qty + 1);
         return response()->json('increment');
     }    
     /**
@@ -157,6 +160,9 @@ class CartController extends Controller
      */
     public function cartDecrement($rowId)
     {
+        
+        $row = Cart::get($rowId);
+        Cart::update($rowId,$row->qty - 1);
         if(Session::has('coupon')){
             $coupon_name = Session::get('coupon')['coupon_name'];
             $coupon = Coupon::where('coupon_name',$coupon_name)->first();
@@ -167,8 +173,6 @@ class CartController extends Controller
                 'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount/100),
             ]);
         }
-        $row = Cart::get($rowId);
-        Cart::update($rowId,$row->qty - 1);
         return response()->json('decrement');
     }
     // ============================couponApply==================
@@ -207,5 +211,30 @@ class CartController extends Controller
     {
         Session::forget('coupon');
         return response()->json(['success'=>'Coupon Remove Success']);
+    }
+    // =====================checkout=====================
+    public function checkoutCreate()
+    {
+        if(Auth::check()){
+            if(Cart::total() > 0){
+                $carts = Cart::content();
+                $cartQty = Cart::count();
+                $cartTotal = Cart::total();
+                $division = ShipDivision::latest()->get();
+                return view('fontend.checkout',compact('carts','cartQty','cartTotal','division'));
+            }else{
+                $notification=array(
+                    'message'=>'Your Cart is Empty.Please Shop First!',
+                    'alert-type'=>'error'
+                );
+                return redirect()->to('/')->with($notification);
+            }
+        }else{
+            $notification=array(
+                'message'=>'You Need To Checkout First',
+                'alert-type'=>'erroe'
+            );
+            return redirect()->route('login')->with($notification);
+        }
     }
 }
