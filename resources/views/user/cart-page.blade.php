@@ -54,7 +54,7 @@
 					  <div class="shopping-cart-btn">
 						<span class="">
 						  <a
-							href="#"
+							href="{{ url('/') }}"
 							class="btn btn-upper btn-primary outer-left-xs"
 							>Continue Shopping</a
 						  >

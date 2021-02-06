@@ -33,6 +33,8 @@
     <div class="container">
       <div class="checkout-box">
         <div class="row">
+          <form method="POST" action="{{ route('checkout.store') }}">
+            @csrf
           <div class="col-md-8">
             <div class="panel-group checkout-steps" id="accordion">
               <!-- checkout-step-01  -->
@@ -49,9 +51,7 @@
                   <!-- panel-body  -->
                   <div class="panel-body">
                     <div class="row">
-                        <form class="register-form" role="form">
                             <div class="col-md-6 col-sm-6 already-registered-login">
-                            
                                 <div class="form-group">
                                     <label class="info-title" for="name"
                                     >Your Name <span>*</span></label
@@ -62,6 +62,7 @@
                                     class="form-control unicase-form-control text-input"
                                     id="name"
                                     placeholder="Enter Your Name"
+                                    data-validation="required"
                                     />
                                 </div>
                                 <div class="form-group">
@@ -74,8 +75,9 @@
                                     type="email"
                                     class="form-control unicase-form-control text-input"
                                     id="email"
-                                    name="shipping_name"
+                                    name="shipping_email"
                                     placeholder="Enter Email"
+                                    data-validation="required"
                                     />
                                 </div>
                                 <div class="form-group">
@@ -88,8 +90,9 @@
                                     type="number"
                                     class="form-control unicase-form-control text-input"
                                     id="phone"
-                                    name="shipping_name"
+                                    name="shipping_phone"
                                     placeholder="Enter Phone Number"
+                                    data-validation="required"
                                     />
                                 </div>
                                 <div class="form-group">
@@ -98,7 +101,8 @@
                                     for="notes"
                                     >Order Notes <span>*</span></label
                                     >
-                                    <textarea name="notes" class="form-control unicase-form-control text-input" id="notes" placeholder="Write order Notes"></textarea>
+                                    <textarea name="notes" class="form-control unicase-form-control text-input" id="notes" data-validation="required" placeholder="Write order Notes"></textarea>
+                                    
                                 </div>
                             </div>  
                             <!-- already-registered-login -->
@@ -107,8 +111,8 @@
                                     <label class="info-title" for="division_id"
                                     >Select Division <span>*</span></label
                                     >
-                                    <select name="division_name" class="form-control unicase-form-control" id="division_id">
-                                        <option>Select One</option>
+                                    <select name="division_id" class="form-control unicase-form-control" id="division_id" data-validation="required" >
+                                        <option value="">Select One</option>
                                         @foreach ($division as $div)
                                             <option value="{{ $div->id }}">{{ ucwords($div->division_name) }}</option>
                                         @endforeach
@@ -119,8 +123,8 @@
                                     <label class="info-title" for="district_id"
                                     >Select District <span>*</span></label
                                     >
-                                    <select name="district_name" class="form-control unicase-form-control" id="district_id">
-                                        <option>Select One</option>
+                                    <select name="district_id" class="form-control unicase-form-control" id="district_id" data-validation="required" >
+                                        <option value="">Select One</option>
                                     </select>
                                     
                                 </div>
@@ -128,9 +132,8 @@
                                     <label class="info-title" for="state_id"
                                     >Select State <span>*</span></label
                                     >
-                                    <select name="state_name" class="form-control unicase-form-control" id="state_id">
-                                        <option>Select One</option>
-                                        <option value="">2</option>
+                                    <select name="state_id" class="form-control unicase-form-control" id="state_id" data-validation="required" >
+                                        <option value="">Select One</option>
                                     </select>
                                     
                                 </div>
@@ -146,13 +149,12 @@
                                     class="form-control unicase-form-control text-input resize-none"
                                     id="post_code"
                                     placeholder="Enter Post Code"
+                                    data-validation="required"
                                     />
                                 </div>
-                                <button type="submit" class="btn-upper btn btn-primary checkout-page-button">
-                                    Submit
-                                </button>
+                                
                             </div>
-                        </form>
+                        
                       <!-- already-registered-login -->
                     </div>
                   </div>
@@ -174,7 +176,7 @@
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h4 class="unicase-checkout-title">
-                      Your Checkout Progress
+                      Your Cart item
                     </h4>
                   </div>
                   <div class="">
@@ -210,6 +212,41 @@
             </div>
             <!-- checkout-progress-sidebar -->
           </div>
+          <div class="col-md-4">
+            <!-- checkout-progress-sidebar -->
+            <div class="checkout-progress-sidebar">
+              <div class="panel-group">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="unicase-checkout-title">
+                      Choose Payment Method
+                    </h4>
+                  </div>
+                  <div class="">
+                    <ul class="nav nav-checkout-progress list-unstyled">
+                        <li>
+                          <input type="radio" name="payment_method" value="stripe" data-validation="required" id="stripe" />
+                          <label for="stripe">Stripe</label>
+                        </li>
+                        <li>
+                          <input type="radio" name="payment_method" data-validation="required" value="card" id="card" />
+                          <label for="card">Card</label>
+                        </li>
+                        <li>
+                          <input type="radio" name="payment_method" data-validation="required" value="handcash" id="handcash" />
+                          <label for="handcash">Handcash</label>
+                        </li>
+                        <button type="submit" class="btn-upper btn btn-primary checkout-page-button pull-right">
+                          payment step
+                      </button>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- checkout-progress-sidebar -->
+          </div>
+          </form>
         </div>
         <!-- /.row -->
       </div>
@@ -219,7 +256,7 @@
 @endsection
 
 @section('script')
-<script>
+  <script>
     $(document).ready(function(){
       $(document).on('change','#division_id',function(){
         var division_id = $(this).val();
@@ -260,4 +297,77 @@
       });
     });
   </script>
+  {{-- <script>
+    $(document).ready(function () {
+      $('#Myform').validate({
+        rules: {
+          shipping_name: {
+            required: true,
+          },
+          shipping_email: {
+            required: true,
+            email: true,
+          },
+          shipping_phone: {
+            required: true,
+          },
+          post_code: {
+            required: true,
+          },
+          notes: {
+            required: true,
+          },
+          division_id: {
+            required: true,
+          },
+          district_id: {
+            required: true,
+          },
+          state_id: {
+            required: true,
+          }
+          
+        },
+        messages: {
+          shipping_name: {
+            required: "Please Enter name",
+          },
+          shipping_email: {
+            required: "Please enter a email address",
+            shipping_email: "Please enter a vaild email address"
+          },
+          shipping_phone: {
+            required: "Please enter a phone number",
+          },
+          post_code: {
+            required: "Please enter post Code",
+          },
+          notes: {
+            required: "Please enter some notes",
+          },
+          division_id: {
+            required: "Please Select division name",
+          },
+          district_id: {
+            required: "Please Select district name",
+          },
+          state_id: {
+            required: "Please Select state name",
+          },
+          
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.form-group').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+    });
+  </script> --}}
 @endsection

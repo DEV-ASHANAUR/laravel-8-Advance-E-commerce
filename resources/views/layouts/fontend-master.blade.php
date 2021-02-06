@@ -579,6 +579,12 @@
     <script src="{{ asset('fontend') }}/assets/js/aditional/jquery.validate.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/aditional/additional-methods.min.js"></script>
     <script src="{{ asset('fontend') }}/assets/js/aditional/preview.js"></script>
+    <script src="{{ asset('fontend') }}/assets/js/aditional/validator.min.js"></script>
+    <script>
+      $.validate({
+        lang:'en'
+      });
+    </script>
     @yield('script')
     <script>
         @if(Session::has('message'))

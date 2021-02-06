@@ -122,7 +122,12 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('wishlist-product',[WishlistController::class,'wishlistProduct']);
     //wishlist-product/remove
     Route::get('wishlist-product/remove/{id}',[WishlistController::class,'wishlistRemove']);
-    
+    //get ship district
+    Route::get('/get-district', [CheckoutContrller::class,'getDistrict'])->name('get-ship-district');
+    //get ship state
+    Route::get('/get-state', [CheckoutContrller::class,'getState'])->name('get-ship-state');
+    //checkout store
+    Route::post('/payment', [CheckoutContrller::class,'checkoutStore'])->name('checkout.store');
 });
 // =================================Fontend Route==================================
     Route::get('language/english',[LanguageController::class,'english'])->name('english.language');
@@ -158,7 +163,4 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('coupon-remove',[CartController::class,'couponRemove']);
     //checkout
     Route::get('user/checkout',[CartController::class,'checkoutCreate'])->name('checkout');
-    //get ship district
-    Route::get('/get-district', [CheckoutContrller::class,'getDistrict'])->name('get-ship-district');
-
-    Route::get('/get-state', [CheckoutContrller::class,'getState'])->name('get-ship-state');
+    
