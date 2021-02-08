@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ShipDistrict;
 use App\Models\ShipState;
 use Illuminate\Http\Request;
+use Cart;
 
 class CheckoutContrller extends Controller
 {
@@ -33,7 +34,8 @@ class CheckoutContrller extends Controller
         $data['post_code'] = $request->post_code;
 
         if($request->payment_method == 'stripe'){
-            return view('fontend.payment.stripe',compact('data'));
+            $cartTotal = Cart::total();
+            return view('fontend.payment.stripe',compact('data','cartTotal'));
         }elseif($request->payment_method == 'card'){
             return 'card';
         }else{

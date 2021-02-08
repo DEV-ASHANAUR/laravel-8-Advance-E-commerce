@@ -42,6 +42,7 @@
           opacity: .2;
       }
     </style>
+    <script src="https://js.stripe.com/v3/"></script>
 	</head>
   <body class="cnt-home">
 		<!-- ========================= HEADER ======================= -->
