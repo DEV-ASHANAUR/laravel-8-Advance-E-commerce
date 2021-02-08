@@ -23,6 +23,9 @@ class CheckoutContrller extends Controller
     public function checkoutStore(Request $request)
     {
         // dd($request->all());
+        $this->validate($request,[
+            'shipping_phone' => ['required','regex:/(^(\+8801|8801|01|008801))[1|5-9]{1}(\d){8}$/'],
+        ]);
         $data = array();
         $data['shipping_name'] = $request->shipping_name;
         $data['shipping_email'] = $request->shipping_email;

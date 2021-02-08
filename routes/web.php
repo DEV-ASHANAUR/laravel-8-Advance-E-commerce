@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Fontend\LanguageController;
 use App\Http\Controllers\Fontend\CartController;
 use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutContrller;
 /*
@@ -128,6 +129,8 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('/get-state', [CheckoutContrller::class,'getState'])->name('get-ship-state');
     //checkout store
     Route::post('/payment', [CheckoutContrller::class,'checkoutStore'])->name('checkout.store');
+    //stripe payment
+    Route::post('/payment/stripe', [StripeController::class,'store'])->name('stripe.order');
 });
 // =================================Fontend Route==================================
     Route::get('language/english',[LanguageController::class,'english'])->name('english.language');

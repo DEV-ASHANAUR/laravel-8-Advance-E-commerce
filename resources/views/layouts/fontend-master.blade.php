@@ -179,7 +179,7 @@
                                         <span id="subTotal" class='price'>00</span>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <a href="checkout.html" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>	
+                                    <a href="{{ route('cartpage') }}" class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>	
                                 </div><!-- /.cart-total-->
                             </li>
                         </ul><!-- /.dropdown-menu-->

@@ -94,6 +94,7 @@
                                     placeholder="Enter Phone Number"
                                     data-validation="required"
                                     />
+                                    <font class="text-danger">{{ ($errors->has('shipping_phone'))?$errors->first('shipping_phone'):'' }}</font>
                                 </div>
                                 <div class="form-group">
                                     <label

@@ -2,9 +2,9 @@
 @section('content')
 @section('title')
 @if (session()->get('language') == 'bangla')
-	চেকআউট পেইজ
+  Stripe Payment
 @else
-	checkout Page
+	Stripe Payment
 @endif
 @endsection
 @php
@@ -107,7 +107,7 @@
                         Payment Area
                     </h4>
                   </div>
-                  <form action="" method="post" id="payment-form">
+                  <form action="{{ route('stripe.order') }}" method="post" id="payment-form">
                     @csrf
                     <div class="form-row">
                         <label for="card-element">
