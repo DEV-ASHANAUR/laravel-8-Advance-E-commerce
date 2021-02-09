@@ -230,12 +230,12 @@
                           <label for="stripe">Stripe</label>
                         </li>
                         <li>
-                          <input type="radio" name="payment_method" data-validation="required" value="card" id="card" />
-                          <label for="card">Card</label>
+                          <input type="radio" name="payment_method" data-validation="required" value="sslHost" id="sslHost" />
+                          <label for="sslHost">SSL HostedPayment</label>
                         </li>
                         <li>
-                          <input type="radio" name="payment_method" data-validation="required" value="handcash" id="handcash" />
-                          <label for="handcash">Handcash</label>
+                          <input type="radio" name="payment_method" data-validation="required" value="sslEasy" id="sslEasy" />
+                          <label for="sslEasy">SSL EasyPayment</label>
                         </li>
                         <button type="submit" class="btn-upper btn btn-primary checkout-page-button pull-right">
                           payment step

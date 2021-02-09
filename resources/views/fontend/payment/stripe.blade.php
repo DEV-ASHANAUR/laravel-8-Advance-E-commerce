@@ -2,7 +2,7 @@
 @section('content')
 @section('title')
 @if (session()->get('language') == 'bangla')
-  Stripe Payment
+  স্ট্রাইপ পেমেন্ট
 @else
 	Stripe Payment
 @endif

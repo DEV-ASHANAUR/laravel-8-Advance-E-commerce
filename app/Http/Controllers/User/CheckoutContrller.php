@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ShipDistrict;
 use App\Models\ShipState;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Cart;
 
 class CheckoutContrller extends Controller
@@ -35,12 +36,21 @@ class CheckoutContrller extends Controller
         $data['district_id'] = $request->district_id;
         $data['state_id'] = $request->state_id;
         $data['post_code'] = $request->post_code;
+        $cartTotal = Cart::total();
+
+        if(Session::has('coupon')){
+            $amount = session::get('coupon')['total_amount'];
+        }else{
+            $amount = round(Cart::total());
+        }
+        $carts = Cart::content();
 
         if($request->payment_method == 'stripe'){
-            $cartTotal = Cart::total();
             return view('fontend.payment.stripe',compact('data','cartTotal'));
+        }elseif($request->payment_method == 'sslHost'){
+            return view('fontend.payment.hosted-payment',compact('data','cartTotal','amount','carts'));
         }elseif($request->payment_method == 'card'){
-            return 'card';
+            return view('fontend.payment.easy-payment',compact('data','cartTotal','amount','carts'));
         }else{
             return 'handcash';
         }

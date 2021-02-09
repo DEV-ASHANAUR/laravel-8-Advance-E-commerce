@@ -16,6 +16,7 @@ use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutContrller;
+use App\Http\Controllers\SslCommerzPaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,19 @@ Route::get('/',[IndexController::class,'index']);
 
 Auth::routes();
 
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // =================================Admin Route==================================
@@ -166,4 +180,5 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::get('coupon-remove',[CartController::class,'couponRemove']);
     //checkout
     Route::get('user/checkout',[CartController::class,'checkoutCreate'])->name('checkout');
+    
     
