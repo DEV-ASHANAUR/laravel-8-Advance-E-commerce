@@ -1,6 +1,20 @@
 @extends('layouts.fontend-master')
-
 @section('content')
+@section('title')
+@if (session()->get('language') == 'bangla')
+    রিসেট পাসওয়াড
+@else
+    Reset Password
+@endif
+@endsection
+@php
+	function bn_price($str){
+		$en = array(1,2,3,4,5,6,7,8,9,0);
+		$bn = array('১','২','৩','৪','৫','৬','৭','৮','৯','০');
+		$str = str_replace($en,$bn,$str);
+		return $str;
+	}
+@endphp
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
@@ -18,6 +32,11 @@
 			<div class="row">
 				<!-- Sign-in -->			
 <div class="col-md-6 col-sm-6 sign-in">
+	@if (session('status'))
+		<div class="alert alert-success" role="alert">
+			{{ session('status') }}
+		</div>
+	@endif
 	<h4 class="">Reset Password</h4>
 	
     <form class="register-form outer-top-xs" role="form" method="POST" action="{{ route('password.email') }}">

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Fontend\IndexController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\SliderController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\SslCommerzPaymentController;
 Route::get('/',[IndexController::class,'index']);
 
 Auth::routes();
+Route::post('/password', [ResetPasswordController::class, 'reset'])->name('pass.up');
 
 // SSLCOMMERZ Start
 Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
