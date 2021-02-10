@@ -49,7 +49,7 @@ class CheckoutContrller extends Controller
             return view('fontend.payment.stripe',compact('data','cartTotal'));
         }elseif($request->payment_method == 'sslHost'){
             return view('fontend.payment.hosted-payment',compact('data','cartTotal','amount','carts'));
-        }elseif($request->payment_method == 'card'){
+        }elseif($request->payment_method == 'sslEasy'){
             return view('fontend.payment.easy-payment',compact('data','cartTotal','amount','carts'));
         }else{
             return 'handcash';

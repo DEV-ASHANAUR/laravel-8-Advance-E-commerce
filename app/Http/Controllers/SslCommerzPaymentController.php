@@ -134,23 +134,32 @@ class SslCommerzPaymentController extends Controller
         # Here you have to receive all the order data to initate the payment.
         # Lets your oder trnsaction informations are saving in a table called "orders"
         # In orders table order uniq identity is "transaction_id","status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
-
+        $requestData = (array) json_decode($request->cart_json);
         $post_data = array();
-        $post_data['total_amount'] = '10'; # You cant not pay less than 10
+        $post_data['total_amount'] = $requestData['amount']; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
         $post_data['tran_id'] = uniqid(); // tran_id must be unique
 
         # CUSTOMER INFORMATION
-        $post_data['cus_name'] = 'Customer Name';
-        $post_data['cus_email'] = 'customer@mail.com';
+        $post_data['cus_name'] = $requestData['cus_name'];
+        $post_data['cus_email'] = $requestData['cus_email'];
         $post_data['cus_add1'] = 'Customer Address';
         $post_data['cus_add2'] = "";
         $post_data['cus_city'] = "";
         $post_data['cus_state'] = "";
-        $post_data['cus_postcode'] = "";
+        $post_data['cus_postcode'] = $requestData['post_code'];
         $post_data['cus_country'] = "Bangladesh";
-        $post_data['cus_phone'] = '8801XXXXXXXXX';
+        $post_data['cus_phone'] = $requestData['cus_phone'];
         $post_data['cus_fax'] = "";
+        // custom data added by md ashanaur rahman
+        $post_data['user_id'] = Auth::id();
+        $post_data['division_id'] = $requestData['division_id'];
+        $post_data['district_id'] = $requestData['district_id'];
+        $post_data['state_id'] = $requestData['state_id'];
+        $post_data['notes'] = $requestData['notes'];
+        $post_data['payment_method'] = 'SSl Payment';
+        $post_data['invoice_no'] = 'SPM'.mt_rand(10000000,99999999);
+
 
         # SHIPMENT INFORMATION
         $post_data['ship_name'] = "Store Test";
@@ -178,15 +187,43 @@ class SslCommerzPaymentController extends Controller
         $update_product = DB::table('orders')
             ->where('transaction_id', $post_data['tran_id'])
             ->updateOrInsert([
+                'user_id' => $post_data['user_id'],
                 'name' => $post_data['cus_name'],
                 'email' => $post_data['cus_email'],
                 'phone' => $post_data['cus_phone'],
                 'amount' => $post_data['total_amount'],
-                'status' => 'Pending',
-                'address' => $post_data['cus_add1'],
+                'order_number' => $post_data['tran_id'],
+                'division_id' => $post_data['division_id'],
+                'district_id' => $post_data['district_id'],
+                'state_id' => $post_data['state_id'],
+                'notes' => $post_data['notes'],
+                'invoice_no' => $post_data['invoice_no'],
+                'payment_type' => $post_data['payment_method'],
+                'payment_method' => $post_data['payment_method'],
+                'post_code' => $post_data['cus_postcode'],
                 'transaction_id' => $post_data['tran_id'],
-                'currency' => $post_data['currency']
+                'currency' => $post_data['currency'],
+                'order_date' => Carbon::now()->format('d F Y'),
+                'order_month' => Carbon::now()->format('F'),
+                'order_year' => Carbon::now()->format('Y'),
+                'status' => 'Pending',
+                'created_at' => Carbon::now(),
             ]);
+
+            $order_id = \Illuminate\Support\Facades\DB::getPdo()->lastInsertId();
+
+            $carts = Cart::content();
+            foreach ($carts as $cart){
+                OrderItem::insert([
+                    'order_id' => $order_id,
+                    'product_id' => $cart->id,
+                    'color' => $cart->options->color,
+                    'size' => $cart->options->size,
+                    'qty' => $cart->qty,
+                    'price' => $cart->price,
+                    'created_at' => Carbon::now(),
+                ]);
+            }
 
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
@@ -227,7 +264,12 @@ class SslCommerzPaymentController extends Controller
                     ->where('transaction_id', $tran_id)
                     ->update(['status' => 'Processing']);
 
-                echo "<br >Transaction is successfully Completed";
+                // echo "<br >Transaction is successfully Completed";
+                $notification=array(
+                    'message'=>'Your Order place Success',
+                    'alert-type'=>'success'
+                );
+                return redirect()->route('user.dashboard')->with($notification);
             } else {
                 /*
                 That means IPN did not work or IPN URL was not set in your merchant panel and Transation validation failed.
