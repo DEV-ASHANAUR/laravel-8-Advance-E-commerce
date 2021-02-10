@@ -186,7 +186,10 @@ class CartController extends Controller
                 'discount_amount' => round(Cart::total() * $coupon->coupon_discount/100),
                 'total_amount' => round(Cart::total() - Cart::total() * $coupon->coupon_discount/100),
             ]);
-            return response()->json(['success' => 'Coupon applied Success']);
+            return response()->json([
+                'validity' => true,
+                'success' => 'Coupon applied Success'
+                ]);
         }else{
             return response()->json(['error' => 'Invaild Coupon']);
         }

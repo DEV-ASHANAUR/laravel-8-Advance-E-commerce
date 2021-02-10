@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Models\Order;
+use App\Mail\orderMail;
 use Carbon\Carbon;
 use App\Models\OrderItem;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Cart;
 
 class SslCommerzPaymentController extends Controller
@@ -103,6 +107,12 @@ class SslCommerzPaymentController extends Controller
             ]);
             
             $order_id = \Illuminate\Support\Facades\DB::getPdo()->lastInsertId();
+            $invoice = Order::findOrFail($order_id);
+            # OPTIONAL PARAMETERS
+            $post_data['value_a'] = $invoice->invoice_no;
+            $post_data['value_b'] = $request->email;
+            $post_data['value_c'] = "ref003";
+            $post_data['value_d'] = "ref004";  
 
             $carts = Cart::content();
             foreach ($carts as $cart){
@@ -177,10 +187,10 @@ class SslCommerzPaymentController extends Controller
         $post_data['product_profile'] = "physical-goods";
 
         # OPTIONAL PARAMETERS
-        $post_data['value_a'] = "ref001";
-        $post_data['value_b'] = "ref002";
-        $post_data['value_c'] = "ref003";
-        $post_data['value_d'] = "ref004";
+        // $post_data['value_a'] = "ref001";
+        // $post_data['value_b'] = "ref002";
+        // $post_data['value_c'] = "ref003";
+        // $post_data['value_d'] = "ref004";
 
 
         #Before  going to initiate the payment order status need to update as Pending.
@@ -211,6 +221,12 @@ class SslCommerzPaymentController extends Controller
             ]);
 
             $order_id = \Illuminate\Support\Facades\DB::getPdo()->lastInsertId();
+            $invoice = Order::findOrFail($order_id);
+            # OPTIONAL PARAMETERS
+            $post_data['value_a'] = $invoice->invoice_no;
+            $post_data['value_b'] = $requestData['cus_email'];
+            $post_data['value_c'] = "ref003";
+            $post_data['value_d'] = "ref004"; 
 
             $carts = Cart::content();
             foreach ($carts as $cart){
@@ -264,7 +280,22 @@ class SslCommerzPaymentController extends Controller
                     ->where('transaction_id', $tran_id)
                     ->update(['status' => 'Processing']);
 
+                    // send mail start
+                    $data = [
+                        'name' => Auth::user()->name,
+                        'invoice_no' => $request->value_a,
+                        'amount' => $amount,
+                    ];
+
+                Mail::to($request->value_b)->send(new orderMail($data));
+                    // send mail end
                 // echo "<br >Transaction is successfully Completed";
+                if(Session::has('coupon')){
+                    Session::forget('coupon');
+                }
+        
+                Cart::destroy();
+
                 $notification=array(
                     'message'=>'Your Order place Success',
                     'alert-type'=>'success'

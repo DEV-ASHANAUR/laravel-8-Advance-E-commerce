@@ -90,8 +90,8 @@
 
 <!-- create a new account -->
 	
-<</div><!-- /.row -->
-		</div><!-- /.sigin-in-->
+    </div>
+</div><!-- /.sigin-in-->
 		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
         @include('fontend.inc.brand')
 

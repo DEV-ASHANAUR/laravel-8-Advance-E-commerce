@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\orderMail;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Carbon\Carbon;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Cart;
+use Illuminate\Support\Facades\Mail;
 
 class StripeController extends Controller
 {
@@ -64,7 +66,16 @@ class StripeController extends Controller
             'status' => 'pending',
             'created_at' => Carbon::now(),
         ]);
+        $invoice = Order::findOrFail($order_id);    
+        // send mail start
+            $data = [
+                'name' => Auth::user()->name,
+                'invoice_no' => $invoice->invoice_no,
+                'amount' => $amount,
+            ];
 
+            Mail::to($request->email)->send(new orderMail($data));
+        // send mail end
         $carts = Cart::content();
         foreach ($carts as $cart){
             OrderItem::insert([
@@ -77,6 +88,7 @@ class StripeController extends Controller
                 'created_at' => Carbon::now(),
             ]);
         }
+        
 
         if(Session::has('coupon')){
             Session::forget('coupon');

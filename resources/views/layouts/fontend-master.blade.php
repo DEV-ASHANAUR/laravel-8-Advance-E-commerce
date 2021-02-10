@@ -1023,7 +1023,9 @@
               success:function(data){
                 // console.log(data);
                 couponCalculation();
-                $('#couponField').hide();
+                if(data.validity == true){
+                  $('#couponField').hide();
+                }
                 var toastMixin = Swal.mixin({
                     toast: true,
                     icon: 'success',
