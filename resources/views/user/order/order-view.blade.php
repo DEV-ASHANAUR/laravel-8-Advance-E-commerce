@@ -101,13 +101,15 @@
                                 </tfoot>
                             </table>
                         </div>
-                        <div class="form-group">
-                            <label for="return_reason">Order Return Reason</label>
-                            <textarea name="return_reason" id="return_reason" class="form-control" placeholder="Write Order Return Reason" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-success">Submit</button>
-                        </div>
+                        @if ($orders->status == 'delivered')
+                            <div class="form-group">
+                                <label for="return_reason">Order Return Reason</label>
+                                <textarea name="return_reason" id="return_reason" class="form-control" placeholder="Write Order Return Reason" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success">Submit</button>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
