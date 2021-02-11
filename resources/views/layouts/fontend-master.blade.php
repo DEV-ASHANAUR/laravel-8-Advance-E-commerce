@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/toastr.css">
     <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/sweetalert2.min.css">
+    
+    {{-- <link rel="stylesheet" href="{{ asset('datatable') }}/css/plugins.css"> --}}
+    <link rel="stylesheet" href="{{ asset('datatable') }}/css/dataTables.bootstrap4.min.css">
+
 		<!-- Icons/Glyphs -->
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/font-awesome.css">
         <!-- Fonts --> 

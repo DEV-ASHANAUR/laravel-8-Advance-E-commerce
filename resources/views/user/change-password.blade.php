@@ -1,12 +1,18 @@
 @extends('layouts.fontend-master')
-
 @section('content')
+@section('title')
+@if (session()->get('language') == 'bangla')
+পাসওয়ার্ড পরিবর্তন
+@else
+	Change Password
+@endif
+@endsection
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="{{ url('/') }}">Home</a></li>
-				<li class='active'>My Account</li>
+				<li class='active'>Change password</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->

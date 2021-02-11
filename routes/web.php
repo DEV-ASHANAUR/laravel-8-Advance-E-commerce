@@ -17,6 +17,7 @@ use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\User\CheckoutContrller;
+use App\Http\Controllers\User\UserOrderController;
 use App\Http\Controllers\SslCommerzPaymentController;
 /*
 |--------------------------------------------------------------------------
@@ -149,6 +150,9 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     Route::post('/payment', [CheckoutContrller::class,'checkoutStore'])->name('checkout.store');
     //stripe payment
     Route::post('/payment/stripe', [StripeController::class,'store'])->name('stripe.order');
+    // ================================user orders====================================
+    Route::get('all/orders', [UserOrderController::class,'index'])->name('my.order');
+    Route::get('view/orders/{order_id}', [UserOrderController::class,'view'])->name('view.order');
 });
 // =================================Fontend Route==================================
     Route::get('language/english',[LanguageController::class,'english'])->name('english.language');
