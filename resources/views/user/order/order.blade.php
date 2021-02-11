@@ -75,7 +75,7 @@
                                 <td>
                                     <a href="{{ route('view.order',$order->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-eye"></i> View</a>
 
-                                    <a href="{{ url('user/invoice-download/'.$order->id) }}" style="margin-top: 5px;"  class="btn btn-sm btn-danger "><i class="fa fa-download" style="color:white;"></i> Invoice</a>
+                                    <a href="{{ route('invoice.download',$order->id) }}" style="margin-top: 5px;"  class="btn btn-sm btn-danger "><i class="fa fa-download" style="color:white;"></i> Invoice</a>
 
                                 </td>
                             </tr>
