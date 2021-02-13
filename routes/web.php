@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ShippingAreaController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Fontend\LanguageController;
 use App\Http\Controllers\Fontend\CartController;
 use App\Http\Controllers\User\WishlistController;
@@ -121,14 +122,21 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('district/edit/{id}',[ShippingAreaController::class,'disEdit'])->name('district.edit');
     Route::post('district/delete/{id}',[ShippingAreaController::class,'disUpdate'])->name('district.update');
     Route::get('district/delete/{id}',[ShippingAreaController::class,'disDelete'])->name('district.delete');
-    // ==============================state=======================
+    // ===================state=======================
     Route::get('state',[ShippingAreaController::class,'stateCreate'])->name('state');
     Route::get('/get-district', [ShippingAreaController::class,'getdistrict'])->name('get-district');
     Route::post('state/store',[ShippingAreaController::class,'stateStore'])->name('state.store');
     Route::get('state/edit/{id}',[ShippingAreaController::class,'stateEdit'])->name('state.edit');
     Route::post('state/delete/{id}',[ShippingAreaController::class,'stateUpdate'])->name('state.update');
     Route::get('state/delete/{id}',[ShippingAreaController::class,'stateDelete'])->name('state.delete');
-    
+    // ==================================order===================
+    Route::get('order/pending',[OrderController::class,'Pending'])->name('pending');
+    Route::get('order/view/{order_id}',[OrderController::class,'orderView'])->name('order.view');
+    Route::get('order/confirmed',[OrderController::class,'Confirmed'])->name('confirmed');
+    Route::get('order/processing',[OrderController::class,'Processing'])->name('processing');
+    Route::get('order/picked',[OrderController::class,'Picked'])->name('picked');
+    Route::get('order/shipped',[OrderController::class,'Shipped'])->name('shipped');
+    Route::get('order/cancle',[OrderController::class,'Cancle'])->name('cancle');
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){

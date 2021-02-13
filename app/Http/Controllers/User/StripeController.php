@@ -63,7 +63,7 @@ class StripeController extends Controller
 
             'order_month' => Carbon::now()->format('F'),
             'order_year' => Carbon::now()->format('Y'),
-            'status' => 'pending',
+            'status' => 'Pending',
             'created_at' => Carbon::now(),
         ]);
         $invoice = Order::findOrFail($order_id);    

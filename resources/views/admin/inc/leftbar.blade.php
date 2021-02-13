@@ -84,6 +84,28 @@
           <li class="nav-item"><a href="{{ route('state') }}" class="nav-link @yield('add-state')">Add State</a></li>
         </ul>
         {{-- shippingArea end --}}
+        {{-- order start --}}
+        <a href="#" class="sl-menu-link @yield('order')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-list-outline tx-20"></i>
+            <span class="menu-item-label">Order</span>
+            <i class="menu-item-arrow fa fa-angle-down"></i>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link  active show-sub -->
+        <ul class="sl-menu-sub nav flex-column">
+          <li class="nav-item"><a href="{{ route('pending') }}" class="nav-link @yield('pending')">Pending</a></li>
+
+          <li class="nav-item"><a href="{{ route('confirmed') }}" class="nav-link @yield('confirmed')">Confirmed</a></li>
+
+          <li class="nav-item"><a href="{{ route('processing') }}" class="nav-link @yield('processing')">Processing</a></li>
+
+          <li class="nav-item"><a href="{{ route('picked') }}" class="nav-link @yield('picked')">Picked</a></li>
+
+          <li class="nav-item"><a href="{{ route('shipped') }}" class="nav-link @yield('shipped')">Shipped</a></li>
+
+          <li class="nav-item"><a href="{{ route('cancle') }}" class="nav-link @yield('cancle')">Cancle</a></li>
+        </ul>
+        {{-- order end --}}
       </div><!-- sl-sideleft-menu -->
       <br>
     </div>
