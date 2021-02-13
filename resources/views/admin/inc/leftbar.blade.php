@@ -103,6 +103,8 @@
 
           <li class="nav-item"><a href="{{ route('shipped') }}" class="nav-link @yield('shipped')">Shipped</a></li>
 
+          <li class="nav-item"><a href="{{ route('delivered') }}" class="nav-link @yield('delivered')">Delivered</a></li>
+
           <li class="nav-item"><a href="{{ route('cancle') }}" class="nav-link @yield('cancle')">Cancle</a></li>
         </ul>
         {{-- order end --}}

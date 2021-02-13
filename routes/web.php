@@ -131,12 +131,20 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('state/delete/{id}',[ShippingAreaController::class,'stateDelete'])->name('state.delete');
     // ==================================order===================
     Route::get('order/pending',[OrderController::class,'Pending'])->name('pending');
+    Route::get('pending-to-confirm/{order_id}',[OrderController::class,'PendingToConfirm'])->name('pentoconfirm.order');
     Route::get('order/view/{order_id}',[OrderController::class,'orderView'])->name('order.view');
     Route::get('order/confirmed',[OrderController::class,'Confirmed'])->name('confirmed');
+    Route::get('confirm-to-processing/{order_id}',[OrderController::class,'ConfirmToProcessing'])->name('confirmtoprocessing.order');
     Route::get('order/processing',[OrderController::class,'Processing'])->name('processing');
+    Route::get('processing-to-picked/{order_id}',[OrderController::class,'ProcessingToPicked'])->name('processingtopicked.order');
     Route::get('order/picked',[OrderController::class,'Picked'])->name('picked');
+    Route::get('picked-to-shipped/{order_id}',[OrderController::class,'PickedToShipped'])->name('pickedtoshipped.order');
     Route::get('order/shipped',[OrderController::class,'Shipped'])->name('shipped');
+    Route::get('shipped-to-delivered/{order_id}',[OrderController::class,'ShippedToDelivered'])->name('shippedtodelivered.order');
+    Route::get('order/delivered',[OrderController::class,'delivered'])->name('delivered');
+    Route::get('orders/invoice/{order_id}', [OrderController::class,'invoiceDownload'])->name('orderinvoice.download');
     Route::get('order/cancle',[OrderController::class,'Cancle'])->name('cancle');
+    Route::get('order/delete/{id}',[OrderController::class,'delete'])->name('order.delete');
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){

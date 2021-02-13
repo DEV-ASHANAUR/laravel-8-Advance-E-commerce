@@ -2,21 +2,21 @@
 @section('order')
     active show-sub
 @endsection
-@section('pending')
+@section('cancle')
     active 
 @endsection
 @section('admin-content')
 <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
       <a class="breadcrumb-item" href="index.html">ShopMama</a>
-      <span class="breadcrumb-item active">Pending Order</span>
+      <span class="breadcrumb-item active">Cancle Order</span>
     </nav>
 
     <div class="sl-pagebody">
       <div class="row row-sm">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Pending List</div>
+                <div class="card-header">Cancle List</div>
                 <div class="card-body">
                   <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap">
@@ -46,7 +46,6 @@
 
                             <a href="{{ route('order.view',$item->id) }}" class="btn btn-sm btn-primary" title="View"><i class="fa fa-eye"></i></a>
 
-                            <a href="{{ route('order.delete',$item->id) }}" id="delete" class="btn btn-sm btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
                           </td>
                         </tr>
                         @endforeach

@@ -2,21 +2,21 @@
 @section('order')
     active show-sub
 @endsection
-@section('pending')
+@section('confirmed')
     active 
 @endsection
 @section('admin-content')
 <div class="sl-mainpanel">
     <nav class="breadcrumb sl-breadcrumb">
       <a class="breadcrumb-item" href="index.html">ShopMama</a>
-      <span class="breadcrumb-item active">Pending Order</span>
+      <span class="breadcrumb-item active">Confirmed Order</span>
     </nav>
 
     <div class="sl-pagebody">
       <div class="row row-sm">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Pending List</div>
+                <div class="card-header">Confirmed List</div>
                 <div class="card-body">
                   <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap">
@@ -40,13 +40,14 @@
                           <td>{{ number_format($item->amount,2) }} Tk</td>
                           <td>{{ $item->transaction_id }}</td>
                           <td>
-                            <span class="badge badge-pill badge-danger">{{ $item->status }}</span>
+                            <span class="badge badge-pill badge-info">{{ $item->status }}</span>
                           </td>
                           <td>
 
                             <a href="{{ route('order.view',$item->id) }}" class="btn btn-sm btn-primary" title="View"><i class="fa fa-eye"></i></a>
 
-                            <a href="{{ route('order.delete',$item->id) }}" id="delete" class="btn btn-sm btn-danger" title="Delete"><i class="fa fa-trash"></i></a>
+                            <a href="{{ route('orderinvoice.download',$item->id) }}" class="btn btn-sm btn-danger "><i class="fa fa-download" style="color:white;"></i></a>
+
                           </td>
                         </tr>
                         @endforeach

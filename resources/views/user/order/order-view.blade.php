@@ -33,7 +33,7 @@
                         <hr>
                         <h5 class="mb-2">Shipping Name : <strong> {{ $orders->name }} </strong> </h5>
                         <h5 class="mb-2">Shipping Phone : <strong> {{ $orders->phone }} </strong> </h5>
-                        <h5 class="mb-2">Shipping Phone : <strong> {{ $orders->email }} </strong> </h5>
+                        <h5 class="mb-2">Shipping Email : <strong> {{ $orders->email }} </strong> </h5>
                         <h5 class="mb-2">Shipping Division : <strong class="text-capitalize"> {{ $orders->division->division_name }} </strong> </h5>
                         <h5 class="mb-2">Shipping District : <strong class="text-capitalize"> {{ $orders->district->district_name }} </strong> </h5>
                         <h5 class="mb-2">Shipping State : <strong class="text-capitalize"> {{ $orders->state->state_name }} </strong> </h5>
@@ -47,7 +47,7 @@
                         <h5 class="mb-2">Phone : <strong> {{ $orders->user->phone }} </strong> </h5>
                         <h5 class="mb-2">Payment Type : <strong> {{ $orders->payment_type }} </strong> </h5>
                         <h5 class="mb-2">Tranx Id : <strong class="text-capitalize"> {{ $orders->transaction_id }} </strong> </h5>
-                        <h5 class="mb-2">Invoive No : <strong class="text-capitalize"> {{ $orders->invoice_no }} </strong> </h5>
+                        <h5 class="mb-2">Status : <span class="badge badge-pill badge-primary"> {{ $orders->status }} </span> </h5>
                         <h5 class="mb-2">Total : <strong class="text-capitalize"> {{ number_format($orders->amount,2) }} Tk </strong> </h5>
                         <h5 class="mb-2">Order Date : <strong class="text-capitalize"> {{ $orders->order_date }} </strong> </h5>
                         <hr>
