@@ -10,6 +10,8 @@
         <ul class="list-group list-group-flush mt-2">
             <a href="{{ route('user.dashboard') }}" class="btn btn-sm btn-primary btn-block">Home</a>
             <a href="{{ route('my.order') }}" class="btn btn-sm btn-primary btn-block">My Orders</a>
+            <a href="{{ route('return.order') }}" class="btn btn-sm btn-primary btn-block">Return Orders</a>
+            <a href="{{ route('cancle.order') }}" class="btn btn-sm btn-primary btn-block">Cancle Orders</a>
             <a href="{{ route('change.password') }}" class="btn btn-sm btn-primary btn-block">Change Password</a>
             <a href="{{ route('logout') }}" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();" class="btn btn-sm btn-danger btn-block"><i class="icon ion-power"></i> Sign Out</a>

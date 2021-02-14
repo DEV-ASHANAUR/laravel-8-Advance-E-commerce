@@ -29,28 +29,35 @@
             <div class="col-md-9">
                 <div class="row">
                     <div class="col-md-6">
-                        <h4 >Shipping Details</h4>
-                        <hr>
-                        <h5 class="mb-2">Shipping Name : <strong> {{ $orders->name }} </strong> </h5>
-                        <h5 class="mb-2">Shipping Phone : <strong> {{ $orders->phone }} </strong> </h5>
-                        <h5 class="mb-2">Shipping Email : <strong> {{ $orders->email }} </strong> </h5>
-                        <h5 class="mb-2">Shipping Division : <strong class="text-capitalize"> {{ $orders->division->division_name }} </strong> </h5>
-                        <h5 class="mb-2">Shipping District : <strong class="text-capitalize"> {{ $orders->district->district_name }} </strong> </h5>
-                        <h5 class="mb-2">Shipping State : <strong class="text-capitalize"> {{ $orders->state->state_name }} </strong> </h5>
-                        <h5 class="mb-2">Post Code : <strong class="text-capitalize"> {{ $orders->post_code }} </strong> </h5>
-                        <hr>
+                        <ul class="list-group">
+                            <li class="list-group-item active text-uppercase" aria-current="true">shipping information</li>
+                            <li class="list-group-item text-capitalize">Shipping Name : <strong>{{ $orders->name }}</strong></li>
+                            <li class="list-group-item text-capitalize">Shipping Phone : <strong> {{ $orders->phone }} </strong></li>
+                            <li class="list-group-item text-capitalize">Shipping Email : <strong> {{ $orders->email }} </strong></li>
+                            <li class="list-group-item text-capitalize">Shipping Division : <strong> {{ $orders->division->division_name }} </strong></li>
+                            <li class="list-group-item text-capitalize">Shipping District : <strong> {{ $orders->district->district_name }} </strong></li>
+                            <li class="list-group-item text-capitalize">Shipping State : <strong> {{ $orders->state->state_name }} </strong></li>
+                            <li class="list-group-item text-capitalize">Post Code : <strong> {{ $orders->post_code }} </strong></li>
+                            
+                        </ul>
                     </div>
                     <div class="col-md-6">
-                        <h4>Oder Details <span class="text-danger">Invoice No:</span>  <mark>{{ $orders->invoice_no }}</mark></h4>
-                        <hr>
-                        <h5 class="mb-2">Name : <strong> {{ $orders->user->name }} </strong> </h5>
-                        <h5 class="mb-2">Phone : <strong> {{ $orders->user->phone }} </strong> </h5>
-                        <h5 class="mb-2">Payment Type : <strong> {{ $orders->payment_type }} </strong> </h5>
-                        <h5 class="mb-2">Tranx Id : <strong class="text-capitalize"> {{ $orders->transaction_id }} </strong> </h5>
-                        <h5 class="mb-2">Status : <span class="badge badge-pill badge-primary"> {{ $orders->status }} </span> </h5>
-                        <h5 class="mb-2">Total : <strong class="text-capitalize"> {{ number_format($orders->amount,2) }} Tk </strong> </h5>
-                        <h5 class="mb-2">Order Date : <strong class="text-capitalize"> {{ $orders->order_date }} </strong> </h5>
-                        <hr>
+                        <ul class="list-group">
+                            @php
+                                $order = App\Models\Order::where('id',$orders->id)->where('return_reason','=',NULL)->first();
+                            @endphp
+                            <li class="list-group-item active" aria-current="true">ORDER INFORMATION <span class="badge badge-pill badge-danger text-uppercase">status : {{ ($order)?$orders->status:'Return Requested' }}</span> 
+                                
+                                 
+                            </li>
+                            <li class="list-group-item text-capitalize">Name : <strong>{{ $orders->user->name }}</strong></li>
+                            <li class="list-group-item text-capitalize">phone : <strong>{{ $orders->user->phone }}</strong></li>
+                            <li class="list-group-item text-capitalize">payment type : <strong>{{ $orders->payment_type }}</strong></li>
+                            <li class="list-group-item text-capitalize">Tranx Id : <strong>{{ $orders->transaction_id }}</strong></li>
+                            <li class="list-group-item text-capitalize">Invoive No : <strong>{{ $orders->invoice_no }}</strong></li>
+                            <li class="list-group-item text-capitalize">Amount : <strong>{{ number_format($orders->amount,2) }} Tk</strong></li>
+                            <li class="list-group-item text-capitalize">Order Date : <strong>{{ $orders->order_date }}</strong></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="row">
@@ -76,7 +83,7 @@
                                             <strong>{{ $key+1 }}</strong>
                                          </td>
                                         <td>
-                                            <img class="img-thumbnail" src="{{ asset ($item->product->product_thumbnail) }}" width="70px" height="70px" alt="">
+                                            <img src="{{ asset ($item->product->product_thumbnail) }}" width="70px" height="70px" alt="">
                                         </td>
                                         <td class="text-capitalize">
                                             {{ $item->product->product_name_en }}
@@ -101,14 +108,23 @@
                                 </tfoot>
                             </table>
                         </div>
-                        @if ($orders->status == 'delivered')
-                            <div class="form-group">
-                                <label for="return_reason">Order Return Reason</label>
-                                <textarea name="return_reason" id="return_reason" class="form-control" placeholder="Write Order Return Reason" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-success">Submit</button>
-                            </div>
+                        @if ($orders->status == 'Delivered')
+                            @php
+                                $order = App\Models\Order::where('id',$orders->id)->where('return_reason','=',NULL)->first();
+                            @endphp
+                            @if ($order)
+                                <form action="{{ route('return.request') }}" method="POST">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="hidden" name="order_id" value="{{ $orders->id }}">
+                                        <label for="return_reason">Order Return Reason</label>
+                                        <textarea name="return_reason" id="return_reason" class="form-control" placeholder="Write Order Return Reason" data-validation="required" ></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </form>
+                            @endif
                         @endif
                     </div>
                 </div>

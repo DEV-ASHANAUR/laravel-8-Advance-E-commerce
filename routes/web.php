@@ -169,6 +169,9 @@ Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User
     // ================================user orders====================================
     Route::get('all/orders', [UserOrderController::class,'index'])->name('my.order');
     Route::get('view/orders/{order_id}', [UserOrderController::class,'view'])->name('view.order');
+    Route::get('return/orders', [UserOrderController::class,'returnOrders'])->name('return.order');
+    Route::get('cancle/orders', [UserOrderController::class,'cancleOrder'])->name('cancle.order');
+    Route::post('return/orders', [UserOrderController::class,'submitRequest'])->name('return.request');
     Route::get('orders/invoice/{order_id}', [UserOrderController::class,'invoiceDownload'])->name('invoice.download');
 });
 // =================================Fontend Route==================================

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -32,5 +33,40 @@ class UserOrderController extends Controller
         ]);
         return $pdf->download('invoice.pdf');
         // return view('user.order.invoice',compact('orders','orderItem'));
+    }    
+    /**
+     * returnOrders() view all return orders
+     *
+     * @return void
+     */
+    public function returnOrders()
+    {
+        $orders = Order::where('user_id',Auth::user()->id)->where('return_reason','!=',NULL)->latest()->get();
+        return view('user.order.return-order',compact('orders'));
+    }    
+    /**
+     * submitRequest() request for return order
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function submitRequest(Request $request)
+    {
+        $order_id = $request->order_id;
+        $order = Order::find($order_id);
+        $order->return_reason = $request->return_reason;
+        $order->return_date = Carbon::now()->format('d F Y');
+        if($order->save()){
+            $notification=array(
+                'message'=>'Successfully Request Send',
+                'alert-type'=>'success'
+            );
+            return redirect()->route('my.order')->with($notification);
+        }
+    }
+    public function cancleOrder()
+    {
+        $orders = Order::where('user_id',Auth::user()->id)->where('status','Cancle')->latest()->get();
+        return view('user.order.cancle',compact('orders'));
     }
 }
