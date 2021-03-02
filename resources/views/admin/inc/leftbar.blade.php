@@ -107,6 +107,14 @@
 
           <li class="nav-item"><a href="{{ route('cancle') }}" class="nav-link @yield('cancle')">Cancle</a></li>
         </ul>
+        <!-- reports start -->
+        <a href="{{ route('reports') }}" class="sl-menu-link @yield('report')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
+            <span class="menu-item-label">Reports</span>
+          </div><!-- menu-item -->
+        </a>
+        <!-- reports end -->
         {{-- order end --}}
       </div><!-- sl-sideleft-menu -->
       <br>

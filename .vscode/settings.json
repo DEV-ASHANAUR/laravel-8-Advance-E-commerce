@@ -1,0 +1,6 @@
+{
+    "i18n-ally.localesPaths": [
+        "resources/lang",
+        "public/backend/lib/summernote/lang"
+    ]
+}

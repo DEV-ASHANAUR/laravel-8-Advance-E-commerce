@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ShippingAreaController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Fontend\LanguageController;
 use App\Http\Controllers\Fontend\CartController;
 use App\Http\Controllers\User\WishlistController;
@@ -145,6 +146,11 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::get('orders/invoice/{order_id}', [OrderController::class,'invoiceDownload'])->name('orderinvoice.download');
     Route::get('order/cancle',[OrderController::class,'Cancle'])->name('cancle');
     Route::get('order/delete/{id}',[OrderController::class,'delete'])->name('order.delete');
+    // =========================reports============================
+    Route::get('reports',[ReportController::class,'index'])->name('reports');
+    Route::post('reports/by-date',[ReportController::class,'reportsByDate'])->name('search-by-date');
+    Route::post('reports/by-month',[ReportController::class,'reportsByMonth'])->name('search-by-month');
+    Route::post('reports/by-year',[ReportController::class,'reportsByYear'])->name('search-by-year');
 });
 // =================================User Route==================================
 Route::group(['prefix'=>'user','middleware' =>['user','auth'],'namespace'=>'User'], function(){
