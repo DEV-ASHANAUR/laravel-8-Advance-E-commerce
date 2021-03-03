@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Carbon\Carbon;
 use Intervention\Image\Facades\Image;
 
 class AdminController extends Controller
@@ -95,5 +96,35 @@ class AdminController extends Controller
             return redirect()->back()->with($notification);
         }
         
+    }
+    public function getUser(){
+        $alluser = User::where('role_id','!=',1)->latest()->get();
+        return view('admin.user.index',compact('alluser'));
+    }
+    public function Banned($id)
+    {
+        $user = User::find($id);
+        $user->isban = '1';
+        $user->updated_at = Carbon::now();
+        if($user->save()){
+            $notification=array(
+                'message'=>'User Banned Successfully',
+                'alert-type'=>'success'
+            );
+            return redirect()->back()->with($notification);
+        }
+    }
+    public function unBanned($id)
+    {
+        $user = User::find($id);
+        $user->isban = '0';
+        $user->updated_at = Carbon::now();
+        if($user->save()){
+            $notification=array(
+                'message'=>'User Unbanned Successfully',
+                'alert-type'=>'success'
+            );
+            return redirect()->back()->with($notification);
+        }
     }
 }

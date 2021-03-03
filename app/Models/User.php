@@ -23,6 +23,8 @@ class User extends Authenticatable
         'image',
         'password',
         'role_id',
+        'last_seen',
+        'isban',
     ];
 
     /**

@@ -32,6 +32,9 @@
 			<div class="row">
 				<!-- Sign-in -->			
 <div class="col-md-6 col-sm-6 sign-in">
+  @error('banned')
+      <h2 class="text-danger">{{ $message }}</h2>
+  @enderror
 	<h4 class="">Sign in</h4>
 	<p class="">Hello, Welcome to your account.</p>
 	<div class="social-sign-in outer-top-xs">

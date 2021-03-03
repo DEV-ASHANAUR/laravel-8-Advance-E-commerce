@@ -61,6 +61,10 @@ Route::group(['prefix'=>'admin','middleware' =>['admin','auth'],'namespace'=>'Ad
     Route::post('profile/update',[AdminController::class,'profileUpdate'])->name('profile.update');
     Route::get('password/change',[AdminController::class,'PassChange'])->name('admin.password');
     Route::post('password/update',[AdminController::class,'PassUpdate'])->name('password.update');
+    // ===================================user================================
+    Route::get('all-user',[AdminController::class,'getUser'])->name('get.user');
+    Route::get('account-banned/{id}',[AdminController::class,'Banned'])->name('account.banned');
+    Route::get('account-unbanned/{id}',[AdminController::class,'unBanned'])->name('account.unbanned');
     // =================================slider=============================
     Route::get('all-slider',[SliderController::class,'index'])->name('sliders');
     Route::post('slider/store',[SliderController::class,'Store'])->name('slider.store');

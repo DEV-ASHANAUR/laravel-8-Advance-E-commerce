@@ -15,6 +15,14 @@
           </div><!-- menu-item -->
         </a>
         <!-- slider start -->
+        <a href="{{ route('get.user') }}" class="sl-menu-link @yield('alluser')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon ion-ios-person-outline tx-22"></i>
+            <span class="menu-item-label">All User</span>
+          </div><!-- menu-item -->
+        </a>
+        <!-- slider end -->
+        <!-- slider start -->
         <a href="{{ route('sliders') }}" class="sl-menu-link @yield('slider')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-briefcase-outline tx-22"></i>
