@@ -13,7 +13,19 @@
       <div class="row row-sm">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">User List</div>
+                @php
+                    $online_cus = 0;
+                @endphp
+                @foreach ($alluser as $row)
+                @php
+                    if($row->userIsOnline()){
+                        $online_cus += 1;
+                    }
+                @endphp
+                @endforeach
+                <div class="card-header">Total Customer <span class="badge badge-pill badge-success">{{ count($alluser) }}</span>
+                    And Active User <span class="badge badge-pill badge-success">{{ $online_cus }}</span>
+                </div>
                 <div class="card-body">
                   <div class="table-wrapper">
                     <table id="datatable1" class="table display responsive nowrap text-center">
@@ -44,7 +56,13 @@
                                 Account Banned
                               @endif
                           </td>
-                          <td><span class="badge badge-pill badge-success">Active</span></td>
+                          <td>
+                              @if ($item->userIsOnline())
+                                <span class="badge badge-pill badge-success">Active Now</span>
+                              @else
+                                <span class="badge badge-pill badge-danger">{{ Carbon\Carbon::parse($item->last_seen)->diffForHumans() }}</span>
+                              @endif
+                            </td>
                           <td>
                             @if ($item->isban == 0)
                               <a href="{{ route('account.banned',$item->id) }}" class="btn btn-sm btn-danger" title="Press For banned">Banned</a>
