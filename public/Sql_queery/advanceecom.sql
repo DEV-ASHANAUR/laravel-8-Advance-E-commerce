@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2021 at 05:04 PM
+-- Generation Time: Apr 10, 2021 at 12:15 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -158,7 +158,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2021_02_04_091120_create_coupons_table', 3),
 (14, '2021_02_04_135746_create_ship_divisions_table', 4),
 (15, '2021_02_04_135920_create_ship_districts_table', 4),
-(16, '2021_02_04_135947_create_ship_states_table', 4);
+(16, '2021_02_04_135947_create_ship_states_table', 4),
+(18, '2021_02_08_142055_create_orders_table', 5),
+(19, '2021_02_08_142151_create_order_items_table', 5);
 
 -- --------------------------------------------------------
 
@@ -199,6 +201,120 @@ INSERT INTO `multiimgs` (`id`, `product_id`, `image`, `created_at`, `updated_at`
 (20, 10, 'uploads/product/multiimg/60156c3132aed.jpg', '2021-01-30 08:24:49', '2021-01-30 08:24:49'),
 (25, 7, 'uploads/product/multiimg/6016771d36868.jpg', '2021-01-31 03:23:41', '2021-01-31 03:23:41'),
 (26, 7, 'uploads/product/multiimg/6016771d72eb3.jpg', '2021-01-31 03:23:41', '2021-01-31 03:23:41');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `division_id` bigint(20) UNSIGNED NOT NULL,
+  `district_id` bigint(20) UNSIGNED NOT NULL,
+  `state_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_code` int(11) NOT NULL,
+  `notes` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_method` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `transaction_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `currency` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` double(8,2) NOT NULL,
+  `order_number` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `invoice_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_date` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_month` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_year` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `confirmed_date` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `processing_date` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `picked_date` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipped_date` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delivered_date` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cancel_date` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return_date` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `return_reason` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `division_id`, `district_id`, `state_id`, `name`, `email`, `phone`, `post_code`, `notes`, `payment_type`, `payment_method`, `transaction_id`, `currency`, `amount`, `order_number`, `invoice_no`, `order_date`, `order_month`, `order_year`, `confirmed_date`, `processing_date`, `picked_date`, `shipped_date`, `delivered_date`, `cancel_date`, `return_date`, `return_reason`, `status`, `created_at`, `updated_at`) VALUES
+(33, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 778895, 'notessss', 'SSl Payment', 'SSl Payment', '6022c804efc1b', 'BDT', 30580.00, '6022c804efc1b', 'SPM22503509', '09 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Confirmed', '2021-02-09 11:36:06', '2021-02-13 11:51:52'),
+(34, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 77885, 'notess', 'SSl Payment', 'SSl Payment', '6022cccc2baba', 'BDT', 22935.00, '6022cccc2baba', 'SPM96030403', '09 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-09 11:56:28', NULL),
+(35, 2, 1, 3, 3, 'nasim', 'nasim@gmail.com', '01866936562', 85572, 'happy shopping', 'SSl Payment', 'SSl Payment', '6022cda9d4d44', 'BDT', 3900.00, '6022cda9d4d44', 'SPM10196480', '09 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-09 12:00:09', NULL),
+(36, 2, 1, 3, 3, 'nasim', 'ashanur@gmail.com', '01866936562', 77885, 'nasim', 'Stripe', 'Stripe', 'txn_1IJ0g7KzalqmeBim1URGFEaf', 'usd', 4950.00, '6022d03e45025', 'SPM67591823', '09 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2021-02-09 12:11:17', NULL),
+(37, 2, 1, 6, 1, 'shohel rana', 'shohel@gmail.com', '01866936562', 778899, 'notes', 'SSl Payment', 'SSl Payment', '6023950602cb2', 'BDT', 2800.00, '6023950602cb2', 'SPM72500228', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 02:10:46', NULL),
+(38, 2, 1, 3, 3, 'Rubel', 'rubel@gmail.com', '01866936562', 77885, 'notes', 'SSl Payment', 'SSl Payment', '6023a18f2e3ac', 'BDT', 25980.00, '6023a18f2e3ac', 'SPM80978842', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 03:04:15', NULL),
+(39, 2, 1, 6, 1, 'shobuj', 'shobuj@gmail.com', '01866936562', 77700, 'happy shopping', 'SSl Payment', 'SSl Payment', '6023a2c0bc940', 'BDT', 1575.00, '6023a2c0bc940', 'SPM76451196', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 03:09:20', NULL),
+(40, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 7785, 'notes', 'SSl Payment', 'SSl Payment', '6023d62a69725', 'BDT', 1050.00, '6023d62a69725', 'SPM67073733', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2021-02-10 06:48:42', NULL),
+(41, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 235466, 'fdsf', 'SSl Payment', 'SSl Payment', '6023d6fa1e51a', 'BDT', 12990.00, '6023d6fa1e51a', 'SPM43023846', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Confirmed', '2021-02-10 06:52:10', '2021-02-13 11:58:31'),
+(42, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 23543, 'sgdhrgfd', 'SSl Payment', 'SSl Payment', '6023d8250373d', 'BDT', 2300.00, '6023d8250373d', 'SPM68839373', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 06:57:09', NULL),
+(43, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 77785, 'notes', 'SSl Payment', 'SSl Payment', '6023d8ec464fe', 'BDT', 25980.00, '6023d8ec464fe', 'SPM27336842', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 07:00:28', NULL),
+(44, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 78548, 'notes', 'Stripe', 'Stripe', 'txn_1IJIw1KzalqmeBimyCPyXFMA', 'usd', 12990.00, '6023e25d6b684', 'SPM44014735', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Confirmed', '2021-02-10 07:40:54', '2021-02-13 11:42:17'),
+(45, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 78548, 'notes', 'Stripe', 'Stripe', 'txn_1IJIxNKzalqmeBimJHWjXxkK', 'usd', 12990.00, '6023e2b44a623', 'SPM91170437', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Confirmed', '2021-02-10 07:42:13', '2021-02-13 11:39:08'),
+(46, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 78548, 'notes', 'Stripe', 'Stripe', 'txn_1IJJ0WKzalqmeBimntk9m393', 'usd', 12990.00, '6023e377aee24', 'SPM43276964', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 07:45:29', '2021-02-13 11:12:11'),
+(47, 2, 1, 3, 3, 'Md.Ashanaur Rahman', 'ashanur@gmail.com', '01866936562', 78548, 'notes', 'Stripe', 'Stripe', 'txn_1IJJLAKzalqmeBim8jp3sfIJ', 'usd', 12990.00, '6023e87791bd0', 'SPM65556226', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 08:06:49', '2021-02-13 11:11:42'),
+(48, 2, 1, 3, 3, 'Rubel', 'rubel@gmail.com', '01866936562', 77885, 'notes', 'Stripe', 'Stripe', 'txn_1IJJUIKzalqmeBimUaCXsv2g', 'usd', 25980.00, '6023eaacc7ae9', 'SPM49516497', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 08:16:15', '2021-02-13 10:40:48'),
+(49, 2, 1, 3, 3, 'shobuj', 'shobuj@gmail.com', '01866936562', 77458, 'happy', 'Stripe', 'Stripe', 'txn_1IJJcuKzalqmeBim0f1Xx51l', 'usd', 3300.00, '6023ecc319285', 'SPM85566254', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Processing', '2021-02-10 08:25:08', '2021-02-13 10:39:04'),
+(50, 2, 1, 3, 3, 'shobuj', 'shobuj@gmail.com', '01866936562', 77458, 'happy', 'Stripe', 'Stripe', 'txn_1IJJdnKzalqmeBimpzI6jlOP', 'usd', 3300.00, '6023ecf936400', 'SPM91509354', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Picked', '2021-02-10 08:26:05', '2021-02-13 11:12:18'),
+(51, 2, 1, 3, 3, 'nasim', 'nasim@gmail.com', '01866936562', 7785, 'happy', 'SSl Payment', 'SSl Payment', '6023f4df82fa6', 'BDT', 2100.00, '6023f4df82fa6', 'SPM70271429', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Delivered', '2021-02-10 08:59:43', '2021-02-14 11:18:22'),
+(52, 2, 1, 3, 3, 'shohel rana', 'shobuj@gmail.com', '01866936562', 77854, 'happy', 'SSl Payment', 'SSl Payment', '6023f5657adcf', 'BDT', 3450.00, '6023f5657adcf', 'SPM36266243', '10 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, '14 February 2021', 'false product', 'Delivered', '2021-02-10 09:01:57', '2021-02-14 11:08:40'),
+(53, 3, 1, 6, 1, 'Rasel', 'raseloo9@gmail.com', '01866936562', 77889, 'happy shopping', 'SSl Payment', 'SSl Payment', '6025437446f2e', 'BDT', 57075.00, '6025437446f2e', 'SPM24189219', '11 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Delivered', '2021-02-11 08:47:16', '2021-02-13 11:10:55'),
+(54, 2, 1, 3, 3, 'nasim', 'nasim@gmail.com', '01866936562', 77855, 'happy', 'Stripe', 'Stripe', 'txn_1IKSVmKzalqmeBimLP04IXFw', 'usd', 3150.00, '60281523c644e', 'SPM64501275', '13 February 2021', 'February', '2021', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Pending', '2021-02-13 12:06:36', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` bigint(20) UNSIGNED NOT NULL,
+  `color` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `size` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qty` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` double(8,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `color`, `size`, `qty`, `price`, `created_at`, `updated_at`) VALUES
+(23, 33, 10, 'green', '6.3', '2', 12990.00, '2021-02-09 11:36:06', NULL),
+(24, 33, 9, 'black', '41', '2', 2300.00, '2021-02-09 11:36:06', NULL),
+(25, 34, 10, 'green', '6.3', '2', 12990.00, '2021-02-09 11:56:28', NULL),
+(26, 34, 9, 'black', '41', '2', 2300.00, '2021-02-09 11:56:28', NULL),
+(27, 35, 8, 'black', '53', '4', 250.00, '2021-02-09 12:00:10', NULL),
+(28, 35, 7, 'black', '40', '4', 1050.00, '2021-02-09 12:00:10', NULL),
+(29, 36, 5, 'black', '40', '3', 1650.00, '2021-02-09 12:11:17', NULL),
+(30, 37, 4, 'red', '40', '2', 1400.00, '2021-02-10 02:10:56', NULL),
+(31, 38, 10, 'green', '6.3', '2', 12990.00, '2021-02-10 03:04:15', NULL),
+(32, 39, 7, 'black', '40', '2', 1050.00, '2021-02-10 03:09:20', NULL),
+(33, 40, 7, 'black', '40', '1', 1050.00, '2021-02-10 06:48:43', NULL),
+(34, 41, 10, 'green', '6.3', '1', 12990.00, '2021-02-10 06:52:10', NULL),
+(35, 42, 9, 'black', '41', '1', 2300.00, '2021-02-10 06:57:09', NULL),
+(36, 43, 10, 'green', '6.3', '2', 12990.00, '2021-02-10 07:00:28', NULL),
+(37, 47, 10, 'green', '6.3', '1', 12990.00, '2021-02-10 08:06:58', NULL),
+(38, 48, 10, 'green', '6.3', '2', 12990.00, '2021-02-10 08:16:23', NULL),
+(39, 50, 5, 'black', '40', '2', 1650.00, '2021-02-10 08:26:17', NULL),
+(40, 51, 7, 'black', '40', '2', 1050.00, '2021-02-10 08:59:44', NULL),
+(41, 52, 9, 'black', '41', '2', 2300.00, '2021-02-10 09:01:57', NULL),
+(42, 53, 7, 'black', '40', '2', 1050.00, '2021-02-11 08:47:16', NULL),
+(43, 53, 3, 'silver', '14', '2', 37000.00, '2021-02-11 08:47:16', NULL),
+(44, 54, 7, 'black', '40', '3', 1050.00, '2021-02-13 12:07:03', NULL);
 
 -- --------------------------------------------------------
 
@@ -288,6 +404,27 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', NULL, NULL),
 (2, 'User', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shippings`
+--
+
+CREATE TABLE `shippings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `division_id` bigint(20) UNSIGNED NOT NULL,
+  `district_id` bigint(20) UNSIGNED NOT NULL,
+  `state_id` bigint(20) UNSIGNED NOT NULL,
+  `shipping_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_code` int(11) NOT NULL,
+  `notes` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -487,6 +624,8 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role_id` int(11) NOT NULL DEFAULT '2',
+  `isban` tinyint(4) NOT NULL DEFAULT '0',
+  `last_seen` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -501,9 +640,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `role_id`, `email`, `phone`, `image`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Md.Ashanur Rahman', 1, 'ashanour009@gmail.com', '01866936562', 'uploads/admin_images/20210129152423.jpg', NULL, '$2y$10$ooG9vBwuQo4ErekIF57jWOngcZCzFwvJF7dMSguThzOKhPq8Omp5u', 'OFnqTSNNVSvvtwpSr1h5TrreQdlKMxNwH2UuEaiL4u8vln85q4HT9p1vDH37', '2021-01-29 09:20:06', '2021-01-29 09:24:23'),
-(2, 'Md.Ashanaur Rahman', 2, 'nasim009@gmail.com', '01866936562', 'uploads/users_images/20210203052821.jpg', NULL, '$2y$10$sqVPBva7Uoz/bIr4n/LKkOoElwp8CJ7ywIl6u4mtEs07sIVVU69V6', 'iJmulqwBQPR1oNLReMSNf8MhbiLBiVV2hr4vliyIyRi1elbTo0bCLk2LZrSf', '2021-02-02 23:21:41', '2021-02-02 23:28:22');
+INSERT INTO `users` (`id`, `name`, `role_id`, `isban`, `last_seen`, `email`, `phone`, `image`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Md.Ashanur Rahman', 1, 0, NULL, 'ashanour009@gmail.com', '01866936562', 'uploads/admin_images/20210129152423.jpg', NULL, '$2y$10$NJ3atdXHEKvnTU9kcaSste0XPapAKQ7nbd6wTUDnhSBbUBLmqH2o.', 'jTyovjVgSyaqORf8B3MIPAS2eH1dQLAeBxfccEUTX9uYzbaaA22Vn8xrtCzB', '2021-01-29 09:20:06', '2021-02-10 05:55:45'),
+(2, 'Md.Nasim', 2, 0, '2021-03-03 18:38:02', 'nasim009@gmail.com', '01866936562', 'uploads/users_images/20210211133330.jpg', NULL, '$2y$10$YzUsseBX4VjwZSuOAPZSNe6sOicmfJ7Z2eRB26NNZ7h7S2DCixWQe', 'QNGXmGo4MsXaMdnEeHp4DoeonreDWHuzBE8KE0kampklQa7IpxnmbHdAjAAq', '2021-02-02 23:21:41', '2021-03-03 12:38:02'),
+(3, 'Md.Rasel Hossian', 2, 0, NULL, 'rasel009@gmail.com', '01866936562', NULL, NULL, '$2y$10$0lSJHJAG7EF4fGt.2gqv3OG.fJMVwlO.i6dncD8MQm3q5vDxx0GVa', NULL, '2021-02-11 08:45:49', '2021-03-03 11:40:04');
 
 -- --------------------------------------------------------
 
@@ -525,7 +665,8 @@ CREATE TABLE `wishlists` (
 
 INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `created_at`, `updated_at`) VALUES
 (13, 2, 6, '2021-02-03 03:17:29', NULL),
-(14, 2, 2, '2021-02-03 07:58:52', NULL);
+(14, 2, 2, '2021-02-03 07:58:52', NULL),
+(15, 2, 9, '2021-02-05 10:53:56', NULL);
 
 --
 -- Indexes for dumped tables
@@ -569,6 +710,19 @@ ALTER TABLE `multiimgs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_items_order_id_foreign` (`order_id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -584,6 +738,12 @@ ALTER TABLE `products`
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shippings`
+--
+ALTER TABLE `shippings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -667,13 +827,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `multiimgs`
 --
 ALTER TABLE `multiimgs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -686,6 +858,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shippings`
+--
+ALTER TABLE `shippings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ship_districts`
@@ -727,13 +905,23 @@ ALTER TABLE `subsubcategories`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
