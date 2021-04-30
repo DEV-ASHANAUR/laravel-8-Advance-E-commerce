@@ -5,28 +5,28 @@
 		<meta charset="utf-8">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}" >
-		<meta name="author" content="">
-	  <meta name="keywords" content="MediaCenter, Template, eCommerce">
-	  <meta name="robots" content="all">
-    <title>@yield('title')</title>
-    <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/style.css">
-	    <!-- Bootstrap Core CSS -->
-	  <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap.min.css">
-	    <!-- Customizable CSS -->
-	  <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/main.css">
-	  <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/blue.css">
-	  <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/owl.carousel.css">
-		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/owl.transitions.css">
-		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/animate.min.css">
-		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/rateit.css">
-    <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap-select.min.css">
-    <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/toastr.css">
-    <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/sweetalert2.min.css">
-    
-    {{-- <link rel="stylesheet" href="{{ asset('datatable') }}/css/plugins.css"> --}}
-    <link rel="stylesheet" href="{{ asset('datatable') }}/css/dataTables.bootstrap4.min.css">
+        <meta name="description" content="">
+        <meta name="csrf-token" content="{{ csrf_token() }}" >
+    	<meta name="author" content="">
+    	<meta name="keywords" content="MediaCenter, Template, eCommerce">
+    	<meta name="robots" content="all">
+        <title>@yield('title')</title>
+        <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/style.css">
+    	    <!-- Bootstrap Core CSS -->
+    	<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap.min.css">
+    	    <!-- Customizable CSS -->
+    	<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/main.css">
+    	<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/blue.css">
+    	<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/owl.carousel.css">
+    	<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/owl.transitions.css">
+    	<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/animate.min.css">
+    	<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/rateit.css">
+        <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/toastr.css">
+        <link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/aditional/sweetalert2.min.css">
+        
+        {{-- <link rel="stylesheet" href="{{ asset('datatable') }}/css/plugins.css"> --}}
+        <link rel="stylesheet" href="{{ asset('datatable') }}/css/dataTables.bootstrap4.min.css">
 
 		<!-- Icons/Glyphs -->
 		<link rel="stylesheet" href="{{ asset('fontend') }}/assets/css/font-awesome.css">

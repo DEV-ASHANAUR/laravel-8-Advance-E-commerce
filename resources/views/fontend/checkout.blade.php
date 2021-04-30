@@ -268,6 +268,8 @@
           type:"GET",
           data:{division_id:division_id},
           success:function(data){
+            // console.log('data'+data);
+            // alert('ok');
             var html = '<option value="">Selcet District</option>';
             $.each(data,function(key,v){
               html +='<option value="'+v.id+'">'+v.district_name+'</option>';
